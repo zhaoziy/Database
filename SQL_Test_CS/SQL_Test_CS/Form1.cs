@@ -19,16 +19,37 @@ namespace SQL_Test_CS
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			DatabaseCmd select = new DatabaseCmd();
-			string str = "select * from Vehicle";
-			SqlDataReader myreader = null;
-			select.SqlExecuteReader(str, out myreader);
-			if (myreader.Read())
-			{
-				string a = "";
-				a = myreader.GetString(2);
-				MessageBox.Show(a);
-			}
+			
         }
+
+		private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+
+		private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			openFileDialog1.Multiselect = false;
+			openFileDialog1.Title = "打开文件";
+			openFileDialog1.ShowDialog();
+			
+		}
+
+		private void 导入数据库ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			openFileDialog1.Multiselect = true;
+			openFileDialog1.Title = "导入数据库";
+			openFileDialog1.ShowDialog();
+			
+		}
+
+		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (tabControl1.SelectedIndex == 1)  //数据库
+			{
+
+			}
+
+		}
 	}
 }
