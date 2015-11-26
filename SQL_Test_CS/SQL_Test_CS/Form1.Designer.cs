@@ -53,7 +53,8 @@
             this.退出ToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(844, 28);
+			this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+			this.menuStrip1.Size = new System.Drawing.Size(633, 25);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -63,27 +64,27 @@
             this.打开ToolStripMenuItem,
             this.导入数据库ToolStripMenuItem});
 			this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-			this.文件ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+			this.文件ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
 			this.文件ToolStripMenuItem.Text = "文件";
 			// 
 			// 打开ToolStripMenuItem
 			// 
 			this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-			this.打开ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.打开ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
 			this.打开ToolStripMenuItem.Text = "打开";
 			this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
 			// 
 			// 导入数据库ToolStripMenuItem
 			// 
 			this.导入数据库ToolStripMenuItem.Name = "导入数据库ToolStripMenuItem";
-			this.导入数据库ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.导入数据库ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
 			this.导入数据库ToolStripMenuItem.Text = "导入数据库";
 			this.导入数据库ToolStripMenuItem.Click += new System.EventHandler(this.导入数据库ToolStripMenuItem_Click);
 			// 
 			// 退出ToolStripMenuItem
 			// 
 			this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-			this.退出ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+			this.退出ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
 			this.退出ToolStripMenuItem.Text = "退出";
 			this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
 			// 
@@ -95,10 +96,12 @@
 			// 
 			this.textData.AcceptsReturn = true;
 			this.textData.AcceptsTab = true;
-			this.textData.Location = new System.Drawing.Point(0, 0);
+			this.textData.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textData.Location = new System.Drawing.Point(2, 2);
+			this.textData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.textData.Multiline = true;
 			this.textData.Name = "textData";
-			this.textData.Size = new System.Drawing.Size(732, 287);
+			this.textData.Size = new System.Drawing.Size(621, 291);
 			this.textData.TabIndex = 1;
 			// 
 			// tabControl1
@@ -106,20 +109,22 @@
 			this.tabControl1.Controls.Add(this.tabText);
 			this.tabControl1.Controls.Add(this.tabDatabase);
 			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControl1.Location = new System.Drawing.Point(0, 28);
+			this.tabControl1.Location = new System.Drawing.Point(0, 25);
+			this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(844, 404);
+			this.tabControl1.Size = new System.Drawing.Size(633, 321);
 			this.tabControl1.TabIndex = 2;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
 			// 
 			// tabText
 			// 
 			this.tabText.Controls.Add(this.textData);
-			this.tabText.Location = new System.Drawing.Point(4, 25);
+			this.tabText.Location = new System.Drawing.Point(4, 22);
+			this.tabText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tabText.Name = "tabText";
-			this.tabText.Padding = new System.Windows.Forms.Padding(3);
-			this.tabText.Size = new System.Drawing.Size(836, 375);
+			this.tabText.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabText.Size = new System.Drawing.Size(625, 295);
 			this.tabText.TabIndex = 0;
 			this.tabText.Text = "文本信息";
 			this.tabText.UseVisualStyleBackColor = true;
@@ -127,31 +132,37 @@
 			// tabDatabase
 			// 
 			this.tabDatabase.Controls.Add(this.listView1);
-			this.tabDatabase.Location = new System.Drawing.Point(4, 25);
+			this.tabDatabase.Location = new System.Drawing.Point(4, 22);
+			this.tabDatabase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tabDatabase.Name = "tabDatabase";
-			this.tabDatabase.Padding = new System.Windows.Forms.Padding(3);
-			this.tabDatabase.Size = new System.Drawing.Size(836, 375);
+			this.tabDatabase.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabDatabase.Size = new System.Drawing.Size(625, 295);
 			this.tabDatabase.TabIndex = 1;
 			this.tabDatabase.Text = "数据库";
 			this.tabDatabase.UseVisualStyleBackColor = true;
 			// 
 			// listView1
 			// 
-			this.listView1.Location = new System.Drawing.Point(8, 17);
+			this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listView1.FullRowSelect = true;
+			this.listView1.Location = new System.Drawing.Point(2, 2);
+			this.listView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.listView1.MultiSelect = false;
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(121, 97);
+			this.listView1.Size = new System.Drawing.Size(621, 291);
 			this.listView1.TabIndex = 0;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
 			// 
 			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(844, 432);
+			this.ClientSize = new System.Drawing.Size(633, 346);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
