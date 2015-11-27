@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseCmd.cs" />
+    <Compile Include="FileBinary.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
