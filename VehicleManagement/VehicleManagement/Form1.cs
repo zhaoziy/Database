@@ -8,17 +8,25 @@ namespace VehicleManagement
     public partial class Form1 : Form
     {
 		string content;
+		int authority;
         public Form1()
         {
             InitializeComponent();
+			UserFunction UserFun = new UserFunction();
         }
+
+		public Form1(int authority)
+		{
+			InitializeComponent();
+			UserFunction UserFun = new UserFunction();
+		}
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			try
 			{
 				init();
-			}
+            }
 			catch
 			{
 			}
