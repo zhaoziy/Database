@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SQL_Test_CS
+namespace VehicleManagement
 {
 	class FileBinary
 	{

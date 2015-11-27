@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
 
-namespace SQL_Test_CS
+namespace VehicleManagement
 {
     public partial class Form1 : Form
     {

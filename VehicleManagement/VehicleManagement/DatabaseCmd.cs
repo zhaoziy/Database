@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace SQL_Test_CS
+namespace VehicleManagement
 {
     class DatabaseCmd
     {

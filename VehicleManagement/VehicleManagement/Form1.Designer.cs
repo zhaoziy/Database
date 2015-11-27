@@ -1,4 +1,4 @@
-﻿namespace SQL_Test_CS
+﻿namespace VehicleManagement
 {
     partial class Form1
     {
