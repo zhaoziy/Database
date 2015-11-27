@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace VehicleManagement
 {
@@ -9,7 +10,7 @@ namespace VehicleManagement
 		static string DatabaseName = "Vehicle";
         static string connstr = "Data Source=.;Integrated Security=True;Database=" + DatabaseName + "";
 
-		public bool SqlExecuteNonQuery(string sqlcmd)
+		public static bool SqlExecuteNonQuery(string sqlcmd)
 		{
 			SqlConnection conn = new SqlConnection(connstr);
 			conn.Open();
@@ -53,7 +54,7 @@ namespace VehicleManagement
 			}
 		}  //不返回数据，只用于提交数据，比如insert、update、delete等
 
-		public bool SqlExecuteReader(string sqlcmd,out SqlDataReader myreader)
+		public static bool SqlExecuteReader(string sqlcmd,out SqlDataReader myreader)
 		{
 			SqlConnection conn = new SqlConnection(connstr);
 			conn.Open();
@@ -74,7 +75,7 @@ namespace VehicleManagement
 			}
 		}  //提交查询并返回数据，用于select
 
-		public bool SqlExecuteScalar(string sqlcmd,out object obj)
+		public static bool SqlExecuteScalar(string sqlcmd,out object obj)
 		{
 			SqlConnection conn = new SqlConnection(connstr);
 			conn.Open();
@@ -118,5 +119,33 @@ namespace VehicleManagement
 				conn.Dispose();
 			}
 		}  //用于提交数据，返回更新后的第一行第一列的值。例如：插入数据，返回刚刚插入数据的ID.
+
+		public static DataTable SqlDataTable(string strname, string str,out DataSet ds,out SqlDataAdapter da)
+		{
+			SqlConnection conn = new SqlConnection(connstr);
+			try
+			{
+				conn.Open();
+				da = new SqlDataAdapter(str, connstr);
+				SqlCommandBuilder thisBuilder = new SqlCommandBuilder(da);
+				ds = new DataSet();
+				da.Fill(ds, strname);
+				DataTable mytable = new DataTable();
+				mytable = ds.Tables[0];
+				return mytable;
+			}
+			catch(Exception ex)
+			{
+				da = null;
+				ds = null;
+				MessageBox.Show(ex.Message);
+				return null;
+			}
+			finally
+			{
+				conn.Close();
+				conn.Dispose();
+			}
+		}
 	}
 }

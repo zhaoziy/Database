@@ -12,8 +12,6 @@ namespace VehicleManagement
 {
 	public partial class Login : Form
 	{
-		UserFunction userFun = new UserFunction();
-		DatabaseCmd databaseCmd = new DatabaseCmd();
 		public Login()
 		{
 			InitializeComponent();
@@ -26,13 +24,13 @@ namespace VehicleManagement
 
 		private void Login_Bt_Click(object sender, EventArgs e)
 		{
-			if (GetAuthority(Num_Textbox.Text, userFun.Md5(Pwd_Textbox.Text)) == 2)
+			if (GetAuthority(Num_Textbox.Text, UserFunction.Md5(Pwd_Textbox.Text)) == 2)
 			{
 				ManagementMain MainManagement = new ManagementMain(2);
 				MainManagement.Show();
 				this.Hide();
 			}
-			if (GetAuthority(Num_Textbox.Text, userFun.Md5(Pwd_Textbox.Text)) == 3)
+			if (GetAuthority(Num_Textbox.Text, UserFunction.Md5(Pwd_Textbox.Text)) == 3)
 			{
 				ManagementMain MainManagement = new ManagementMain(3);
 				MainManagement.Show();
@@ -48,7 +46,7 @@ namespace VehicleManagement
 		{
 			string str = "select 权限 from [member] where 工号 ='" + num + "'and 密码 ='" + pwd + "'";
 			SqlDataReader myreader;
-			databaseCmd.SqlExecuteReader(str,out myreader);
+			DatabaseCmd.SqlExecuteReader(str,out myreader);
 			if(myreader.Read())
 			{
 				return myreader.GetInt32(0);
@@ -56,6 +54,14 @@ namespace VehicleManagement
 			else
 			{
 				return 0;
+			}
+		}
+
+		private void Num_Textbox_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if(!(Char.IsNumber(e.KeyChar)) && e.KeyChar !=(char)8)
+			{
+				e.Handled = true;
 			}
 		}
 	}

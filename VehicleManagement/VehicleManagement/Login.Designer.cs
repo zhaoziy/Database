@@ -48,7 +48,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(61, 124);
+			this.label2.Location = new System.Drawing.Point(64, 124);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(37, 15);
 			this.label2.TabIndex = 1;
@@ -56,18 +56,24 @@
 			// 
 			// Num_Textbox
 			// 
+			this.Num_Textbox.ImeMode = System.Windows.Forms.ImeMode.Disable;
 			this.Num_Textbox.Location = new System.Drawing.Point(107, 61);
+			this.Num_Textbox.MaxLength = 11;
 			this.Num_Textbox.Name = "Num_Textbox";
 			this.Num_Textbox.Size = new System.Drawing.Size(224, 25);
 			this.Num_Textbox.TabIndex = 2;
+			this.Num_Textbox.Text = "21422011";
+			this.Num_Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_Textbox_KeyPress);
 			// 
 			// Pwd_Textbox
 			// 
+			this.Pwd_Textbox.ImeMode = System.Windows.Forms.ImeMode.Disable;
 			this.Pwd_Textbox.Location = new System.Drawing.Point(107, 121);
 			this.Pwd_Textbox.Name = "Pwd_Textbox";
 			this.Pwd_Textbox.PasswordChar = '*';
 			this.Pwd_Textbox.Size = new System.Drawing.Size(224, 25);
 			this.Pwd_Textbox.TabIndex = 3;
+			this.Pwd_Textbox.Text = "123abc";
 			// 
 			// Login_Bt
 			// 
@@ -108,6 +114,7 @@
 			this.MinimumSize = new System.Drawing.Size(427, 313);
 			this.Name = "Login";
 			this.ShowIcon = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "登录";
 			this.ResumeLayout(false);
 			this.PerformLayout();
