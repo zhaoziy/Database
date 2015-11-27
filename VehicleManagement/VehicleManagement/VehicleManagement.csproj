@@ -62,12 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseCmd.cs" />
-    <Compile Include="FileBinary.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="ManagementMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ManagementMain.Designer.cs">
+      <DependentUpon>ManagementMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -78,8 +77,8 @@
     <Compile Include="UserFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ManagementMain.resx">
+      <DependentUpon>ManagementMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

@@ -17,7 +17,6 @@ namespace VehicleManagement
 		public Login()
 		{
 			InitializeComponent();
-			
 		}
 
 		private void Exit_Bt_Click(object sender, EventArgs e)
@@ -29,19 +28,19 @@ namespace VehicleManagement
 		{
 			if (GetAuthority(Num_Textbox.Text, userFun.Md5(Pwd_Textbox.Text)) == 2)
 			{
-				MessageBox.Show("2");
-				Form1 MainManagement = new Form1(2);
+				ManagementMain MainManagement = new ManagementMain(2);
 				MainManagement.Show();
+				this.Hide();
 			}
 			if (GetAuthority(Num_Textbox.Text, userFun.Md5(Pwd_Textbox.Text)) == 3)
 			{
-				Form1 MainManagement = new Form1(3);
+				ManagementMain MainManagement = new ManagementMain(3);
 				MainManagement.Show();
-				this.Close();
+				this.Hide();
 			}
-			else if(GetAuthority(Num_Textbox.Text, userFun.Md5(Pwd_Textbox.Text)) == 0)
+			else
 			{
-				MessageBox.Show("0");
+				MessageBox.Show("请检查用户名和密码是否正确");
 			}
         }
 

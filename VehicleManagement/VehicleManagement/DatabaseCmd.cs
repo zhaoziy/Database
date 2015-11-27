@@ -6,7 +6,8 @@ namespace VehicleManagement
 {
     class DatabaseCmd
     {
-		static string connstr = "Data Source=.;Integrated Security=True;Database=test";
+		static string DatabaseName = "Vehicle";
+        static string connstr = "Data Source=.;Integrated Security=True;Database=" + DatabaseName + "";
 
 		public bool SqlExecuteNonQuery(string sqlcmd)
 		{
@@ -22,7 +23,7 @@ namespace VehicleManagement
 			{
 				//从此开始，基于该连接的数据操作都被认为是事务的一部分
 				//下面绑定连接和事务对象  
-				cmd.CommandText = "USE test";
+				cmd.CommandText = "USE " + DatabaseName + "";
 				cmd.ExecuteNonQuery();     //更新数据  
 				cmd.CommandText = sqlcmd;
 				cmd.ExecuteNonQuery();
@@ -59,7 +60,7 @@ namespace VehicleManagement
 			SqlCommand cmd = new SqlCommand(sqlcmd, conn);
 			try
 			{
-				cmd.CommandText = "USE test";
+				cmd.CommandText = "USE " + DatabaseName + "";
 				cmd.ExecuteNonQuery();     //更新数据
 				cmd.CommandText = sqlcmd;
 				myreader = cmd.ExecuteReader();
@@ -87,7 +88,7 @@ namespace VehicleManagement
 			{
 				//从此开始，基于该连接的数据操作都被认为是事务的一部分
 				//下面绑定连接和事务对象  
-				cmd.CommandText = "USE test";
+				cmd.CommandText = "USE " + DatabaseName + "";
 				cmd.ExecuteNonQuery();     //更新数据  
 				cmd.CommandText = sqlcmd;
 				obj = cmd.ExecuteScalar();
@@ -117,11 +118,5 @@ namespace VehicleManagement
 				conn.Dispose();
 			}
 		}  //用于提交数据，返回更新后的第一行第一列的值。例如：插入数据，返回刚刚插入数据的ID.
-
-		public DatabaseCmd()
-		{ } //构造函数
-
-		~DatabaseCmd()
-		{ } //析构函数
 	}
 }
