@@ -7,7 +7,7 @@ using System.IO;
 
 namespace VehicleManagement
 {
-	class UserFunction
+	static class UserFunction
 	{
 		public static string Md5(string strPwd)   //正确的MD5加密
 		{
@@ -39,5 +39,10 @@ namespace VehicleManagement
 			bw.Write(Files);
 			bw.Close();
 		}//从数据库中把二进制流读出写入还原成文件
+
+		private static void FileToStream(string path, Stream st)
+		{
+
+		}
 	}
 }

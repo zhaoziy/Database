@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
 using System.Data;
+using System.Collections;
 
 namespace VehicleManagement
 {
@@ -16,9 +17,7 @@ namespace VehicleManagement
 		DataSet SearchDataSet;
 		SqlDataAdapter SearchoDataAdapter;
 
-		TextBox lenghtTB = new TextBox();
-		TextBox widthTB = new TextBox();
-		TextBox heightTB = new TextBox();
+		TextBox[] txtInfo = new TextBox[39];
 
 		public delegate void ShowDatabase(string str, int mode);
 		public static ShowDatabase showData;
@@ -30,27 +29,39 @@ namespace VehicleManagement
 			showData = ShowDatabaseInfo;
         }
 
+		#region "窗体事件"
+
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			init();
-        }
-
-		private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Application.Exit();
 		}
 
 		private void init()
 		{
+			MapTxt();
 			string str = "select * from [VehicleInfo]";
 			ShowDatabaseInfo(str, 0);
-        }
+		}
 
-		private void ShowDatabaseInfo(string str,int mode)
+		private void MapTxt()
 		{
-			if(mode == 0)
+			txtInfo[0] = textBox1; txtInfo[1] = textBox2; txtInfo[2] = textBox3; txtInfo[3] = textBox4; txtInfo[4] = textBox5;
+			txtInfo[5] = textBox6; txtInfo[6] = textBox7; txtInfo[7] = textBox8; txtInfo[8] = textBox9; txtInfo[9] = textBox10;
+			txtInfo[10] = textBox11; txtInfo[11] = textBox12; txtInfo[12] = textBox13; txtInfo[13] = textBox14; txtInfo[14] = textBox15;
+			txtInfo[15] = textBox16; txtInfo[16] = textBox17; txtInfo[17] = textBox18; txtInfo[18] = textBox19; txtInfo[19] = textBox20;
+			txtInfo[20] = textBox21; txtInfo[21] = textBox22; txtInfo[22] = textBox23; txtInfo[23] = textBox24; txtInfo[24] = textBox25;
+			txtInfo[25] = textBox26; txtInfo[26] = textBox27; txtInfo[27] = textBox28; txtInfo[28] = textBox29; txtInfo[29] = textBox30;
+			txtInfo[30] = textBox31; txtInfo[31] = textBox32; txtInfo[32] = textBox33; txtInfo[33] = textBox34; txtInfo[34] = textBox35;
+			txtInfo[35] = textBox36; txtInfo[36] = textBox37; txtInfo[37] = textBox38; txtInfo[38] = textBox39;
+		}
+
+		private void ShowDatabaseInfo(string str, int mode)
+		{
+			DatabaseCmd datacmd = new DatabaseCmd();
+			if (mode == 0)
 			{
-				DatabaseCmd.SqlDataTable("table1", str, out AllInfoDataSet, out AllInfoDataAdapter);
+				datacmd.SqlDataTable("table1", str, out AllInfoDataSet, out AllInfoDataAdapter);
+
 				try
 				{
 					bindingSource_AllInfo.DataSource = AllInfoDataSet.Tables[0];
@@ -59,23 +70,14 @@ namespace VehicleManagement
 
 					ClearBinding();
 
-					textBox1.DataBindings.Add("Text", bindingSource_AllInfo, "车型");
-					textBox2.DataBindings.Add("Text", bindingSource_AllInfo, "厂商");
-					textBox3.DataBindings.Add("Text", bindingSource_AllInfo, "级别");
-					textBox4.DataBindings.Add("Text", bindingSource_AllInfo, "车身结构");
+					string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
 
-					lenghtTB.DataBindings.Add("Text", bindingSource_AllInfo, "长");
-					widthTB.DataBindings.Add("Text", bindingSource_AllInfo, "宽");
-					heightTB.DataBindings.Add("Text", bindingSource_AllInfo, "高");
+					int iLoop = 0;
+					for (iLoop = 0; iLoop < 33; ++iLoop)
+					{
+						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_AllInfo, (string)array1.GetValue(iLoop));
+					}
 
-					textBox5.Text = lenghtTB.Text + "*" + widthTB.Text + "*" + heightTB.Text;
-					textBox6.DataBindings.Add("Text", bindingSource_AllInfo, "最高车速");
-					textBox7.DataBindings.Add("Text", bindingSource_AllInfo, "百公里加速");
-					textBox8.DataBindings.Add("Text", bindingSource_AllInfo, "综合油耗");
-					textBox9.DataBindings.Add("Text", bindingSource_AllInfo, "最小离地间隙");
-					textBox10.DataBindings.Add("Text", bindingSource_AllInfo, "轴距");
-					textBox11.DataBindings.Add("Text", bindingSource_AllInfo, "前轮距");
-					textBox12.DataBindings.Add("Text", bindingSource_AllInfo, "后轮距");
 				}
 				catch (Exception ex)
 				{
@@ -84,7 +86,7 @@ namespace VehicleManagement
 			}
 			else
 			{
-				DatabaseCmd.SqlDataTable("table2", str, out SearchDataSet, out SearchoDataAdapter);
+				datacmd.SqlDataTable("table2", str, out SearchDataSet, out SearchoDataAdapter);
 				try
 				{
 					bindingSource_Search.DataSource = SearchDataSet.Tables[0];
@@ -93,24 +95,13 @@ namespace VehicleManagement
 
 					ClearBinding();
 
-					textBox1.DataBindings.Add("Text", bindingSource_Search, "车型");
-					textBox2.DataBindings.Add("Text", bindingSource_Search, "厂商");
-					textBox3.DataBindings.Add("Text", bindingSource_Search, "级别");
-					textBox4.DataBindings.Add("Text", bindingSource_Search, "车身结构");
+					string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
 
-					lenghtTB.DataBindings.Add("Text", bindingSource_Search, "长");
-					widthTB.DataBindings.Add("Text", bindingSource_Search, "宽");
-					heightTB.DataBindings.Add("Text", bindingSource_Search, "高");
-
-					textBox5.Text = lenghtTB.Text + "*" + widthTB.Text + "*" + heightTB.Text;
-					textBox6.DataBindings.Add("Text", bindingSource_Search, "最高车速");
-					textBox7.DataBindings.Add("Text", bindingSource_Search, "百公里加速");
-					textBox8.DataBindings.Add("Text", bindingSource_Search, "综合油耗");
-					textBox9.DataBindings.Add("Text", bindingSource_Search, "最小离地间隙");
-					textBox10.DataBindings.Add("Text", bindingSource_Search, "轴距");
-					textBox11.DataBindings.Add("Text", bindingSource_Search, "前轮距");
-					textBox12.DataBindings.Add("Text", bindingSource_Search, "后轮距");
-
+					int iLoop = 0;
+					for (iLoop = 0; iLoop < 39; ++iLoop)
+					{
+						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Search, (string)array1.GetValue(iLoop));
+					}
 					tabControl1.SelectedIndex = 1;
 				}
 				catch (Exception ex)
@@ -120,63 +111,138 @@ namespace VehicleManagement
 			}
 		}
 
+		private void InsertRowOfDataSet(DataSet ds, string ColName, ArrayList List)
+		{
+			ds.Tables[0].Columns.Add(ColName, typeof(string));
+			DataRow dr = ds.Tables[0].NewRow();
+			dr[0] = List;
+			ds.Tables[0].Rows.Add(dr);
+		}
+
 		private void ClearBinding()
 		{
-			textBox1.DataBindings.Clear();
-			textBox2.DataBindings.Clear();
-			textBox3.DataBindings.Clear();
-			textBox4.DataBindings.Clear();
-			textBox5.DataBindings.Clear();
-			textBox6.DataBindings.Clear();
-			textBox7.DataBindings.Clear();
-			textBox8.DataBindings.Clear();
-			textBox9.DataBindings.Clear();
-			textBox10.DataBindings.Clear();
-			textBox11.DataBindings.Clear();
-			textBox12.DataBindings.Clear();
-			lenghtTB.DataBindings.Clear();
-			widthTB.DataBindings.Clear();
-			heightTB.DataBindings.Clear();
+			int iLoop = 0;
+			for (iLoop = 0; iLoop < 39; ++iLoop)
+			{
+				txtInfo[iLoop].DataBindings.Clear();
+			}
 		}
 
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			UpdateDatabase("table1");
+			UpdateDatabase("table1", 0);
+			UpdateDatabase("table2", 1);
 			Application.Exit();
 		}
 
-		private void 导入数据库ToolStripMenuItem_Click(object sender, EventArgs e)
+		private void UpdateDatabase(string str, int mode)
 		{
-			openFileDialog1.Multiselect = true;
-			openFileDialog1.Title = "导入数据库";
-			DialogResult result = openFileDialog1.ShowDialog();
-			if (result == DialogResult.OK)
+			if (mode == 0)
 			{
-				
-			}
-		}
-
-		private void Save_Bt_Click(object sender, EventArgs e)
-		{
-			((BindingSource)dataGridView_AllInfo.DataSource).EndEdit();
-			if(AllInfoDataSet.GetChanges() == null)
-			{
-				return;
+				if (AllInfoDataSet != null)
+				{
+					AllInfoDataAdapter.Update(AllInfoDataSet, str);
+				}
 			}
 			else
 			{
-				UpdateDatabase("table1");
-            }
-        }
+				if (SearchDataSet != null)
+				{
+					SearchoDataAdapter.Update(SearchDataSet, str);
+				}
+			}
+		}
 
-		private void UpdateDatabase(string str)
+		#endregion
+
+		#region"菜单事件"
+
+		private void 导入数据库ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			AllInfoDataAdapter.Update(AllInfoDataSet, str);
+			UploadToDatabase upload = new UploadToDatabase();
+			upload.ShowDialog();
+			upload.Dispose();
 		}
 
 		private void 检索数据ToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			SearchOneForm.Show();
-        }
+		}
+
+		private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+
+		#endregion
+
+		#region "按钮事件"
+
+		private void Save_Bt_Click(object sender, EventArgs e)
+		{
+			((BindingSource)dataGridView_AllInfo.DataSource).EndEdit();
+			if (AllInfoDataSet.GetChanges() == null)
+			{
+				return;
+			}
+			else
+			{
+				UpdateDatabase("table1", 0);
+			}
+		}
+
+		private void SaveSearch_Bt_Click(object sender, EventArgs e)
+		{
+			((BindingSource)bindingSource_Search.DataSource).EndEdit();
+			if (SearchDataSet.GetChanges() == null)
+			{
+				return;
+			}
+			else
+			{
+				UpdateDatabase("table2", 1);
+			}
+
+		}
+
+		#endregion
+
+		#region"鼠标焦点事件"
+
+		private void dataGridView_AllInfo_MouseEnter(object sender, EventArgs e)
+		{
+			dataGridView_AllInfo.Focus();
+		}
+
+		private void dataGridView_Search_MouseEnter(object sender, EventArgs e)
+		{
+			dataGridView_Search.Focus();
+		}
+
+		private void splitContainer1_Panel2_MouseEnter(object sender, EventArgs e)
+		{
+			splitContainer1.Panel2.Focus();
+		}
+
+		#endregion
 	}
+
+	#region"枚举变量"
+
+	enum ColName_Vehicle
+	{
+		ID = 0, 车型 = 1, 厂商 = 2, 级别 = 3, 车身结构 = 4, 长 = 5, 宽 = 6, 高 = 7, 最高车速 = 8, 百公里加速 = 9,
+		综合油耗 = 10, 最小离地间隙 = 11, 轴距 = 12, 前轮距 = 13, 后轮距 = 14, 整备质量 = 15, 车门数 = 16,
+		座位数 = 17, 行李箱容积 = 18, 排量 = 19, 前轮胎规格 = 20, 后轮胎规格 = 21, 电动天窗 = 22, 全景天窗 = 23,
+		运动外观套件 = 24, 铝合金轮圈 = 25, 电动吸合门 = 26, 侧滑门 = 27, 电动后备箱 = 28, 感应后备箱 = 29,
+		车顶行李架 = 30, 外观颜色 = 31, 信息更新时间 = 32
+	}
+
+	enum ColName_VehicleGeo
+	{
+		ID = 0, 车型 = 1, JPG = 2, BWF = 3, TMPLT = 4, LQB = 5, PRT = 6, STL = 7, 是否模板 = 8, 版本 = 9, 信息更新时间 = 10
+	}
+
+	#endregion
+
 }

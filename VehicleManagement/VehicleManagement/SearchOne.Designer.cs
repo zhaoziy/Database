@@ -39,7 +39,7 @@
 			this.Close_Bt.Location = new System.Drawing.Point(191, 92);
 			this.Close_Bt.Name = "Close_Bt";
 			this.Close_Bt.Size = new System.Drawing.Size(75, 33);
-			this.Close_Bt.TabIndex = 0;
+			this.Close_Bt.TabIndex = 2;
 			this.Close_Bt.Text = "关闭";
 			this.Close_Bt.UseVisualStyleBackColor = true;
 			this.Close_Bt.Click += new System.EventHandler(this.button1_Click);
@@ -60,15 +60,16 @@
 			this.label1.Location = new System.Drawing.Point(45, 36);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(37, 15);
-			this.label1.TabIndex = 2;
+			this.label1.TabIndex = 3;
 			this.label1.Text = "车型";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// textBox1
 			// 
 			this.textBox1.Location = new System.Drawing.Point(88, 33);
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Size = new System.Drawing.Size(207, 25);
-			this.textBox1.TabIndex = 3;
+			this.textBox1.TabIndex = 0;
 			// 
 			// SearchOne
 			// 

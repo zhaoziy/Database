@@ -46,7 +46,8 @@ namespace VehicleManagement
 		{
 			string str = "select 权限 from [member] where 工号 ='" + num + "'and 密码 ='" + pwd + "'";
 			SqlDataReader myreader;
-			DatabaseCmd.SqlExecuteReader(str,out myreader);
+			DatabaseCmd datacmd = new DatabaseCmd();
+			datacmd.SqlExecuteReader(str,out myreader);
 			if(myreader.Read())
 			{
 				return myreader.GetInt32(0);
@@ -55,6 +56,7 @@ namespace VehicleManagement
 			{
 				return 0;
 			}
+			datacmd.SqlReaderClose();
 		}
 
 		private void Num_Textbox_KeyPress(object sender, KeyPressEventArgs e)

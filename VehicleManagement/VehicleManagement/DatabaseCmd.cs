@@ -7,12 +7,12 @@ namespace VehicleManagement
 {
     class DatabaseCmd
     {
-		static string DatabaseName = "Vehicle";
-        static string connstr = "Data Source=.;Integrated Security=True;Database=" + DatabaseName + "";
+		static private string DatabaseName = "Vehicle";
+        static private string connstr = "Data Source=.;Integrated Security=True;Database=" + DatabaseName + "";
+		private SqlConnection conn = new SqlConnection(connstr);
 
-		public static bool SqlExecuteNonQuery(string sqlcmd)
+		public bool SqlExecuteNonQuery(string sqlcmd)
 		{
-			SqlConnection conn = new SqlConnection(connstr);
 			conn.Open();
 			SqlCommand cmd = new SqlCommand(sqlcmd, conn);
 			//SqlTransaction myTran=new SqlTransaction();  
@@ -54,9 +54,8 @@ namespace VehicleManagement
 			}
 		}  //不返回数据，只用于提交数据，比如insert、update、delete等
 
-		public static bool SqlExecuteReader(string sqlcmd,out SqlDataReader myreader)
-		{
-			SqlConnection conn = new SqlConnection(connstr);
+		public bool SqlExecuteReader(string sqlcmd,out SqlDataReader myreader)
+		{ 
 			conn.Open();
 			SqlCommand cmd = new SqlCommand(sqlcmd, conn);
 			try
@@ -75,9 +74,22 @@ namespace VehicleManagement
 			}
 		}  //提交查询并返回数据，用于select
 
-		public static bool SqlExecuteScalar(string sqlcmd,out object obj)
+		public bool SqlReaderClose()
 		{
-			SqlConnection conn = new SqlConnection(connstr);
+			if(conn.State == ConnectionState.Open)
+			{
+				conn.Close();
+				conn.Dispose();
+			}
+			else
+			{
+				conn.Dispose();
+			}
+			return true;
+		}
+
+		public bool SqlExecuteScalar(string sqlcmd,out object obj)
+		{
 			conn.Open();
 			SqlCommand cmd = new SqlCommand(sqlcmd, conn);
 			//SqlTransaction myTran=new SqlTransaction();  
@@ -120,7 +132,7 @@ namespace VehicleManagement
 			}
 		}  //用于提交数据，返回更新后的第一行第一列的值。例如：插入数据，返回刚刚插入数据的ID.
 
-		public static DataTable SqlDataTable(string strname, string str,out DataSet ds,out SqlDataAdapter da)
+		public DataTable SqlDataTable(string strname, string str,out DataSet ds,out SqlDataAdapter da)
 		{
 			SqlConnection conn = new SqlConnection(connstr);
 			try
