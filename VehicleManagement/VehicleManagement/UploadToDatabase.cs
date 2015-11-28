@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Collections;
+using System.IO;
 
 namespace VehicleManagement
 {
@@ -96,7 +97,7 @@ namespace VehicleManagement
 
 				string[] ColName_VehicleGeo_Array = Enum.GetNames(typeof(ColName_VehicleGeo));
 
-				for (iLoop = 1; iLoop < 10; ++iLoop)
+				for (iLoop = 1; iLoop < 11; ++iLoop)
 				{
 					ColNameList.Add(ColName_VehicleGeo_Array[iLoop]);
 				}
@@ -106,8 +107,9 @@ namespace VehicleManagement
 		private void Upload_Info_Click(object sender, EventArgs e)
 		{
 			openFileDialog1.Multiselect = true;
-			openFileDialog1.Title = "导入数据库";
-			DialogResult result = openFileDialog1.ShowDialog();
+			openFileDialog1.Title = "基本信息导入数据库";
+			openFileDialog1.FileName = "基本信息模板.xlsx";
+            DialogResult result = openFileDialog1.ShowDialog();
 			if (result == DialogResult.OK)
 			{
 
@@ -117,11 +119,60 @@ namespace VehicleManagement
 		private void Upload_Geo_Click(object sender, EventArgs e)
 		{
 			openFileDialog1.Multiselect = true;
-			openFileDialog1.Title = "导入数据库";
+			openFileDialog1.Title = "几何信息导入数据库";
+			openFileDialog1.FileName = "几何信息模板.xlsx";
 			DialogResult result = openFileDialog1.ShowDialog();
 			if (result == DialogResult.OK)
 			{
+				ExcelCmd excelcmd = new ExcelCmd();
+				excelcmd.CreateOrOpenExcelFile(false, openFileDialog1.FileName);
+				excelcmd.GetSheetIndex(1);
+				int iLoop = 0;
+				try
+				{
+					for (iLoop = 3; iLoop <= 8; ++iLoop)
+					{
+						string path = (string)excelcmd.GetCell(2, iLoop);
+						string filter = Path.GetExtension(path);
+						if(filter.Length > 1)
+						{
+							filter = filter.Substring(1, filter.Length - 1);
+							if (filter == "jpg")
+							{
 
+							}
+							else if(filter == "bwf")
+							{
+
+							}
+							else if (filter == "tmplt")
+							{
+
+							}
+							else if (filter == "lqb")
+							{
+
+							}
+							else if (filter == "prt")
+							{
+
+							}
+							else if (filter == "stl")
+							{
+
+							}
+						}
+						
+                    }
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				finally
+				{
+					excelcmd.ExitExcelApp();
+				}				
 			}
 		}
 	}
@@ -140,7 +191,7 @@ enum ColName_Vehicle
 
 enum ColName_VehicleGeo
 {
-	ID = 0, 车型 = 1, JPG = 2, BWF = 3, TMPLT = 4, LQB = 5, PRT = 6, STL = 7, 是否模板 = 8, 版本 = 9, 信息更新时间 = 10
+	ID = 0, 车型 = 1, 厂商 = 2, JPG = 3, BWF = 4, TMPLT = 5, LQB = 6, PRT = 7, STL = 8, 是否模板 = 9, 版本 = 10, 信息更新时间 = 11
 }
 
 #endregion

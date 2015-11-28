@@ -95,11 +95,11 @@ namespace VehicleManagement
 			}
 		}
 
-		public bool FillCell(int row, int cell, object content)
+		public bool FillCell(int row, int col, object content)
 		{
 			try
 			{
-				ExcelWorkSheet.Cells[row, cell] = content;
+				ExcelWorkSheet.Cells[row, col] = content;
 				return true;
 			}
 			catch (Exception ex)
@@ -109,11 +109,11 @@ namespace VehicleManagement
 			}
 		}
 
-		public object GetCell(int row, int cell)
+		public object GetCell(int row, int col)
 		{
 			try
 			{
-				return ExcelWorkSheet.Cells[row, cell];
+                return ((Range)ExcelWorkSheet.Cells[row, col]).Text.ToString();
 			}
 			catch (Exception ex)
 			{

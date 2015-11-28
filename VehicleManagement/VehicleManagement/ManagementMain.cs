@@ -240,7 +240,7 @@ namespace VehicleManagement
 
 	enum ColName_VehicleGeo
 	{
-		ID = 0, 车型 = 1, JPG = 2, BWF = 3, TMPLT = 4, LQB = 5, PRT = 6, STL = 7, 是否模板 = 8, 版本 = 9, 信息更新时间 = 10
+		ID = 0, 车型 = 1, 厂商 = 2, JPG = 3, BWF = 4, TMPLT = 5, LQB = 6, PRT = 7, STL = 8, 是否模板 = 9, 版本 = 10, 信息更新时间 = 11
 	}
 
 	#endregion

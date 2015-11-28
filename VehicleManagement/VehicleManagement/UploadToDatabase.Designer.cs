@@ -63,7 +63,7 @@
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "模板.xlsx";
-			this.openFileDialog1.Filter = "Excel文件|*.xlsx,*.xls";
+			this.openFileDialog1.Filter = "Excel文件|*.xlsx";
 			// 
 			// saveFileDialog1
 			// 
