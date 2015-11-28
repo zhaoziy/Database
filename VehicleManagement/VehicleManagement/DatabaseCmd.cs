@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
+using System.Collections;
 
 namespace VehicleManagement
 {
@@ -155,6 +156,125 @@ namespace VehicleManagement
 			}
 			finally
 			{
+				conn.Close();
+				conn.Dispose();
+			}
+		}
+
+
+		public bool SqlUploadBytes(string[] Column, UploadToDatabase.GeoInfo GeoInfoStruct)
+		{
+			conn.Open();
+			SqlCommand cmd = new SqlCommand();
+			
+			SqlTransaction myTran = conn.BeginTransaction();
+			cmd.Connection = conn;
+			cmd.Transaction = myTran;
+
+			try
+			{
+				cmd.CommandType = CommandType.Text;
+				cmd.CommandText = "insert into VehicleGeoInfo ('";
+                for (int iLoop = 0; iLoop < 10; ++iLoop)
+				{
+					cmd.CommandText = cmd.CommandText + Column[iLoop] + "','";
+				}
+				cmd.CommandText = cmd.CommandText + "','信息更新时间') values(@str1, @str2, @byte1, @byte2" +
+					", @byte3, @byte4, @byte5, @byte6, @bool1, @int1, @date1)";
+				SqlParameter str1  = new SqlParameter("@str1", SqlDbType.NVarChar);
+				SqlParameter str2 = new SqlParameter("@str2", SqlDbType.NVarChar);
+				SqlParameter byte1 = new SqlParameter("@byte1", SqlDbType.Image);
+				SqlParameter byte2 = new SqlParameter("@byte2", SqlDbType.Image);
+				SqlParameter byte3 = new SqlParameter("@byte3", SqlDbType.Image);
+				SqlParameter byte4 = new SqlParameter("@byte4", SqlDbType.Image);
+				SqlParameter byte5 = new SqlParameter("@byte5", SqlDbType.Image);
+				SqlParameter byte6 = new SqlParameter("@byte6", SqlDbType.Image);
+				SqlParameter bool1 = new SqlParameter("@bool1", SqlDbType.Bit);
+				SqlParameter int1 = new SqlParameter("@int1", SqlDbType.Int);
+				SqlParameter date1 = new SqlParameter("@date1", SqlDbType.DateTime);
+
+				str1.Value = GeoInfoStruct.Car;
+				str2.Value = GeoInfoStruct.Factory;
+				if(GeoInfoStruct.JPGByte != null)
+				{
+					byte1.Value = GeoInfoStruct.JPGByte;
+				}
+				else
+				{
+					byte1.Value = null;
+				}
+				if (GeoInfoStruct.BWFByte != null)
+				{
+					byte2.Value = GeoInfoStruct.BWFByte;
+				}
+				else
+				{
+					byte2.Value = null;
+				}
+				if (GeoInfoStruct.TMPLTByte != null)
+				{
+					byte3.Value = GeoInfoStruct.TMPLTByte;
+				}
+				else
+				{
+					byte3.Value = null;
+				}
+				if (GeoInfoStruct.LQBByte != null)
+				{
+					byte4.Value = GeoInfoStruct.LQBByte;
+				}
+				else
+				{
+					byte4.Value = null;
+				}
+				if (GeoInfoStruct.PRTByte != null)
+				{
+					byte5.Value = GeoInfoStruct.PRTByte;
+				}
+				else
+				{
+					byte5.Value = null;
+				}
+				if (GeoInfoStruct.STLByte != null)
+				{
+					byte6.Value = GeoInfoStruct.STLByte;
+				}
+				else
+				{
+					byte6.Value = null;
+				}
+
+				bool1.Value = GeoInfoStruct.IsModel;
+				int1.Value = 1;
+				date1.Value = GeoInfoStruct.UpdateDate;
+
+				cmd.Parameters.Add(str1);
+				cmd.Parameters.Add(str2);
+				cmd.Parameters.Add(byte1);
+				cmd.Parameters.Add(byte2);
+				cmd.Parameters.Add(byte3);
+				cmd.Parameters.Add(byte4);
+				cmd.Parameters.Add(byte5);
+				cmd.Parameters.Add(byte6);
+				cmd.Parameters.Add(bool1);
+				cmd.Parameters.Add(int1);
+				cmd.Parameters.Add(date1);
+
+				cmd.ExecuteNonQuery();
+
+				myTran.Commit();
+				return true;
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				return false;
+			}
+			finally
+			{
+				myTran.Dispose();
+				cmd.Transaction = null;
 				conn.Close();
 				conn.Dispose();
 			}
