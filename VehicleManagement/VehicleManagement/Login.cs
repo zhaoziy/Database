@@ -30,7 +30,7 @@ namespace VehicleManagement
 				MainManagement.Show();
 				this.Hide();
 			}
-			if (GetAuthority(Num_Textbox.Text, UserFunction.Md5(Pwd_Textbox.Text)) == 3)
+			else if (GetAuthority(Num_Textbox.Text, UserFunction.Md5(Pwd_Textbox.Text)) == 3)
 			{
 				ManagementMain MainManagement = new ManagementMain(3);
 				MainManagement.Show();

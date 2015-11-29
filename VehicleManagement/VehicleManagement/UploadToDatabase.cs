@@ -19,6 +19,20 @@ namespace VehicleManagement
 			InitializeComponent();
 		}
 
+		public struct GeoInfo
+		{
+			public string Car;
+			public string Factory;
+			public Byte[] JPGByte;
+			public Byte[] BWFByte;
+			public Byte[] TMPLTByte;
+			public Byte[] LQBByte;
+			public Byte[] PRTByte;
+			public Byte[] STLByte;
+			public bool IsModel;
+			public DateTime UpdateDate;
+		}
+
 		private void CreateModel_Info_Click(object sender, EventArgs e)
 		{
 			ArrayList ColNameList;
@@ -97,7 +111,7 @@ namespace VehicleManagement
 
 				string[] ColName_VehicleGeo_Array = Enum.GetNames(typeof(ColName_VehicleGeo));
 
-				for (iLoop = 1; iLoop < 11; ++iLoop)
+				for (iLoop = 1; iLoop < 10; ++iLoop)
 				{
 					ColNameList.Add(ColName_VehicleGeo_Array[iLoop]);
 				}
@@ -127,71 +141,106 @@ namespace VehicleManagement
 				ExcelCmd excelcmd = new ExcelCmd();
 				excelcmd.CreateOrOpenExcelFile(false, openFileDialog1.FileName);
 				excelcmd.GetSheetIndex(1);
-				int iLoop = 0;
-				try
+
+				GeoInfo UpdataGeoInfo = new GeoInfo();
+
+				string[] column_temp = Enum.GetNames(typeof(ColName_VehicleGeo));
+				string[] column = new string[10];
+				for(int jLoop = 0;jLoop < 10; ++jLoop)
 				{
-					for (iLoop = 3; iLoop <= 8; ++iLoop)
+					column[jLoop] = column_temp[jLoop + 1];
+				}
+
+				string path;
+				string filter;
+
+				int iLoop = 2;
+				for(iLoop = 2; iLoop < 3; ++iLoop)
+				{
+					
+					UpdataGeoInfo.Car = (string)excelcmd.GetCell(2, 1);
+					UpdataGeoInfo.Factory = (string)excelcmd.GetCell(2, 2);
+
+					path = (string)excelcmd.GetCell(2, 3);
+					filter = Path.GetExtension(path);
+
+					if (filter == ".jpg")
 					{
-						string path = (string)excelcmd.GetCell(2, iLoop);
-						string filter = Path.GetExtension(path);
-						if(filter.Length > 1)
-						{
-							filter = filter.Substring(1, filter.Length - 1);
-							if (filter == "jpg")
-							{
+						UserFunction.FileToBinary(path, out UpdataGeoInfo.JPGByte);
+					}
+					else
+					{
+						UpdataGeoInfo.JPGByte = null;
+					}
 
-							}
-							else if(filter == "bwf")
-							{
+					path = (string)excelcmd.GetCell(2, 4);
+					filter = Path.GetExtension(path);
 
-							}
-							else if (filter == "tmplt")
-							{
+					if (filter == ".bwf" || filter == ".BWF")
+					{
+						UserFunction.FileToBinary(path, out UpdataGeoInfo.BWFByte);
+					}
+					else
+					{
+						UpdataGeoInfo.BWFByte = null;
+					}
 
-							}
-							else if (filter == "lqb")
-							{
+					path = (string)excelcmd.GetCell(2, 5);
+					filter = Path.GetExtension(path);
 
-							}
-							else if (filter == "prt")
-							{
+					if (filter == ".tmplt" || filter == ".TMPLT")
+					{
+						UserFunction.FileToBinary(path, out UpdataGeoInfo.TMPLTByte);
+					}
+					else
+					{
+						UpdataGeoInfo.TMPLTByte = null;
+					}
 
-							}
-							else if (filter == "stl")
-							{
+					path = (string)excelcmd.GetCell(2, 6);
+					filter = Path.GetExtension(path);
 
-							}
-						}
-						
-                    }
+					if (filter == ".lqb" || filter == ".LQB")
+					{
+						UserFunction.FileToBinary(path, out UpdataGeoInfo.LQBByte);
+					}
+					else
+					{
+						UpdataGeoInfo.LQBByte = null;
+					}
+
+					path = (string)excelcmd.GetCell(2, 7);
+					filter = Path.GetExtension(path);
+
+					if (filter == ".prt" || filter == ".PRT")
+					{
+						UserFunction.FileToBinary(path, out UpdataGeoInfo.PRTByte);
+					}
+					else
+					{
+						UpdataGeoInfo.PRTByte = null;
+					}
+
+					path = (string)excelcmd.GetCell(2, 8);
+					filter = Path.GetExtension(path);
+
+					if (filter == ".stl" || filter == ".STL")
+					{
+						UserFunction.FileToBinary(path, out UpdataGeoInfo.STLByte);
+					}
+					else
+					{
+						UpdataGeoInfo.STLByte = null;
+					}
+
+					UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
+
+					DatabaseCmd datacmd = new DatabaseCmd();
+					
+					datacmd.SqlUploadBytes(column, UpdataGeoInfo);
 				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message);
-				}
-				finally
-				{
-					excelcmd.ExitExcelApp();
-				}				
+				excelcmd.ExitExcelApp();			
 			}
 		}
 	}
 }
-
-#region"枚举变量"
-
-enum ColName_Vehicle
-{
-	ID = 0, 车型 = 1, 厂商 = 2, 级别 = 3, 车身结构 = 4, 长 = 5, 宽 = 6, 高 = 7, 最高车速 = 8, 百公里加速 = 9,
-	综合油耗 = 10, 最小离地间隙 = 11, 轴距 = 12, 前轮距 = 13, 后轮距 = 14, 整备质量 = 15, 车门数 = 16,
-	座位数 = 17, 行李箱容积 = 18, 排量 = 19, 前轮胎规格 = 20, 后轮胎规格 = 21, 电动天窗 = 22, 全景天窗 = 23,
-	运动外观套件 = 24, 铝合金轮圈 = 25, 电动吸合门 = 26, 侧滑门 = 27, 电动后备箱 = 28, 感应后备箱 = 29,
-	车顶行李架 = 30, 外观颜色 = 31, 信息更新时间 = 32
-}
-
-enum ColName_VehicleGeo
-{
-	ID = 0, 车型 = 1, 厂商 = 2, JPG = 3, BWF = 4, TMPLT = 5, LQB = 6, PRT = 7, STL = 8, 是否模板 = 9, 版本 = 10, 信息更新时间 = 11
-}
-
-#endregion

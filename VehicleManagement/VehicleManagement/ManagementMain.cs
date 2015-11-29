@@ -39,6 +39,21 @@ namespace VehicleManagement
 		private void init()
 		{
 			MapTxt();
+			if(authority == 2)
+			{
+				导入数据库ToolStripMenuItem.Enabled = false;
+				导入数据库ToolStripMenuItem.Visible = false;
+				dataGridView_AllInfo.ReadOnly = true;
+				dataGridView_Search.ReadOnly = true;
+                for (int iLoop = 0; iLoop < 39; ++iLoop)
+				{
+					txtInfo[iLoop].ReadOnly = true;
+                }
+				SaveAllInfo_Bt.Enabled = false;
+				SaveAllInfo_Bt.Visible = false;
+				SaveSearch_Bt.Enabled = false;
+				SaveSearch_Bt.Visible = false;
+            }
 			string str = "select * from [VehicleInfo]";
 			ShowDatabaseInfo(str, 0);
 		}
@@ -98,7 +113,7 @@ namespace VehicleManagement
 					string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
 
 					int iLoop = 0;
-					for (iLoop = 0; iLoop < 39; ++iLoop)
+					for (iLoop = 0; iLoop < 33; ++iLoop)
 					{
 						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Search, (string)array1.GetValue(iLoop));
 					}
@@ -208,16 +223,6 @@ namespace VehicleManagement
 		#endregion
 
 		#region"鼠标焦点事件"
-
-		private void dataGridView_AllInfo_MouseEnter(object sender, EventArgs e)
-		{
-			dataGridView_AllInfo.Focus();
-		}
-
-		private void dataGridView_Search_MouseEnter(object sender, EventArgs e)
-		{
-			dataGridView_Search.Focus();
-		}
 
 		private void splitContainer1_Panel2_MouseEnter(object sender, EventArgs e)
 		{
