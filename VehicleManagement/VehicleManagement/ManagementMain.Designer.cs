@@ -831,7 +831,6 @@
 			this.splitContainer1.Panel2.Controls.Add(this.textBox2);
 			this.splitContainer1.Panel2.Controls.Add(this.label12);
 			this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-			this.splitContainer1.Panel2.MouseEnter += new System.EventHandler(this.splitContainer1_Panel2_MouseEnter);
 			this.splitContainer1.Size = new System.Drawing.Size(777, 518);
 			this.splitContainer1.SplitterDistance = 243;
 			this.splitContainer1.SplitterWidth = 3;

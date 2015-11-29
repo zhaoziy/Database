@@ -21,6 +21,7 @@ namespace VehicleManagement
 
 		public struct GeoInfo
 		{
+			public int ID;
 			public string Car;
 			public string Factory;
 			public Byte[] JPGByte;
@@ -30,6 +31,7 @@ namespace VehicleManagement
 			public Byte[] PRTByte;
 			public Byte[] STLByte;
 			public bool IsModel;
+			public int Version;
 			public DateTime UpdateDate;
 		}
 
@@ -111,7 +113,7 @@ namespace VehicleManagement
 
 				string[] ColName_VehicleGeo_Array = Enum.GetNames(typeof(ColName_VehicleGeo));
 
-				for (iLoop = 1; iLoop < 10; ++iLoop)
+				for (iLoop = 0; iLoop < 10; ++iLoop)
 				{
 					ColNameList.Add(ColName_VehicleGeo_Array[iLoop]);
 				}
@@ -142,26 +144,26 @@ namespace VehicleManagement
 				excelcmd.CreateOrOpenExcelFile(false, openFileDialog1.FileName);
 				excelcmd.GetSheetIndex(1);
 
-				GeoInfo UpdataGeoInfo = new GeoInfo();
+				string[] column = Enum.GetNames(typeof(ColName_VehicleGeo));
 
-				string[] column_temp = Enum.GetNames(typeof(ColName_VehicleGeo));
-				string[] column = new string[10];
-				for(int jLoop = 0;jLoop < 10; ++jLoop)
+				int ExcelRow = 0;
+				do
 				{
-					column[jLoop] = column_temp[jLoop + 1];
+					ExcelRow++;
 				}
+				while ((string)excelcmd.GetCell(ExcelRow, 1) != "");
 
-				string path;
-				string filter;
-
-				int iLoop = 2;
-				for(iLoop = 2; iLoop < 3; ++iLoop)
+				for (int iLoop = 2; iLoop < ExcelRow; ++iLoop)
 				{
-					
-					UpdataGeoInfo.Car = (string)excelcmd.GetCell(2, 1);
-					UpdataGeoInfo.Factory = (string)excelcmd.GetCell(2, 2);
+					string path = string.Empty;
+					string filter = string.Empty;
+					GeoInfo UpdataGeoInfo = new GeoInfo();
 
-					path = (string)excelcmd.GetCell(2, 3);
+					UpdataGeoInfo.ID = Int32.Parse((string)excelcmd.GetCell(iLoop, 1));
+					UpdataGeoInfo.Car = (string)excelcmd.GetCell(iLoop, 2);
+					UpdataGeoInfo.Factory = (string)excelcmd.GetCell(iLoop, 3);
+
+					path = (string)excelcmd.GetCell(iLoop, 4);
 					filter = Path.GetExtension(path);
 
 					if (filter == ".jpg")
@@ -173,7 +175,7 @@ namespace VehicleManagement
 						UpdataGeoInfo.JPGByte = null;
 					}
 
-					path = (string)excelcmd.GetCell(2, 4);
+					path = (string)excelcmd.GetCell(iLoop, 5);
 					filter = Path.GetExtension(path);
 
 					if (filter == ".bwf" || filter == ".BWF")
@@ -185,7 +187,7 @@ namespace VehicleManagement
 						UpdataGeoInfo.BWFByte = null;
 					}
 
-					path = (string)excelcmd.GetCell(2, 5);
+					path = (string)excelcmd.GetCell(iLoop, 6);
 					filter = Path.GetExtension(path);
 
 					if (filter == ".tmplt" || filter == ".TMPLT")
@@ -197,7 +199,7 @@ namespace VehicleManagement
 						UpdataGeoInfo.TMPLTByte = null;
 					}
 
-					path = (string)excelcmd.GetCell(2, 6);
+					path = (string)excelcmd.GetCell(iLoop, 7);
 					filter = Path.GetExtension(path);
 
 					if (filter == ".lqb" || filter == ".LQB")
@@ -209,7 +211,7 @@ namespace VehicleManagement
 						UpdataGeoInfo.LQBByte = null;
 					}
 
-					path = (string)excelcmd.GetCell(2, 7);
+					path = (string)excelcmd.GetCell(iLoop, 8);
 					filter = Path.GetExtension(path);
 
 					if (filter == ".prt" || filter == ".PRT")
@@ -221,7 +223,7 @@ namespace VehicleManagement
 						UpdataGeoInfo.PRTByte = null;
 					}
 
-					path = (string)excelcmd.GetCell(2, 8);
+					path = (string)excelcmd.GetCell(iLoop, 9);
 					filter = Path.GetExtension(path);
 
 					if (filter == ".stl" || filter == ".STL")
@@ -233,12 +235,22 @@ namespace VehicleManagement
 						UpdataGeoInfo.STLByte = null;
 					}
 
+					if ((string)excelcmd.GetCell(iLoop, 10) == "是")
+					{
+						UpdataGeoInfo.IsModel = true;
+					}
+					else
+					{
+						UpdataGeoInfo.IsModel = false;
+					}
+
+					UpdataGeoInfo.Version = 0;
 					UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
 
 					DatabaseCmd datacmd = new DatabaseCmd();
-					
-					datacmd.SqlUploadBytes(column, UpdataGeoInfo);
-				}
+					datacmd.SqlUploadGeoInfo(column, UpdataGeoInfo);
+                }
+				MessageBox.Show("导入成功");
 				excelcmd.ExitExcelApp();			
 			}
 		}

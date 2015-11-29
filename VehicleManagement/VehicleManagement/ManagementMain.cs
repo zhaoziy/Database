@@ -222,21 +222,13 @@ namespace VehicleManagement
 
 		#endregion
 
-		#region"鼠标焦点事件"
-
-		private void splitContainer1_Panel2_MouseEnter(object sender, EventArgs e)
-		{
-			splitContainer1.Panel2.Focus();
-		}
-
-		#endregion
 	}
 
 	#region"枚举变量"
 
 	enum ColName_Vehicle
 	{
-		ID = 0, 车型 = 1, 厂商 = 2, 级别 = 3, 车身结构 = 4, 长 = 5, 宽 = 6, 高 = 7, 最高车速 = 8, 百公里加速 = 9,
+		汽车ID = 0, 车型 = 1, 厂商 = 2, 级别 = 3, 车身结构 = 4, 长 = 5, 宽 = 6, 高 = 7, 最高车速 = 8, 百公里加速 = 9,
 		综合油耗 = 10, 最小离地间隙 = 11, 轴距 = 12, 前轮距 = 13, 后轮距 = 14, 整备质量 = 15, 车门数 = 16,
 		座位数 = 17, 行李箱容积 = 18, 排量 = 19, 前轮胎规格 = 20, 后轮胎规格 = 21, 电动天窗 = 22, 全景天窗 = 23,
 		运动外观套件 = 24, 铝合金轮圈 = 25, 电动吸合门 = 26, 侧滑门 = 27, 电动后备箱 = 28, 感应后备箱 = 29,
@@ -245,7 +237,7 @@ namespace VehicleManagement
 
 	enum ColName_VehicleGeo
 	{
-		ID = 0, 车型 = 1, 厂商 = 2, JPG = 3, BWF = 4, TMPLT = 5, LQB = 6, PRT = 7, STL = 8, 是否模板 = 9, 版本 = 10, 信息更新时间 = 11
+		汽车ID = 0, 车型 = 1, 厂商 = 2, JPG = 3, BWF = 4, TMPLT = 5, LQB = 6, PRT = 7, STL = 8, 是否模板 = 9, 版本 = 10, 信息更新时间 = 11
 	}
 
 	#endregion
