@@ -7,8 +7,8 @@ namespace VehicleManagement
 {
 	static class Config
 	{
-		static public int 汽车ID = -1;
-		static public int 车型 = 1;
+		static public int 汽车ID = 500;
+		static public int 车型 = 2;
 		static public int 厂商 = 6;
 		static public int 级别 = 7;
 		static public int 车身结构 = 11;
@@ -25,7 +25,7 @@ namespace VehicleManagement
 		static public int 整备质量 = 28;
 		static public int 车门数 = 30;
 		static public int 座位数 = 31;
-		static public int 行李箱容积 = 33;
+		static public int 行李厢容积 = 33;
 		static public int 排量 = 36;
 		static public int 前轮胎规格 = 73;
 		static public int 后轮胎规格 = 74;
@@ -35,9 +35,9 @@ namespace VehicleManagement
 		static public int 铝合金轮圈 = 109;
 		static public int 电动吸合门 = 110;
 		static public int 侧滑门 = 111;
-		static public int 电动后备箱 = 112;
-		static public int 感应后备箱 = 113;
+		static public int 电动后备厢 = 112;
+		static public int 感应后备厢 = 113;
 		static public int 车顶行李架 = 114;
-		static public int 外观颜色 = -1;
+		static public int 外观颜色 = 500;
 	}
 }
