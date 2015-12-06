@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="DatabaseCmd.cs" />
     <Compile Include="ExcelCmd.cs" />
     <Compile Include="ManagementMain.cs">
@@ -121,6 +122,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\几何信息模板.xlsx" />
+    <None Include="Resources\基本信息模板.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
