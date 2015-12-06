@@ -66,20 +66,5 @@ namespace VehicleManagement
 				e.Handled = true;
 			}
 		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-			DatabaseCmd cmd = new DatabaseCmd();
-			string str = "select LQB from VehicleGeoInfo where 汽车ID = 2 and 版本 = 6";
-			SqlDataReader myreader;
-			cmd.SqlExecuteReader(str, out myreader);
-			if (myreader.Read())
-			{
-				byte[] File = null;
-				File = (byte[])myreader[0];
-				UserFunction.BinaryToFile(File, @"d:\a.LQB");
-			}
-			cmd.SqlReaderClose();
-		}
 	}
 }

@@ -93,7 +93,22 @@ namespace VehicleManagement
             DialogResult result = openFileDialog1.ShowDialog();
 			if (result == DialogResult.OK)
 			{
+				string[] FilePath = new string[openFileDialog1.FileNames.Length];
+				int iLoop = 0;
+				foreach (string FileName in openFileDialog1.FileNames)
+				{
+					FilePath[iLoop] = FileName;
+					iLoop++;
+                }
 
+				if (UploadInfo(FilePath) == true)
+				{
+					MessageBox.Show("上传成功");
+				}
+				else
+				{
+					MessageBox.Show("上传失败，请查找原因后重试");
+				}
 			}
 		}
 
@@ -299,6 +314,12 @@ namespace VehicleManagement
 				datacmd.GetCommand().Transaction = null;
 				datacmd.GetConnection().Close();
 			}
+		}
+
+		public bool UploadInfo(string[] FilePath)
+		{
+
+			return true;
 		}
 	}
 }
