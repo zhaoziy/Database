@@ -34,6 +34,7 @@
 			this.Pwd_Textbox = new System.Windows.Forms.TextBox();
 			this.Login_Bt = new System.Windows.Forms.Button();
 			this.Exit_Bt = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -96,12 +97,23 @@
 			this.Exit_Bt.UseVisualStyleBackColor = true;
 			this.Exit_Bt.Click += new System.EventHandler(this.Exit_Bt_Click);
 			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(342, 190);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 6;
+			this.button1.Text = "button1";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
 			// Login
 			// 
 			this.AcceptButton = this.Login_Bt;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.CancelButton = this.Exit_Bt;
 			this.ClientSize = new System.Drawing.Size(409, 266);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.Exit_Bt);
 			this.Controls.Add(this.Login_Bt);
 			this.Controls.Add(this.Pwd_Textbox);
@@ -129,5 +141,6 @@
 		private System.Windows.Forms.TextBox Pwd_Textbox;
 		private System.Windows.Forms.Button Login_Bt;
 		private System.Windows.Forms.Button Exit_Bt;
+		private System.Windows.Forms.Button button1;
 	}
 }

@@ -59,5 +59,25 @@ namespace VehicleManagement.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 几何信息模板 {
+            get {
+                object obj = ResourceManager.GetObject("几何信息模板", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 基本信息模板 {
+            get {
+                object obj = ResourceManager.GetObject("基本信息模板", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

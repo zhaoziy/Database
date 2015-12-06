@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Xml;
+
 
 namespace VehicleManagement
 {
@@ -29,8 +31,7 @@ namespace VehicleManagement
 
 		public static void FileToBinary(string path, out Byte[] byteData)
 		{
-			;
-            try
+			try
 			{
 				FileInfo fi = new FileInfo(path);
 				FileStream fs = fi.OpenRead();
@@ -39,18 +40,20 @@ namespace VehicleManagement
 				fs.Close();
 				fs.Dispose();
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				byteData = null;
-                MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message);
 			}
 		}  //把文件转成二进制流出入数据库
 
-		public static void BinaryToFile(Byte[] Files, string path)
+		public static void BinaryToFile(Byte[] File, string path)
 		{
-			BinaryWriter bw = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate));
-			bw.Write(Files);
-			bw.Close();
+			FileStream fs;
+			FileInfo fi = new System.IO.FileInfo(path);
+			fs = fi.OpenWrite();
+			fs.Write(File, 0, File.Length);
+			fs.Close();
 		}//从数据库中把二进制流读出写入还原成文件
 
 		public static DateTime GetServerDateTime()
@@ -70,7 +73,7 @@ namespace VehicleManagement
 					return DateTime.Now;
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				return DateTime.Now;
 				MessageBox.Show(ex.Message);
@@ -79,6 +82,6 @@ namespace VehicleManagement
 			{
 				datacmd.SqlReaderClose();
 			}
-        }
-	}
+		}
+    }
 }

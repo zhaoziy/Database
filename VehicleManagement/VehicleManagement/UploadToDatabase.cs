@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Collections;
 using System.IO;
+using VehicleManagement.Properties;
 
 namespace VehicleManagement
 {
@@ -37,60 +38,24 @@ namespace VehicleManagement
 
 		private void CreateModel_Info_Click(object sender, EventArgs e)
 		{
-			ArrayList ColNameList;
-			GetColumnNames(0, out ColNameList);
-
-			ExcelCmd excelcmd = new ExcelCmd();
-			excelcmd.CreateOrOpenExcelFile(true);
-			excelcmd.GetSheetIndex(1);
-			excelcmd.RenameSheet(1, "基本信息模板");
-			int iLoop = 0;
-			for (iLoop = 0; iLoop < ColNameList.Count; ++iLoop)
-			{
-                excelcmd.FillCell(1, iLoop + 1, ColNameList[iLoop]);
-            }
-
-			saveFileDialog1.FileName = "基本信息模板.xlsx";
-            DialogResult result = saveFileDialog1.ShowDialog();
-			if (result == DialogResult.OK)
-			{
-				excelcmd.SaveFile(saveFileDialog1.FileName);
-			}
-			else
-			{
-				MessageBox.Show("未指定保存路径，默认保存到D:\\基本信息模板.xlsx");
-				excelcmd.SaveFile("D:\\基本信息模板.xlsx");
-			}
-			excelcmd.ExitExcelApp();
+			byte[] res;
+			res = new byte[Resources.基本信息模板.Length];
+			Resources.基本信息模板.CopyTo(res, 0);
+			FileStream fs = new FileStream(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop) + "\\基本信息模板.xlsx", FileMode.Create, FileAccess.Write);
+			fs.Write(res, 0, res.Length);
+			fs.Close();
+			MessageBox.Show("生成成功，请在桌面查找");
 		}
-				
+		
 		private void CreateModel_Geo_Click(object sender, EventArgs e)
 		{
-			ArrayList ColNameList;
-			GetColumnNames(1, out ColNameList);
-
-			ExcelCmd excelcmd = new ExcelCmd();
-			excelcmd.CreateOrOpenExcelFile(true);
-			excelcmd.GetSheetIndex(1);
-			excelcmd.RenameSheet(1, "几何信息模板");
-			int iLoop = 0;
-			for (iLoop = 0; iLoop < ColNameList.Count; ++iLoop)
-			{
-				excelcmd.FillCell(1, iLoop + 1, ColNameList[iLoop]);
-			}
-
-			saveFileDialog1.FileName = "几何信息模板.xlsx";
-			DialogResult result = saveFileDialog1.ShowDialog();
-			if (result == DialogResult.OK)
-			{
-				excelcmd.SaveFile(saveFileDialog1.FileName);
-			}
-			else
-			{
-				MessageBox.Show("未指定保存路径，默认保存到D:\\几何信息模板.xlsx");
-				excelcmd.SaveFile("D:\\几何信息模板.xlsx");
-			}
-			excelcmd.ExitExcelApp();
+			byte[] res;
+			res = new byte[Resources.几何信息模板.Length];
+			Resources.几何信息模板.CopyTo(res, 0);
+			FileStream fs = new FileStream(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop) + "\\几何信息模板.xlsx", FileMode.Create, FileAccess.Write);
+			fs.Write(res, 0, res.Length);
+			fs.Close();
+			MessageBox.Show("生成成功，请在桌面查找");
 		}
 
 		private void GetColumnNames(int mode, out ArrayList ColNameList)
