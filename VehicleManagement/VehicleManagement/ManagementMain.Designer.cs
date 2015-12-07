@@ -1157,7 +1157,7 @@
 			this.label30.Name = "label30";
 			this.label30.Size = new System.Drawing.Size(65, 12);
 			this.label30.TabIndex = 43;
-			this.label30.Text = "感应后备箱";
+			this.label30.Text = "感应后备厢";
 			// 
 			// label29
 			// 
@@ -1167,7 +1167,7 @@
 			this.label29.Name = "label29";
 			this.label29.Size = new System.Drawing.Size(65, 12);
 			this.label29.TabIndex = 42;
-			this.label29.Text = "电动后备箱";
+			this.label29.Text = "电动后备厢";
 			// 
 			// label28
 			// 
@@ -1267,7 +1267,7 @@
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(65, 12);
 			this.label19.TabIndex = 32;
-			this.label19.Text = "行李箱容积";
+			this.label19.Text = "行李厢容积";
 			// 
 			// label18
 			// 

@@ -20,22 +20,6 @@ namespace VehicleManagement
 			InitializeComponent();
 		}
 
-		public struct GeoInfo
-		{
-			public int ID;
-			public string Car;
-			public string Factory;
-			public Byte[] JPGByte;
-			public Byte[] BWFByte;
-			public Byte[] TMPLTByte;
-			public Byte[] LQBByte;
-			public Byte[] PRTByte;
-			public Byte[] STLByte;
-			public bool IsModel;
-			public int Version;
-			public DateTime UpdateDate;
-		}
-
 		private void CreateModel_Info_Click(object sender, EventArgs e)
 		{
 			byte[] res;
@@ -46,7 +30,7 @@ namespace VehicleManagement
 			fs.Close();
 			MessageBox.Show("生成成功，请在桌面查找");
 		}
-		
+
 		private void CreateModel_Geo_Click(object sender, EventArgs e)
 		{
 			byte[] res;
@@ -58,40 +42,12 @@ namespace VehicleManagement
 			MessageBox.Show("生成成功，请在桌面查找");
 		}
 
-		private void GetColumnNames(int mode, out ArrayList ColNameList)
-		{
-			ColNameList = new ArrayList();
-			int iLoop = 0;
-
-			if (mode == 0)
-			{
-				string[] ColName_Vehicle_Array = Enum.GetNames(typeof(ColName_Vehicle));
-
-				for (iLoop = 1; iLoop < 32; ++iLoop)
-				{
-					ColNameList.Add(ColName_Vehicle_Array[iLoop]);
-				}
-			}
-			else
-			{
-				ColNameList = new ArrayList();
-
-				string[] ColName_VehicleGeo_Array = Enum.GetNames(typeof(ColName_VehicleGeo));
-
-				for (iLoop = 0; iLoop < 10; ++iLoop)
-				{
-					ColNameList.Add(ColName_VehicleGeo_Array[iLoop]);
-				}
-			}
-		}
-
 		private void Upload_Info_Click(object sender, EventArgs e)
 		{
 			openFileDialog1.Multiselect = true;
 			openFileDialog1.Title = "基本信息导入数据库";
 			openFileDialog1.FileName = "基本信息模板.xlsx";
-            DialogResult result = openFileDialog1.ShowDialog();
-			if (result == DialogResult.OK)
+			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
 				string[] FilePath = new string[openFileDialog1.FileNames.Length];
 				int iLoop = 0;
@@ -99,7 +55,7 @@ namespace VehicleManagement
 				{
 					FilePath[iLoop] = FileName;
 					iLoop++;
-                }
+				}
 
 				if (UploadInfo(FilePath) == true)
 				{
@@ -114,11 +70,13 @@ namespace VehicleManagement
 
 		private void Upload_Geo_Click(object sender, EventArgs e)
 		{
-			openFileDialog1.Multiselect = true;
+			progressBar.Minimum = 0;
+			progressBar.Value = 0;
+
+			openFileDialog1.Multiselect = false;
 			openFileDialog1.Title = "几何信息导入数据库";
 			openFileDialog1.FileName = "几何信息模板.xlsx";
-			DialogResult result = openFileDialog1.ShowDialog();
-			if (result == DialogResult.OK)
+			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
 				ExcelCmd excelcmd = new ExcelCmd();
 				excelcmd.CreateOrOpenExcelFile(false, openFileDialog1.FileName);
@@ -133,6 +91,14 @@ namespace VehicleManagement
 				}
 				while ((string)excelcmd.GetCell(ExcelRow, 1) != "");
 
+				int ProgressCount = 0;
+
+				for (int iLoop = 2; iLoop < ExcelRow; ++iLoop)
+				{
+					ProgressCount++;
+                }
+				progressBar.Maximum = ProgressCount;
+
 				for (int iLoop = 2; iLoop < ExcelRow; ++iLoop)
 				{
 					string path = string.Empty;
@@ -146,41 +112,41 @@ namespace VehicleManagement
 					path = (string)excelcmd.GetCell(iLoop, 4);
 					filter = Path.GetExtension(path);
 
-					if (filter.ToLower() == ".jpg") {UserFunction.FileToBinary(path, out UpdataGeoInfo.JPGByte);}
-					else{UpdataGeoInfo.JPGByte = null;}
+					if (filter.ToLower() == ".jpg") { UserFunction.FileToBinary(path, out UpdataGeoInfo.JPGByte); }
+					else { UpdataGeoInfo.JPGByte = null; }
 
 					path = (string)excelcmd.GetCell(iLoop, 5);
 					filter = Path.GetExtension(path);
 
-					if (filter.ToLower() == ".bwf") {UserFunction.FileToBinary(path, out UpdataGeoInfo.BWFByte);}
-					else{UpdataGeoInfo.BWFByte = null;}
+					if (filter.ToLower() == ".bwf") { UserFunction.FileToBinary(path, out UpdataGeoInfo.BWFByte); }
+					else { UpdataGeoInfo.BWFByte = null; }
 
 					path = (string)excelcmd.GetCell(iLoop, 6);
 					filter = Path.GetExtension(path);
 
-					if (filter.ToLower() == ".tmplt") {	UserFunction.FileToBinary(path, out UpdataGeoInfo.TMPLTByte);}
-					else{UpdataGeoInfo.TMPLTByte = null;}
+					if (filter.ToLower() == ".tmplt") { UserFunction.FileToBinary(path, out UpdataGeoInfo.TMPLTByte); }
+					else { UpdataGeoInfo.TMPLTByte = null; }
 
 					path = (string)excelcmd.GetCell(iLoop, 7);
 					filter = Path.GetExtension(path);
 
-					if (filter.ToLower() == ".lqb") {UserFunction.FileToBinary(path, out UpdataGeoInfo.LQBByte);}
-					else{UpdataGeoInfo.LQBByte = null;}
+					if (filter.ToLower() == ".lqb") { UserFunction.FileToBinary(path, out UpdataGeoInfo.LQBByte); }
+					else { UpdataGeoInfo.LQBByte = null; }
 
 					path = (string)excelcmd.GetCell(iLoop, 8);
 					filter = Path.GetExtension(path);
 
-					if (filter.ToLower() == ".prt") {UserFunction.FileToBinary(path, out UpdataGeoInfo.PRTByte);}
-					else{UpdataGeoInfo.PRTByte = null;}
+					if (filter.ToLower() == ".prt") { UserFunction.FileToBinary(path, out UpdataGeoInfo.PRTByte); }
+					else { UpdataGeoInfo.PRTByte = null; }
 
 					path = (string)excelcmd.GetCell(iLoop, 9);
 					filter = Path.GetExtension(path);
 
-					if (filter.ToLower() == ".stl"){UserFunction.FileToBinary(path, out UpdataGeoInfo.STLByte);}
-					else{UpdataGeoInfo.STLByte = null;}
+					if (filter.ToLower() == ".stl") { UserFunction.FileToBinary(path, out UpdataGeoInfo.STLByte); }
+					else { UpdataGeoInfo.STLByte = null; }
 
-					if ((string)excelcmd.GetCell(iLoop, 10) == "是"){UpdataGeoInfo.IsModel = true;}
-					else{UpdataGeoInfo.IsModel = false;}
+					if ((string)excelcmd.GetCell(iLoop, 10) == "是") { UpdataGeoInfo.IsModel = true; }
+					else { UpdataGeoInfo.IsModel = false; }
 
 					string str = "select top 1 版本 from [VehicleGeoInfo] where 汽车ID = " + UpdataGeoInfo.ID + " order by 版本 desc";
 					DatabaseCmd datacmd = new DatabaseCmd();
@@ -190,13 +156,14 @@ namespace VehicleManagement
 
 					UpdataGeoInfo.Version = (myreader.Read()) ? (UpdataGeoInfo.Version = myreader.GetInt32(0) + 1) : (1);
 					datacmd.SqlReaderClose();
-										
+
 					UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
 
 					SqlUploadGeoInfo(column, UpdataGeoInfo, 4);
+
+					progressBar.Value++;
                 }
-				MessageBox.Show("导入成功");
-				excelcmd.ExitExcelApp();			
+				excelcmd.ExitExcelApp();
 			}
 		}
 
@@ -233,7 +200,7 @@ namespace VehicleManagement
 			datacmd.GetConnection().Open();
 			SqlTransaction myTran = datacmd.GetConnection().BeginTransaction();
 			try
-			{ 
+			{
 				datacmd.GetCommand().Connection = datacmd.GetConnection();
 				datacmd.GetCommand().Transaction = myTran;
 				datacmd.GetCommand().CommandType = CommandType.Text;
@@ -242,7 +209,7 @@ namespace VehicleManagement
 				{
 					datacmd.GetCommand().CommandText = datacmd.GetCommand().CommandText + Column[iLoop] + ",";
 				}
-				datacmd.GetCommand().CommandText +=  "信息更新时间) values (@int1, @str1, @str2, @byte1, @byte2" +
+				datacmd.GetCommand().CommandText += "信息更新时间) values (@int1, @str1, @str2, @byte1, @byte2" +
 					", @byte3, @byte4, @byte5, @byte6, @bool1, @int2, @date1)";
 
 				SqlParameter int1 = new SqlParameter("@int1", SqlDbType.Int);
@@ -318,8 +285,218 @@ namespace VehicleManagement
 
 		public bool UploadInfo(string[] FilePath)
 		{
+			string[] column = Enum.GetNames(typeof(ColName_Vehicle));
 
-			return true;
+			ExcelCmd excelcmd = new ExcelCmd();
+			int ProgressCount = 0;
+			try
+			{
+				for (int iLoop = 0; iLoop < FilePath.Length; ++iLoop)
+				{
+					excelcmd.CreateOrOpenExcelFile(false, FilePath[iLoop]);
+					excelcmd.GetSheetIndex(1);
+
+					int ExcelCol = 0;
+					do
+					{
+						ExcelCol++;
+					}
+					while ((string)excelcmd.GetCell(1, ExcelCol) != "");
+
+					for (int Col = 2; Col <= ExcelCol; ++Col)
+					{
+						ProgressCount++;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+			finally
+			{
+				excelcmd.CloseExcelWorkbooks();
+			}
+
+            progressBar.Minimum = 0;
+			progressBar.Value = 0;
+			progressBar.Maximum = ProgressCount;
+
+            try
+			{
+				for (int iLoop = 0; iLoop < FilePath.Length; ++iLoop)
+				{
+					excelcmd.CreateOrOpenExcelFile(false, FilePath[iLoop]);
+					excelcmd.GetSheetIndex(1);
+
+					int ExcelCol = 0;
+					do
+					{
+						ExcelCol++;
+					}
+					while ((string)excelcmd.GetCell(1, ExcelCol) != "");
+
+					for (int Col = 2; Col <= ExcelCol; ++Col)
+					{
+						Info UploadInfo = new Info();
+						try { UploadInfo.汽车ID = Int32.Parse((string)excelcmd.GetCell(Config.汽车ID, Col)); } catch (Exception ex) { }
+						try { UploadInfo.车型 = (string)excelcmd.GetCell(Config.车型, Col); } catch (Exception ex) { }
+						try { UploadInfo.厂商 = (string)excelcmd.GetCell(Config.厂商, Col); } catch (Exception ex) { }
+						try { UploadInfo.级别 = (string)excelcmd.GetCell(Config.级别, Col); } catch (Exception ex) { }
+						try { UploadInfo.车身结构 = (string)excelcmd.GetCell(Config.车身结构, Col); } catch (Exception ex) { }
+						try { UploadInfo.长 = Int32.Parse((string)excelcmd.GetCell(Config.长, Col)); } catch (Exception ex) { }
+						try { UploadInfo.宽 = Int32.Parse((string)excelcmd.GetCell(Config.宽, Col)); } catch (Exception ex) { }
+						try { UploadInfo.高 = Int32.Parse((string)excelcmd.GetCell(Config.高, Col)); } catch (Exception ex) { }
+						try { UploadInfo.最高车速 = Int32.Parse((string)excelcmd.GetCell(Config.最高车速, Col)); } catch (Exception ex) { }
+						try { UploadInfo.百公里加速 = float.Parse((string)excelcmd.GetCell(Config.百公里加速, Col)); } catch (Exception ex) { }
+						try { UploadInfo.综合油耗 = float.Parse((string)excelcmd.GetCell(Config.综合油耗, Col)); } catch (Exception ex) { }
+						try { UploadInfo.最小离地间隙 = Int32.Parse((string)excelcmd.GetCell(Config.最小离地间隙, Col)); } catch (Exception ex) { }
+						try { UploadInfo.轴距 = Int32.Parse((string)excelcmd.GetCell(Config.轴距, Col)); } catch (Exception ex) { }
+						try { UploadInfo.前轮距 = Int32.Parse((string)excelcmd.GetCell(Config.前轮距, Col)); } catch (Exception ex) { }
+						try { UploadInfo.后轮距 = Int32.Parse((string)excelcmd.GetCell(Config.后轮距, Col)); } catch (Exception ex) { }
+						try { UploadInfo.整备质量 = float.Parse((string)excelcmd.GetCell(Config.整备质量, Col)); } catch (Exception ex) { }
+						try { UploadInfo.车门数 = Int32.Parse((string)excelcmd.GetCell(Config.车门数, Col)); } catch (Exception ex) { }
+						try { UploadInfo.座位数 = Int32.Parse((string)excelcmd.GetCell(Config.座位数, Col)); } catch (Exception ex) { }
+						try { UploadInfo.行李厢容积 = Int32.Parse((string)excelcmd.GetCell(Config.行李厢容积, Col)); } catch (Exception ex) { }
+						try { UploadInfo.排量 = Int32.Parse((string)excelcmd.GetCell(Config.排量, Col)); } catch (Exception ex) { }
+						try { UploadInfo.前轮胎规格 = (string)excelcmd.GetCell(Config.前轮胎规格, Col); } catch (Exception ex) { }
+						try { UploadInfo.后轮胎规格 = (string)excelcmd.GetCell(Config.后轮胎规格, Col); } catch (Exception ex) { }
+						try { UploadInfo.电动天窗 = ((string)excelcmd.GetCell(Config.电动天窗, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.全景天窗 = ((string)excelcmd.GetCell(Config.全景天窗, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.运动外观套件 = ((string)excelcmd.GetCell(Config.运动外观套件, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.铝合金轮圈 = ((string)excelcmd.GetCell(Config.铝合金轮圈, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.电动吸合门 = ((string)excelcmd.GetCell(Config.电动吸合门, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.侧滑门 = ((string)excelcmd.GetCell(Config.侧滑门, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.电动后备厢 = ((string)excelcmd.GetCell(Config.电动后备厢, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.感应后备厢 = ((string)excelcmd.GetCell(Config.感应后备厢, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.车顶行李架 = ((string)excelcmd.GetCell(Config.车顶行李架, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.外观颜色 = (string)excelcmd.GetCell(Config.外观颜色, Col); } catch (Exception ex) { }
+						try { UploadInfo.信息更新时间 = UserFunction.GetServerDateTime(); } catch (Exception ex) { }
+
+						SqlUpoadeInfo(column, UploadInfo);
+						progressBar.Value++;
+                    }
+				}
+				return true;
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				return false;
+			}
+			finally
+			{
+				excelcmd.ExitExcelApp();
+			}			
+		}
+
+		public bool SqlUpoadeInfo(string[] Column, UploadToDatabase.Info InfoStruct)
+		{
+			try
+			{
+				string InsertStr = "insert into VehicleInfo (";
+				for (int iLoop = 0; iLoop < 32; ++iLoop)
+				{
+					InsertStr += Column[iLoop] + ",";
+				}
+				InsertStr += "信息更新时间) values (";
+				InsertStr += InfoStruct.汽车ID + ",'";
+				InsertStr += InfoStruct.车型 + "','";
+				InsertStr += InfoStruct.厂商 + "','";
+				InsertStr += InfoStruct.级别 + "','";
+				InsertStr += InfoStruct.车身结构 + "',";
+				InsertStr += InfoStruct.长 + ",";
+				InsertStr += InfoStruct.宽 + ",";
+				InsertStr += InfoStruct.高 + ",";
+				InsertStr += InfoStruct.最高车速 + ",";
+				InsertStr += InfoStruct.百公里加速 + ",";
+				InsertStr += InfoStruct.综合油耗 + ",";
+				InsertStr += InfoStruct.最小离地间隙 + ",";
+				InsertStr += InfoStruct.轴距 + ",";
+				InsertStr += InfoStruct.前轮距 + ",";
+				InsertStr += InfoStruct.后轮距 + ",";
+				InsertStr += InfoStruct.整备质量 + ",";
+				InsertStr += InfoStruct.车门数 + ",";
+				InsertStr += InfoStruct.座位数 + ",";
+				InsertStr += InfoStruct.行李厢容积 + ",";
+				InsertStr += InfoStruct.排量 + ",'";
+				InsertStr += InfoStruct.前轮胎规格 + "','";
+				InsertStr += InfoStruct.后轮胎规格 + "','";
+				InsertStr += InfoStruct.电动天窗 + "','";
+				InsertStr += InfoStruct.全景天窗 + "','";
+				InsertStr += InfoStruct.运动外观套件 + "','";
+				InsertStr += InfoStruct.铝合金轮圈 + "','";
+				InsertStr += InfoStruct.电动吸合门 + "','";
+				InsertStr += InfoStruct.侧滑门 + "','";
+				InsertStr += InfoStruct.电动后备厢 + "','";
+				InsertStr += InfoStruct.感应后备厢 + "','";
+				InsertStr += InfoStruct.车顶行李架 + "','";
+				InsertStr += InfoStruct.外观颜色 + "','";
+				InsertStr += InfoStruct.信息更新时间;
+				InsertStr += "')";
+
+				DatabaseCmd databasecmd = new DatabaseCmd();
+				databasecmd.SqlExecuteNonQuery(InsertStr);
+
+				return true;
+			}
+			catch(Exception ex)
+			{
+				return false;
+			}
+        }
+
+		public struct GeoInfo
+		{
+			public int ID;
+			public string Car;
+			public string Factory;
+			public Byte[] JPGByte;
+			public Byte[] BWFByte;
+			public Byte[] TMPLTByte;
+			public Byte[] LQBByte;
+			public Byte[] PRTByte;
+			public Byte[] STLByte;
+			public bool IsModel;
+			public int Version;
+			public DateTime UpdateDate;
+		}
+
+		public struct Info
+		{
+			public int 汽车ID;
+			public string 车型;
+			public string 厂商;
+			public string 级别;
+			public string 车身结构;
+			public int 长;
+			public int 宽;
+			public int 高;
+			public int 最高车速;
+			public float 百公里加速;
+			public float 综合油耗;
+			public int 最小离地间隙;
+			public int 轴距;
+			public int 前轮距;
+			public int 后轮距;
+			public float 整备质量;
+			public int 车门数;
+			public int 座位数;
+			public int 行李厢容积;
+			public int 排量;
+			public string 前轮胎规格;
+			public string 后轮胎规格;
+			public bool 电动天窗;
+			public bool 全景天窗;
+			public bool 运动外观套件;
+			public bool 铝合金轮圈;
+			public bool 电动吸合门;
+			public bool 侧滑门;
+			public bool 电动后备厢;
+			public bool 感应后备厢;
+			public bool 车顶行李架;
+			public string 外观颜色;
+			public DateTime 信息更新时间;
 		}
 	}
 }

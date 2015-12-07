@@ -163,6 +163,23 @@ namespace VehicleManagement
 				MessageBox.Show(ex.Message);
 			}
 		}
-
+		public void CloseExcelWorkbooks()
+		{
+			try
+			{
+				if (ExcelWorkBook != null)
+				{
+					ExcelWorkBook.Close();
+				}
+				if (ExcelWorkbooks != null)
+				{
+					ExcelWorkbooks.Close();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
 	}
 }
