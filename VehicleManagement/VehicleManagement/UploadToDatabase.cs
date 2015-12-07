@@ -80,27 +80,24 @@ namespace VehicleManagement
 			{
 				ExcelCmd excelcmd = new ExcelCmd();
 				excelcmd.CreateOrOpenExcelFile(false, openFileDialog1.FileName);
-				excelcmd.GetSheetIndex(1);
+				excelcmd.SetActiveSheet(1);
 
 				string[] column = Enum.GetNames(typeof(ColName_VehicleGeo));
 
-				int ExcelRow = 0;
-				do
-				{
-					ExcelRow++;
-				}
-				while ((string)excelcmd.GetCell(ExcelRow, 1) != "");
+				int ExcelRow = excelcmd.GetLastRow(1);
 
 				int ProgressCount = 0;
 
-				for (int iLoop = 2; iLoop < ExcelRow; ++iLoop)
+				for (int iLoop = 2; iLoop <= ExcelRow; ++iLoop)
 				{
 					ProgressCount++;
                 }
 				progressBar.Maximum = ProgressCount;
 
-				for (int iLoop = 2; iLoop < ExcelRow; ++iLoop)
+				for (int iLoop = 2; iLoop <= ExcelRow; ++iLoop)
 				{
+					progressBar.Value++;
+
 					string path = string.Empty;
 					string filter = string.Empty;
 					GeoInfo UpdataGeoInfo = new GeoInfo();
@@ -160,8 +157,6 @@ namespace VehicleManagement
 					UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
 
 					SqlUploadGeoInfo(column, UpdataGeoInfo, 4);
-
-					progressBar.Value++;
                 }
 				excelcmd.ExitExcelApp();
 			}
@@ -294,7 +289,7 @@ namespace VehicleManagement
 				for (int iLoop = 0; iLoop < FilePath.Length; ++iLoop)
 				{
 					excelcmd.CreateOrOpenExcelFile(false, FilePath[iLoop]);
-					excelcmd.GetSheetIndex(1);
+					excelcmd.SetActiveSheet(1);
 
 					int ExcelCol = 0;
 					do
@@ -327,7 +322,7 @@ namespace VehicleManagement
 				for (int iLoop = 0; iLoop < FilePath.Length; ++iLoop)
 				{
 					excelcmd.CreateOrOpenExcelFile(false, FilePath[iLoop]);
-					excelcmd.GetSheetIndex(1);
+					excelcmd.SetActiveSheet(1);
 
 					int ExcelCol = 0;
 					do
@@ -338,6 +333,8 @@ namespace VehicleManagement
 
 					for (int Col = 2; Col <= ExcelCol; ++Col)
 					{
+						progressBar.Value++;
+
 						Info UploadInfo = new Info();
 						try { UploadInfo.汽车ID = Int32.Parse((string)excelcmd.GetCell(Config.汽车ID, Col)); } catch (Exception ex) { }
 						try { UploadInfo.车型 = (string)excelcmd.GetCell(Config.车型, Col); } catch (Exception ex) { }
@@ -374,7 +371,6 @@ namespace VehicleManagement
 						try { UploadInfo.信息更新时间 = UserFunction.GetServerDateTime(); } catch (Exception ex) { }
 
 						SqlUpoadeInfo(column, UploadInfo);
-						progressBar.Value++;
                     }
 				}
 				return true;

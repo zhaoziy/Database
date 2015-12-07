@@ -43,7 +43,7 @@ namespace VehicleManagement
 			return true;
 		} ///mode为true时创建新文件，false时打开path位置的文件
 
-		public bool GetSheetIndex(int index)
+		public bool SetActiveSheet(int index)
 		{
 			if(index > 0)
 			{
@@ -84,7 +84,7 @@ namespace VehicleManagement
 		{
 			try
 			{
-				GetSheetIndex(index);
+				SetActiveSheet(index);
 				ExcelWorkSheet.Name = Name;
 				return true;
 			}
@@ -163,6 +163,7 @@ namespace VehicleManagement
 				MessageBox.Show(ex.Message);
 			}
 		}
+
 		public void CloseExcelWorkbooks()
 		{
 			try
@@ -180,6 +181,18 @@ namespace VehicleManagement
 			{
 				MessageBox.Show(ex.Message);
 			}
+		}
+
+		public int GetLastRow(int SheetNum)
+		{
+			SetActiveSheet(SheetNum);
+			return ExcelWorkSheet.UsedRange.Rows.Count;
+		}
+
+		public int GetLastCol(int SheetNum)
+		{
+			SetActiveSheet(SheetNum);
+			return ExcelWorkSheet.UsedRange.Columns.Count;
 		}
 	}
 }
