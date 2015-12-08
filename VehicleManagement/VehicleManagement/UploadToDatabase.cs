@@ -66,7 +66,8 @@ namespace VehicleManagement
 					MessageBox.Show("上传失败，请查找原因后重试");
 				}
 			}
-		}
+			ManagementMain.refreshinfo();
+        }
 
 		private void Upload_Geo_Click(object sender, EventArgs e)
 		{
@@ -126,11 +127,15 @@ namespace VehicleManagement
 
 						UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
 
-						SqlUploadGeoInfo(column, UpdataGeoInfo, 4);
+						if(UpdataGeoInfo.ByteData != null)
+						{
+							SqlUploadGeoInfo(column, UpdataGeoInfo, 4);
+						}
 					}
 					excelcmd.ExitExcelApp();
+					MessageBox.Show("导入成功");
+					ManagementMain.refreshgeoinfo();
 				}
-				MessageBox.Show("导入成功");
 			}
 			catch (Exception ex)
 			{
@@ -249,14 +254,14 @@ namespace VehicleManagement
 				{
 					ExcelCol++;
 				}
-				while ((string)excelcmd.GetCell(1, ExcelCol) != "");
+				while ((string)excelcmd.GetCell(10, ExcelCol) != "");
 
-				for (int Col = 2; Col <= ExcelCol; ++Col)
+				for (int Col = 2; Col < ExcelCol; ++Col)
 				{
 					ProgressCount++;
 				}
+				excelcmd.CloseExcelWorkbooks();
 			}
-			excelcmd.CloseExcelWorkbooks();
 
 			progressBar.Minimum = 0;
 			progressBar.Value = 0;
@@ -274,9 +279,9 @@ namespace VehicleManagement
 				{
 					ExcelCol++;
 				}
-				while ((string)excelcmd.GetCell(1, ExcelCol) != "");
+				while ((string)excelcmd.GetCell(10, ExcelCol) != "");
 
-				for (int Col = 2; Col <= ExcelCol; ++Col)
+				for (int Col = 2; Col < ExcelCol; ++Col)
 				{
 					progressBar.Value++;
 

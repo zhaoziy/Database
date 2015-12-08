@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.IO;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 
 namespace OperateDatabase
 {
@@ -46,12 +43,12 @@ namespace OperateDatabase
 
 		public static void BinaryToFile(Byte[] File, string path)
 		{
-			FileStream fs;
-			FileInfo fi = new System.IO.FileInfo(path);
-			fs = fi.OpenWrite();
-			fs.Write(File, 0, File.Length);
+			FileStream fs = new FileStream(path, FileMode.CreateNew);
+			BinaryWriter bw = new BinaryWriter(fs);
+			bw.Write(File, 0, File.Length);
+			bw.Close();
 			fs.Close();
-		}//从数据库中把二进制流读出写入还原成文件
+		} //从数据库中把二进制流读出写入还原成文件
 
 		public static DateTime GetServerDateTime()
 		{
@@ -83,14 +80,15 @@ namespace OperateDatabase
 
 		public static bool GetBinaryFromDatabase(string ID, string Ext, int Version, bool isModel, string outPath)
 		{
+			Byte[] ByteFile = null;
 			string sqlstr = "select Data from [VehicleGeoInfo] where 汽车ID ='" + ID + "' and Ext ='" + Ext + "' and 版本=" + Version + " 是否模板 ='" + isModel + "'";
 			DatabaseCmd databasecmd = new DatabaseCmd();
 			SqlDataReader myreader;
 			databasecmd.SqlExecuteReader(sqlstr, out myreader);
 			if(myreader.Read())
             {
-				//Byte[] byte = new byte[];
-
+				ByteFile = (byte[])myreader[0];
+				BinaryToFile(ByteFile, outPath);
 			}
 			return true;
 		}
