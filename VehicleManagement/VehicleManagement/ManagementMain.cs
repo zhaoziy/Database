@@ -237,7 +237,7 @@ namespace VehicleManagement
 
 	enum ColName_VehicleGeo
 	{
-		汽车ID = 0, 车型 = 1, 厂商 = 2, JPG = 3, BWF = 4, TMPLT = 5, LQB = 6, PRT = 7, STL = 8, 是否模板 = 9, 版本 = 10, 信息更新时间 = 11
+		汽车ID = 0, 车型 = 1, 厂商 = 2, Data = 3, Ext = 4, 版本 = 5, 是否模板 = 6, 信息更新时间 = 7
 	}
 
 	#endregion

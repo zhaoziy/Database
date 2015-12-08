@@ -25,22 +25,30 @@ namespace VehicleManagement
 
 		public bool CreateOrOpenExcelFile(bool mode, string path = "")
 		{
-			if (mode == true)
+			try
 			{
-				ExcelWorkBook = ExcelWorkbooks.Add(mode);
-			}
-			else if (path != "")
-			{
-				ExcelWorkBook = ExcelWorkbooks.Add(path);
-			}
-			else
-			{
-				MessageBox.Show("路径不能为空");
-				return false;
-			}
+				if (mode == true)
+				{
+					ExcelWorkBook = ExcelWorkbooks.Add(mode);
+				}
+				else if (path != "")
+				{
+					ExcelWorkBook = ExcelWorkbooks.Add(path);
+				}
+				else
+				{
+					MessageBox.Show("路径不能为空");
+					return false;
+				}
 
-			ExcelSheets = ExcelWorkBook.Sheets;
-			return true;
+				ExcelSheets = ExcelWorkBook.Sheets;
+				return true;
+			}
+			catch(Exception ex)
+			{
+				return false;
+				MessageBox.Show(ex.Message);
+			}
 		} ///mode为true时创建新文件，false时打开path位置的文件
 
 		public bool SetActiveSheet(int index)
@@ -136,7 +144,7 @@ namespace VehicleManagement
 			}
         }
 
-		public void ShowOrHideForm(bool mode)
+		public void ShowOrHideApp(bool mode)
 		{
 			ExcelApp.Visible = mode;
 		}
