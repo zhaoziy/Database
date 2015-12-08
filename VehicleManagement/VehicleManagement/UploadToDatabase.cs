@@ -324,6 +324,8 @@ namespace VehicleManagement
 					excelcmd.CreateOrOpenExcelFile(false, FilePath[iLoop]);
 					excelcmd.SetActiveSheet(1);
 
+					Config config = new Config(FilePath[iLoop]);
+
 					int ExcelCol = 0;
 					do
 					{
@@ -336,38 +338,38 @@ namespace VehicleManagement
 						progressBar.Value++;
 
 						Info UploadInfo = new Info();
-						try { UploadInfo.汽车ID = Int32.Parse((string)excelcmd.GetCell(Config.汽车ID, Col)); } catch (Exception ex) { }
-						try { UploadInfo.车型 = (string)excelcmd.GetCell(Config.车型, Col); } catch (Exception ex) { }
-						try { UploadInfo.厂商 = (string)excelcmd.GetCell(Config.厂商, Col); } catch (Exception ex) { }
-						try { UploadInfo.级别 = (string)excelcmd.GetCell(Config.级别, Col); } catch (Exception ex) { }
-						try { UploadInfo.车身结构 = (string)excelcmd.GetCell(Config.车身结构, Col); } catch (Exception ex) { }
-						try { UploadInfo.长 = Int32.Parse((string)excelcmd.GetCell(Config.长, Col)); } catch (Exception ex) { }
-						try { UploadInfo.宽 = Int32.Parse((string)excelcmd.GetCell(Config.宽, Col)); } catch (Exception ex) { }
-						try { UploadInfo.高 = Int32.Parse((string)excelcmd.GetCell(Config.高, Col)); } catch (Exception ex) { }
-						try { UploadInfo.最高车速 = Int32.Parse((string)excelcmd.GetCell(Config.最高车速, Col)); } catch (Exception ex) { }
-						try { UploadInfo.百公里加速 = float.Parse((string)excelcmd.GetCell(Config.百公里加速, Col)); } catch (Exception ex) { }
-						try { UploadInfo.综合油耗 = float.Parse((string)excelcmd.GetCell(Config.综合油耗, Col)); } catch (Exception ex) { }
-						try { UploadInfo.最小离地间隙 = Int32.Parse((string)excelcmd.GetCell(Config.最小离地间隙, Col)); } catch (Exception ex) { }
-						try { UploadInfo.轴距 = Int32.Parse((string)excelcmd.GetCell(Config.轴距, Col)); } catch (Exception ex) { }
-						try { UploadInfo.前轮距 = Int32.Parse((string)excelcmd.GetCell(Config.前轮距, Col)); } catch (Exception ex) { }
-						try { UploadInfo.后轮距 = Int32.Parse((string)excelcmd.GetCell(Config.后轮距, Col)); } catch (Exception ex) { }
-						try { UploadInfo.整备质量 = float.Parse((string)excelcmd.GetCell(Config.整备质量, Col)); } catch (Exception ex) { }
-						try { UploadInfo.车门数 = Int32.Parse((string)excelcmd.GetCell(Config.车门数, Col)); } catch (Exception ex) { }
-						try { UploadInfo.座位数 = Int32.Parse((string)excelcmd.GetCell(Config.座位数, Col)); } catch (Exception ex) { }
-						try { UploadInfo.行李厢容积 = Int32.Parse((string)excelcmd.GetCell(Config.行李厢容积, Col)); } catch (Exception ex) { }
-						try { UploadInfo.排量 = Int32.Parse((string)excelcmd.GetCell(Config.排量, Col)); } catch (Exception ex) { }
-						try { UploadInfo.前轮胎规格 = (string)excelcmd.GetCell(Config.前轮胎规格, Col); } catch (Exception ex) { }
-						try { UploadInfo.后轮胎规格 = (string)excelcmd.GetCell(Config.后轮胎规格, Col); } catch (Exception ex) { }
-						try { UploadInfo.电动天窗 = ((string)excelcmd.GetCell(Config.电动天窗, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.全景天窗 = ((string)excelcmd.GetCell(Config.全景天窗, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.运动外观套件 = ((string)excelcmd.GetCell(Config.运动外观套件, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.铝合金轮圈 = ((string)excelcmd.GetCell(Config.铝合金轮圈, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.电动吸合门 = ((string)excelcmd.GetCell(Config.电动吸合门, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.侧滑门 = ((string)excelcmd.GetCell(Config.侧滑门, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.电动后备厢 = ((string)excelcmd.GetCell(Config.电动后备厢, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.感应后备厢 = ((string)excelcmd.GetCell(Config.感应后备厢, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.车顶行李架 = ((string)excelcmd.GetCell(Config.车顶行李架, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
-						try { UploadInfo.外观颜色 = (string)excelcmd.GetCell(Config.外观颜色, Col); } catch (Exception ex) { }
+						try { UploadInfo.汽车ID = Int32.Parse((string)excelcmd.GetCell(config.汽车ID, Col)); } catch (Exception ex) { }
+						try { UploadInfo.车型 = (string)excelcmd.GetCell(config.车型, Col); } catch (Exception ex) { }
+						try { UploadInfo.厂商 = (string)excelcmd.GetCell(config.厂商, Col); } catch (Exception ex) { }
+						try { UploadInfo.级别 = (string)excelcmd.GetCell(config.级别, Col); } catch (Exception ex) { }
+						try { UploadInfo.车身结构 = (string)excelcmd.GetCell(config.车身结构, Col); } catch (Exception ex) { }
+						try { UploadInfo.长 = Int32.Parse((string)excelcmd.GetCell(config.长, Col)); } catch (Exception ex) { }
+						try { UploadInfo.宽 = Int32.Parse((string)excelcmd.GetCell(config.宽, Col)); } catch (Exception ex) { }
+						try { UploadInfo.高 = Int32.Parse((string)excelcmd.GetCell(config.高, Col)); } catch (Exception ex) { }
+						try { UploadInfo.最高车速 = Int32.Parse((string)excelcmd.GetCell(config.最高车速, Col)); } catch (Exception ex) { }
+						try { UploadInfo.百公里加速 = float.Parse((string)excelcmd.GetCell(config.百公里加速, Col)); } catch (Exception ex) { }
+						try { UploadInfo.综合油耗 = float.Parse((string)excelcmd.GetCell(config.综合油耗, Col)); } catch (Exception ex) { }
+						try { UploadInfo.最小离地间隙 = Int32.Parse((string)excelcmd.GetCell(config.最小离地间隙, Col)); } catch (Exception ex) { }
+						try { UploadInfo.轴距 = Int32.Parse((string)excelcmd.GetCell(config.轴距, Col)); } catch (Exception ex) { }
+						try { UploadInfo.前轮距 = Int32.Parse((string)excelcmd.GetCell(config.前轮距, Col)); } catch (Exception ex) { }
+						try { UploadInfo.后轮距 = Int32.Parse((string)excelcmd.GetCell(config.后轮距, Col)); } catch (Exception ex) { }
+						try { UploadInfo.整备质量 = float.Parse((string)excelcmd.GetCell(config.整备质量, Col)); } catch (Exception ex) { }
+						try { UploadInfo.车门数 = Int32.Parse((string)excelcmd.GetCell(config.车门数, Col)); } catch (Exception ex) { }
+						try { UploadInfo.座位数 = Int32.Parse((string)excelcmd.GetCell(config.座位数, Col)); } catch (Exception ex) { }
+						try { UploadInfo.行李厢容积 = Int32.Parse((string)excelcmd.GetCell(config.行李厢容积, Col)); } catch (Exception ex) { }
+						try { UploadInfo.排量 = Int32.Parse((string)excelcmd.GetCell(config.排量, Col)); } catch (Exception ex) { }
+						try { UploadInfo.前轮胎规格 = (string)excelcmd.GetCell(config.前轮胎规格, Col); } catch (Exception ex) { }
+						try { UploadInfo.后轮胎规格 = (string)excelcmd.GetCell(config.后轮胎规格, Col); } catch (Exception ex) { }
+						try { UploadInfo.电动天窗 = ((string)excelcmd.GetCell(config.电动天窗, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.全景天窗 = ((string)excelcmd.GetCell(config.全景天窗, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.运动外观套件 = ((string)excelcmd.GetCell(config.运动外观套件, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.铝合金轮圈 = ((string)excelcmd.GetCell(config.铝合金轮圈, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.电动吸合门 = ((string)excelcmd.GetCell(config.电动吸合门, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.侧滑门 = ((string)excelcmd.GetCell(config.侧滑门, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.电动后备厢 = ((string)excelcmd.GetCell(config.电动后备厢, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.感应后备厢 = ((string)excelcmd.GetCell(config.感应后备厢, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.车顶行李架 = ((string)excelcmd.GetCell(config.车顶行李架, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
+						try { UploadInfo.外观颜色 = (string)excelcmd.GetCell(config.外观颜色, Col); } catch (Exception ex) { }
 						try { UploadInfo.信息更新时间 = UserFunction.GetServerDateTime(); } catch (Exception ex) { }
 
 						SqlUpoadeInfo(column, UploadInfo);

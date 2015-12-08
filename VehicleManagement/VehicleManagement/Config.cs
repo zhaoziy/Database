@@ -50,42 +50,269 @@ namespace VehicleManagement
 			excelcmd.CreateOrOpenExcelFile(false, path);
 			excelcmd.SetActiveSheet(1);
 			int MaxRowNum = excelcmd.GetLastRow(1);
-			for(int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			string[] RowName = new string[MaxRowNum];
+			for (int iLoop = 0; iLoop < MaxRowNum; ++iLoop)
 			{
-				汽车ID = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (汽车ID);
-				车型 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (车型);
-				厂商 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (厂商);
-				级别 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (级别);
-				车身结构 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (车身结构);
-				长 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (长);
-				宽 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (宽);
-				高 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (高);
-				最高车速 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (最高车速);
-				百公里加速 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (百公里加速);
-				综合油耗 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (综合油耗);
-				最小离地间隙 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (最小离地间隙);
-				轴距 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (轴距);
-				前轮距 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (前轮距);
-				后轮距 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (后轮距);
-				整备质量 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (整备质量);
-				车门数 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (车门数);
-				座位数 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (座位数);
-				行李厢容积 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (行李厢容积);
-				排量 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (排量);
-				前轮胎规格 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (前轮胎规格);
-				后轮胎规格 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (后轮胎规格);
-				电动天窗 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (电动天窗);
-				全景天窗 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (全景天窗);
-				运动外观套件 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (运动外观套件);
-				铝合金轮圈 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (铝合金轮圈);
-				电动吸合门 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (电动吸合门);
-				侧滑门 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (侧滑门);
-				电动后备厢 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (电动后备厢);
-				感应后备厢 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (感应后备厢);
-				车顶行李架 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (车顶行李架);
-				外观颜色 = ((string)excelcmd.GetCell(iLoop, 1) == "") ? (iLoop) : (外观颜色);
+				RowName[iLoop] = (string)excelcmd.GetCell(iLoop + 1, 1);
+            }
+			excelcmd.ExitExcelApp();
+
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if(RowName[iLoop - 1] == "")
+				{
+					汽车ID = 汽车ID;
+					break;
+                }
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if(RowName[iLoop - 1] == "")
+				{
+					车型 = 车型;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "厂商")
+				{
+					厂商 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "级别")
+				{
+					级别 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "车身结构")
+				{
+					车身结构 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "长")
+				{
+					长 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "宽")
+				{
+					宽 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "高")
+				{
+					高 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "最高车速(km/h)")
+				{
+					最高车速 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "官方0-100km/h加速(s)")
+				{
+					百公里加速 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "工信部综合油耗(L/100km)")
+				{
+					综合油耗 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "最小离地间隙(mm)")
+				{
+					最小离地间隙 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "轴距(mm)")
+				{
+					轴距 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "前轮距(mm)")
+				{
+					前轮距 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "后轮距(mm)")
+				{
+					后轮距 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "整备质量(kg)")
+				{
+					整备质量 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "车门数(个)")
+				{
+					车门数 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "座位数(个)")
+				{
+					座位数 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "行李厢容积(L)")
+				{
+					行李厢容积 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "排量(mL)")
+				{
+					排量 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "前轮胎规格")
+				{
+					前轮胎规格 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "后轮胎规格"	)
+				{
+					后轮胎规格 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "电动天窗")
+				{
+					电动天窗 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "全景天窗")
+				{
+					全景天窗 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "运动外观套件")
+				{
+					运动外观套件 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "铝合金轮圈")
+				{
+					铝合金轮圈 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "电动吸合门")
+				{
+					电动吸合门 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "侧滑门")
+				{
+					侧滑门 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "电动后备厢")
+				{
+					电动后备厢 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "感应后备厢")
+				{
+					感应后备厢 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "车顶行李架")
+				{
+					车顶行李架 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "外观颜色")
+				{
+					外观颜色 = iLoop;
+					break;
+				}
 			}
 		}
-
 	}
 }
