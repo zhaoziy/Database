@@ -65,13 +65,20 @@ namespace VehicleManagement
 			{
 				导入数据库ToolStripMenuItem.Enabled = false;
 				导入数据库ToolStripMenuItem.Visible = false;
+
 				dataGridView_AllInfo.ReadOnly = true;
 				dataGridView_Search.ReadOnly = true;
 				dataGridView_AllGeoInfo.ReadOnly = true;
+
 				for (int iLoop = 0; iLoop < 39; ++iLoop)
 				{
 					txtInfo[iLoop].ReadOnly = true;
 				}
+				for (int iLoop = 0; iLoop < 7; ++iLoop)
+				{
+					txtGeoInfo[iLoop].ReadOnly = true;
+				}
+
 				SaveAllInfo_Bt.Enabled = false;
 				SaveAllInfo_Bt.Visible = false;
 				SaveSearch_Bt.Enabled = false;
