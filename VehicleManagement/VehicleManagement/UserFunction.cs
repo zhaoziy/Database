@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Xml;
 
-
 namespace VehicleManagement
 {
 	static class UserFunction
