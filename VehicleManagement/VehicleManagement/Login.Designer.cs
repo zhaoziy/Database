@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.Num_Textbox = new System.Windows.Forms.TextBox();
@@ -108,12 +109,12 @@
 			this.Controls.Add(this.Num_Textbox);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MaximumSize = new System.Drawing.Size(427, 313);
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(427, 313);
 			this.Name = "Login";
-			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "登录";
 			this.ResumeLayout(false);
