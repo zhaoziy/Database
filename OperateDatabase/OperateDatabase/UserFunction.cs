@@ -5,9 +5,9 @@ using System.Data.SqlClient;
 
 namespace OperateDatabase
 {
-	public static class UserFunction
+	public class UserFunction
 	{
-		public static string Md5(string strPwd)   //正确的MD5加密
+		public string Md5(string strPwd)   //正确的MD5加密
 		{
 			MD5 md5 = new MD5CryptoServiceProvider();
 			byte[] bytes = System.Text.Encoding.UTF8.GetBytes(strPwd);
@@ -23,7 +23,7 @@ namespace OperateDatabase
 			return ret.PadLeft(32, '0');
 		}
 
-		public static void FileToBinary(string path, out Byte[] byteData)
+		public void FileToBinary(string path, out Byte[] byteData)
 		{
 			try
 			{
@@ -41,7 +41,7 @@ namespace OperateDatabase
 			}
 		}  //把文件转成二进制流出入数据库
 
-		public static void BinaryToFile(Byte[] File, string path)
+		public void BinaryToFile(Byte[] File, string path)
 		{
 			FileStream fs = new FileStream(path, FileMode.CreateNew);
 			BinaryWriter bw = new BinaryWriter(fs);
@@ -50,7 +50,7 @@ namespace OperateDatabase
 			fs.Close();
 		} //从数据库中把二进制流读出写入还原成文件
 
-		public static DateTime GetServerDateTime()
+		public DateTime GetServerDateTime()
 		{
 			string str = "select getdate() as serverDate";
 			DatabaseCmd datacmd = new DatabaseCmd();
@@ -78,10 +78,10 @@ namespace OperateDatabase
 			}
 		}
 
-		public static bool GetBinaryFromDatabase(string ID, string Ext, int Version, bool isModel, string outPath)
+		public bool GetBinaryFromDatabase(string ID, string Ext, int Version, bool isModel, string outPath)
 		{
 			Byte[] ByteFile = null;
-			string sqlstr = "select Data from [VehicleGeoInfo] where 汽车ID ='" + ID + "' and Ext ='" + Ext + "' and 版本=" + Version + " 是否模板 ='" + isModel + "'";
+			string sqlstr = "select Data from [VehicleGeoInfo] where 汽车ID ='" + ID + "' and Ext ='" + Ext + "' and 版本=" + Version + " and 是否模板 ='" + isModel + "'";
 			DatabaseCmd databasecmd = new DatabaseCmd();
 			SqlDataReader myreader;
 			databasecmd.SqlExecuteReader(sqlstr, out myreader);

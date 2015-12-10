@@ -8,7 +8,7 @@ namespace OperateDatabase
 	public class DatabaseCmd
 	{
 		static private string DatabaseName = "Vehicle";
-		static private string connstr = "Data Source=.;Integrated Security=True;Database=" + DatabaseName + "";
+		static private string connstr = "server=115.159.90.52;database=" + DatabaseName + "; uid=sa;pwd=Elab2015;connection timeout = 5;";
 		private SqlConnection conn = new SqlConnection(connstr);
 		private SqlCommand command = new SqlCommand();
 
