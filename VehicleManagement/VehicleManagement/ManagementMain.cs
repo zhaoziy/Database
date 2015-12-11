@@ -12,18 +12,16 @@ namespace VehicleManagement
 	{
 		int authority = 0;
 
-		DataSet AllInfoDataSet;
-		SqlDataAdapter AllInfoDataAdapter;
+		DataSet InfoDataSet = new DataSet();
+		SqlDataAdapter InfoDataAdapter = new SqlDataAdapter();
 
-		DataSet AllGeoInfoDataSet;
-		SqlDataAdapter AllGeoInfoDataAdapter;
+		DataSet GeoInfoDataSet = new DataSet();
+		SqlDataAdapter GeoInfoDataAdapter = new SqlDataAdapter();
 
 		SearchOne SearchOneForm = new SearchOne();
-		DataSet SearchDataSet;
-		SqlDataAdapter SearchoDataAdapter;
 
-		TextBox[] txtInfo = new TextBox[39];
-		TextBox[] txtGeoInfo = new TextBox[7];
+		TextBox[] txtInfo = new TextBox[43];
+		TextBox[] txtGeoInfo = new TextBox[9];
 
 		public delegate void ShowDatabase(string str, int mode);
 		public static ShowDatabase showData;
@@ -31,7 +29,7 @@ namespace VehicleManagement
 		public delegate void RefreshInfo_delegate();
 		public static RefreshInfo_delegate refreshinfo;
 
-		public delegate void RefreshGeoInfo_delegate();
+		public delegate void RefreshGeoInfo_delegate(string GeoType);
 		public static RefreshGeoInfo_delegate refreshgeoinfo;
 
 		public ManagementMain(int auth)
@@ -41,14 +39,6 @@ namespace VehicleManagement
 			showData = ShowInfo;
 			refreshinfo = RefreshInfo;
 			refreshgeoinfo = RefreshGeoInfo;
-
-			panel_Info.Enabled = true;
-			panel_Info.Visible = true;
-			panel_Info.Location = new Point(12, 3);
-			panel_Info.Dock = DockStyle.Fill;
-
-			panel_GeoInfo.Enabled = false;
-			panel_GeoInfo.Visible = false;
         }
 
 		#region "窗体事件"
@@ -66,28 +56,25 @@ namespace VehicleManagement
 				导入数据库ToolStripMenuItem.Enabled = false;
 				导入数据库ToolStripMenuItem.Visible = false;
 
-				dataGridView_AllInfo.ReadOnly = true;
-				dataGridView_Search.ReadOnly = true;
-				dataGridView_AllGeoInfo.ReadOnly = true;
+				dataGridView_Info.ReadOnly = true;
+				dataGridView_GeoInfo.ReadOnly = true;
 
-				for (int iLoop = 0; iLoop < 39; ++iLoop)
+				for (int iLoop = 0; iLoop < txtInfo.Length; ++iLoop)
 				{
 					txtInfo[iLoop].ReadOnly = true;
 				}
-				for (int iLoop = 0; iLoop < 7; ++iLoop)
+				for (int iLoop = 0; iLoop < txtGeoInfo.Length; ++iLoop)
 				{
 					txtGeoInfo[iLoop].ReadOnly = true;
 				}
 
 				SaveAllInfo_Bt.Enabled = false;
 				SaveAllInfo_Bt.Visible = false;
-				SaveSearch_Bt.Enabled = false;
-				SaveSearch_Bt.Visible = false;
 				SaveGeoInfo_Bt.Enabled = false;
 				SaveGeoInfo_Bt.Visible = false;
 			}
 			RefreshInfo();
-			RefreshGeoInfo();
+			RefreshGeoInfo("BWF");
         }
 
 		private void RefreshInfo()
@@ -96,9 +83,9 @@ namespace VehicleManagement
 			ShowInfo(str, 0);
 		}
 
-		private void RefreshGeoInfo()
+		private void RefreshGeoInfo(string GeoType)
 		{
-			string str = "select ID,汽车ID,车型,厂商,Ext,版本,是否模板,信息更新时间 from [VehicleGeoInfo]";
+			string str = "select ID,汽车ID,车型,厂商,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + GeoType + "]";
 			ShowGeoInfo(str, 0);
 		}
 
@@ -111,35 +98,42 @@ namespace VehicleManagement
 			txtInfo[20] = textBox21; txtInfo[21] = textBox22; txtInfo[22] = textBox23; txtInfo[23] = textBox24; txtInfo[24] = textBox25;
 			txtInfo[25] = textBox26; txtInfo[26] = textBox27; txtInfo[27] = textBox28; txtInfo[28] = textBox29; txtInfo[29] = textBox30;
 			txtInfo[30] = textBox31; txtInfo[31] = textBox32; txtInfo[32] = textBox33; txtInfo[33] = textBox34; txtInfo[34] = textBox35;
-			txtInfo[35] = textBox36; txtInfo[36] = textBox37; txtInfo[37] = textBox38; txtInfo[38] = textBox39;
+			txtInfo[35] = textBox36; txtInfo[36] = textBox37; txtInfo[37] = textBox38; txtInfo[38] = textBox39; txtInfo[39] = textBox40;
+			txtInfo[40] = textBox41; txtInfo[41] = textBox42; txtInfo[42] = textBox43;
 
-			txtGeoInfo[0] = textBox40; txtGeoInfo[1] = textBox41; txtGeoInfo[2] = textBox42; txtGeoInfo[3] = textBox43;
-			txtGeoInfo[4] = textBox44; txtGeoInfo[5] = textBox45; txtGeoInfo[6] = textBox46;
+			txtGeoInfo[0] = textBox44; txtGeoInfo[1] = textBox45; txtGeoInfo[2] = textBox46; txtGeoInfo[3] = textBox47;
+			txtGeoInfo[4] = textBox48; txtGeoInfo[5] = textBox49; txtGeoInfo[6] = textBox50; txtGeoInfo[7] = textBox51;
+			txtGeoInfo[8] = textBox52;
 		}
 
 		private void ShowInfo(string str, int mode)
 		{
 			DatabaseCmd datacmd = new DatabaseCmd();
+			
+			InfoDataAdapter = null;
+
 			if (mode == 0)
 			{
-				datacmd.SqlDataTable("AllInfo", str, out AllInfoDataSet, out AllInfoDataAdapter);
-
+				if (InfoDataSet.Tables["Info"] != null)
+				{
+					InfoDataSet.Tables["Info"].Clear();
+				}
+				datacmd.SqlDataTable("Info", str, out InfoDataSet, out InfoDataAdapter);
 				try
 				{
-					bindingSource_AllInfo.DataSource = AllInfoDataSet.Tables[0];
-					dataGridView_AllInfo.DataSource = bindingSource_AllInfo;
-					bindingNavigator1.BindingSource = bindingSource_AllInfo;
+					bindingSource_Info.DataSource = InfoDataSet.Tables["Info"];
+					dataGridView_Info.DataSource = bindingSource_Info;
+					bindingNavigator_Info.BindingSource = bindingSource_Info;
 
 					ClearInfoBinding();
 
 					string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
 
 					int iLoop = 0;
-					for (iLoop = 0; iLoop < 32; ++iLoop)
+					for (iLoop = 0; iLoop < array1.Length; ++iLoop)
 					{
-						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_AllInfo, (string)array1.GetValue(iLoop));
+						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Info, (string)array1.GetValue(iLoop));
 					}
-					txtInfo[38].DataBindings.Add("Text", bindingSource_AllInfo, (string)array1.GetValue(32));
 				}
 				catch (Exception ex)
 				{
@@ -148,23 +142,26 @@ namespace VehicleManagement
 			}
 			else
 			{
-				datacmd.SqlDataTable("SearchAllInfo", str, out SearchDataSet, out SearchoDataAdapter);
+				if (InfoDataSet.Tables["SearchInfo"] != null)
+				{
+					InfoDataSet.Tables["SearchInfo"].Clear();
+				}
+				datacmd.SqlDataTable("SearchInfo", str, out InfoDataSet, out InfoDataAdapter);
 				try
 				{
-					bindingSource_Search.DataSource = SearchDataSet.Tables[0];
-					dataGridView_Search.DataSource = bindingSource_Search;
-					bindingNavigator2.BindingSource = bindingSource_Search;
+					bindingSource_Info.DataSource = InfoDataSet.Tables["SearchInfo"];
+					dataGridView_Info.DataSource = bindingSource_Info;
+					bindingNavigator_Info.BindingSource = bindingSource_Info;
 
 					ClearInfoBinding();
 
 					string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
 
 					int iLoop = 0;
-					for (iLoop = 0; iLoop < array1.Length - 1; ++iLoop)
+					for (iLoop = 0; iLoop < array1.Length; ++iLoop)
 					{
-						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Search, (string)array1.GetValue(iLoop));
+						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Info, (string)array1.GetValue(iLoop));
 					}
-					tabControl1.SelectedIndex = 2;
 				}
 				catch (Exception ex)
 				{
@@ -177,23 +174,28 @@ namespace VehicleManagement
 		{
 			DatabaseCmd datacmd = new DatabaseCmd();
 
-			datacmd.SqlDataTable("GeoInfo", str, out AllGeoInfoDataSet, out AllGeoInfoDataAdapter);
+			if (GeoInfoDataSet.Tables["GeoInfo"] != null)
+			{
+				GeoInfoDataSet.Tables["GeoInfo"].Clear();
+			}
+			datacmd.SqlDataTable("GeoInfo", str, out GeoInfoDataSet, out GeoInfoDataAdapter);
 
 			try
 			{
-				bindingSource_GeoInfo.DataSource = AllGeoInfoDataSet.Tables[0];
-				dataGridView_AllGeoInfo.DataSource = bindingSource_GeoInfo;
-				bindingNavigator3.BindingSource = bindingSource_GeoInfo;
+				bindingSource_GeoInfo.DataSource = GeoInfoDataSet.Tables[0];
+				dataGridView_GeoInfo.DataSource = bindingSource_GeoInfo;
+				bindingNavigator_GeoInfo.BindingSource = bindingSource_GeoInfo;
 
 				ClearGeoInfoBinding();
 
 				txtGeoInfo[0].DataBindings.Add("Text", bindingSource_GeoInfo, "汽车ID");
 				txtGeoInfo[1].DataBindings.Add("Text", bindingSource_GeoInfo, "车型");
 				txtGeoInfo[2].DataBindings.Add("Text", bindingSource_GeoInfo, "厂商");
-				txtGeoInfo[3].DataBindings.Add("Text", bindingSource_GeoInfo, "Ext");
-				txtGeoInfo[4].DataBindings.Add("Text", bindingSource_GeoInfo, "版本");
-				txtGeoInfo[5].DataBindings.Add("Text", bindingSource_GeoInfo, "是否模板");
-				txtGeoInfo[6].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新时间");
+				txtGeoInfo[3].DataBindings.Add("Text", bindingSource_GeoInfo, "版本");
+				txtGeoInfo[4].DataBindings.Add("Text", bindingSource_GeoInfo, "是否模板");
+				txtGeoInfo[5].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新时间");
+				txtGeoInfo[6].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新者工号");
+				txtGeoInfo[7].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新者姓名");
 			}
 			catch (Exception ex)
 			{
@@ -221,9 +223,9 @@ namespace VehicleManagement
 
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			UpdateDatabase("AllInfo", 0);
-			UpdateDatabase("SearchAllInfo", 1);
-			UpdateDatabase("GeoInfo", 2);
+			UpdateDatabase("Info", 0);
+			UpdateDatabase("SearchInfo", 0);
+			UpdateDatabase("GeoInfo", 1);
 			Application.Exit();
 		}
 
@@ -231,23 +233,16 @@ namespace VehicleManagement
 		{
 			if (mode == 0)
 			{
-				if (AllInfoDataSet != null)
+				if (InfoDataSet != null && InfoDataSet.Tables[str] != null)
 				{
-					AllInfoDataAdapter.Update(AllInfoDataSet, str);
+						InfoDataAdapter.Update(InfoDataSet, str);
 				}
 			}
 			else if(mode == 1)
 			{
-				if (SearchDataSet != null)
+				if (GeoInfoDataSet != null && GeoInfoDataSet.Tables[str] != null)
 				{
-					SearchoDataAdapter.Update(SearchDataSet, str);
-				}
-			}
-			else if (mode == 2)
-			{
-				if (AllGeoInfoDataSet != null)
-				{
-					AllGeoInfoDataAdapter.Update(AllGeoInfoDataSet, str);
+					GeoInfoDataAdapter.Update(GeoInfoDataSet, str);
 				}
 			}
 		}
@@ -279,74 +274,61 @@ namespace VehicleManagement
 
 		private void Save_Bt_Click(object sender, EventArgs e)
 		{
-			((BindingSource)dataGridView_AllInfo.DataSource).EndEdit();
-			if (AllInfoDataSet.GetChanges() == null)
+			((BindingSource)dataGridView_Info.DataSource).EndEdit();
+			if (InfoDataSet.GetChanges() == null)
 			{
 				return;
 			}
 			else
 			{
-				UpdateDatabase("AllInfo", 0);
+				UpdateDatabase("SearchInfo", 0);
+				UpdateDatabase("Info", 0);
 			}
-		}
-
-		private void SaveSearch_Bt_Click(object sender, EventArgs e)
-		{
-			((BindingSource)dataGridView_Search.DataSource).EndEdit();
-			if (SearchDataSet.GetChanges() == null)
-			{
-				return;
-			}
-			else
-			{
-				UpdateDatabase("SearchAllInfo", 1);
-			}
-
 		}
 
 		private void SaveGeoInfo_Bt_Click(object sender, EventArgs e)
 		{
-			((BindingSource)dataGridView_AllGeoInfo.DataSource).EndEdit();
-			if (AllGeoInfoDataSet.GetChanges() == null)
+			((BindingSource)dataGridView_GeoInfo.DataSource).EndEdit();
+			if (GeoInfoDataSet.GetChanges() == null)
 			{
 				return;
 			}
 			else
 			{
-				UpdateDatabase("GeoInfo", 2);
+				UpdateDatabase("GeoInfo", 1);
 			}
 		}
 
 		#endregion
 
-		private void dataGridView_AllInfo_SelectionChanged(object sender, EventArgs e)
+		private void dataGridView_Info_SelectionChanged(object sender, EventArgs e)
 		{
 			DatabaseCmd databasecmd = new DatabaseCmd();
 			SqlDataReader myreader;
 
-			string str = "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_AllInfo.Rows[dataGridView_AllInfo.CurrentRow.Index].Cells[1].Value + "' and Ext = 'JPG'"
+			string str = "select count(*) from [GeoInfo_BWF] where 汽车ID = '"
+				+ dataGridView_Info.Rows[dataGridView_Info.CurrentRow.Index].Cells[1].Value + "'"
 				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_AllInfo.Rows[dataGridView_AllInfo.CurrentRow.Index].Cells[1].Value + "' and Ext = 'BWF'"
+				+ "select count(*) from [GeoInfo_LQB] where 汽车ID = '"
+				+ dataGridView_Info.Rows[dataGridView_Info.CurrentRow.Index].Cells[1].Value + "'"
 				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_AllInfo.Rows[dataGridView_AllInfo.CurrentRow.Index].Cells[1].Value + "' and Ext = 'TMPLT'"
+				+ "select count(*) from [GeoInfo_TMPLT] where 汽车ID = '"
+				+ dataGridView_Info.Rows[dataGridView_Info.CurrentRow.Index].Cells[1].Value + "'"
 				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_AllInfo.Rows[dataGridView_AllInfo.CurrentRow.Index].Cells[1].Value + "' and Ext = 'LQB'"
+				+ "select count(*) from [GeoInfo_PRT] where 汽车ID = '"
+				+ dataGridView_Info.Rows[dataGridView_Info.CurrentRow.Index].Cells[1].Value + "'"
 				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_AllInfo.Rows[dataGridView_AllInfo.CurrentRow.Index].Cells[1].Value + "' and Ext = 'PRT'"
+				+ "select count(*) from [GeoInfo_STL] where 汽车ID = '"
+				+ dataGridView_Info.Rows[dataGridView_Info.CurrentRow.Index].Cells[1].Value + "'"
 				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_AllInfo.Rows[dataGridView_AllInfo.CurrentRow.Index].Cells[1].Value + "' and Ext = 'STL'";
+				+ "select count(*) from [GeoInfo_JPG] where 汽车ID = '"
+				+ dataGridView_Info.Rows[dataGridView_Info.CurrentRow.Index].Cells[1].Value + "'";
 
 			databasecmd.SqlExecuteReader(str, out myreader);
 			int iLoop = 0;
 			while (myreader.Read())
 			{
-				txtInfo[iLoop + 32].Text = (myreader.GetInt32(0) != 0) ? ("True") : ("False");
+				txtInfo[iLoop + 37].Text = (myreader.GetInt32(0) != 0) ? ("True") : ("False");
 				iLoop++;
 			}
 			databasecmd.SqlReaderClose();
@@ -355,74 +337,26 @@ namespace VehicleManagement
 
 		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			UpdateDatabase("AllInfo", 0);
-			UpdateDatabase("SearchAllInfo", 1);
+			UpdateDatabase("Info", 0);
+			UpdateDatabase("SearchInfo", 1);
 			UpdateDatabase("GeoInfo", 2);
-
-			if (tabControl1.SelectedIndex == 0)
-			{
-				panel_Info.Enabled = true;
-				panel_Info.Visible = true;
-				panel_Info.Location = new Point(12, 3);
-				panel_Info.Dock = DockStyle.Fill;
-
-				panel_GeoInfo.Enabled = false;
-				panel_GeoInfo.Visible = false;
-            }
-			else if (tabControl1.SelectedIndex == 1)
-			{
-				panel_GeoInfo.Enabled = true;
-				panel_GeoInfo.Visible = true;
-				panel_GeoInfo.Location = new Point(12, 3);
-				panel_GeoInfo.Dock = DockStyle.Fill;
-
-				panel_Info.Enabled = false;
-				panel_Info.Visible = false;
-			}
-			else if (tabControl1.SelectedIndex == 2)
-			{
-				panel_Info.Enabled = true;
-				panel_Info.Visible = true;
-				panel_Info.Location = new Point(12, 3);
-				panel_Info.Dock = DockStyle.Fill;
-
-				panel_GeoInfo.Enabled = false;
-				panel_GeoInfo.Visible = false;
-			}
 		}
 
-		private void dataGridView_Search_SelectionChanged(object sender, EventArgs e)
+		private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			DatabaseCmd databasecmd = new DatabaseCmd();
-			SqlDataReader myreader;
-
-			string str = "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_Search.Rows[dataGridView_Search.CurrentRow.Index].Cells[1].Value + "' and Ext = 'JPG'"
-				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_Search.Rows[dataGridView_Search.CurrentRow.Index].Cells[1].Value + "' and Ext = 'BWF'"
-				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_Search.Rows[dataGridView_Search.CurrentRow.Index].Cells[1].Value + "' and Ext = 'TMPLT'"
-				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_Search.Rows[dataGridView_Search.CurrentRow.Index].Cells[1].Value + "' and Ext = 'LQB'"
-				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_Search.Rows[dataGridView_Search.CurrentRow.Index].Cells[1].Value + "' and Ext = 'PRT'"
-				+ " union all "
-				+ "select count(*) from [VehicleGeoInfo] where 汽车ID = '"
-				+ dataGridView_Search.Rows[dataGridView_Search.CurrentRow.Index].Cells[1].Value + "' and Ext = 'STL'";
-
-			databasecmd.SqlExecuteReader(str, out myreader);
-			int iLoop = 0;
-			while (myreader.Read())
+			UpdateDatabase("GeoInfo", 2);
+			tabControl2.TabPages[tabControl2.SelectedIndex].Controls.Add(splitContainer2);
+			string str = string.Empty;
+			if (tabControl2.TabPages[tabControl2.SelectedIndex].Text != "JPG")
 			{
-				txtInfo[iLoop + 32].Text = (myreader.GetInt32(0) != 0) ? ("True") : ("False");
-				iLoop++;
+				str = "select ID,汽车ID,车型,厂商,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
+				ShowGeoInfo(str, 0);
 			}
-			databasecmd.SqlReaderClose();
-			myreader = null;
+			else
+			{
+				str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
+				ShowGeoInfo(str, 1);
+			}
 		}
 	}
 
@@ -430,17 +364,19 @@ namespace VehicleManagement
 
 	enum ColName_Vehicle
 		{
-			汽车ID = 0, 车型 = 1, 厂商 = 2, 级别 = 3, 车身结构 = 4, 长 = 5, 宽 = 6, 高 = 7, 最高车速 = 8, 百公里加速 = 9,
-			综合油耗 = 10, 最小离地间隙 = 11, 轴距 = 12, 前轮距 = 13, 后轮距 = 14, 整备质量 = 15, 车门数 = 16,
-			座位数 = 17, 行李厢容积 = 18, 排量 = 19, 前轮胎规格 = 20, 后轮胎规格 = 21, 电动天窗 = 22, 全景天窗 = 23,
-			运动外观套件 = 24, 铝合金轮圈 = 25, 电动吸合门 = 26, 侧滑门 = 27, 电动后备厢 = 28, 感应后备厢 = 29,
-			车顶行李架 = 30, 外观颜色 = 31, 信息更新时间 = 32
-		}
+			汽车ID = 0, 车型 = 1, 型号 = 2, 年款 = 3, 厂商 = 4, 级别 = 5, 车身结构 = 6, 长 = 7, 宽 = 8, 高 = 9,
+			最高车速 = 10, 百公里加速 = 11, 综合油耗 = 12, 最小离地间隙 = 13, 轴距 = 14, 前轮距 = 15, 后轮距 = 16,
+			整备质量 = 17, 车门数 = 18,  座位数 = 19, 行李厢容积 = 20, 排量 = 21, 前轮胎规格 = 22, 后轮胎规格 = 23,
+			电动天窗 = 24, 全景天窗 = 25, 运动外观套件 = 26, 铝合金轮圈 = 27, 电动吸合门 = 28, 侧滑门 = 29,
+			电动后备厢 = 30, 感应后备厢 = 31, 车顶行李架 = 32, 外观颜色 = 33, 信息更新时间 = 34, 信息更新者工号= 35,
+			信息更新者姓名 = 36
+	}
 
 	enum ColName_VehicleGeo
 		{
-			汽车ID = 0, 车型 = 1, 厂商 = 2, Data = 3, Ext = 4, 版本 = 5, 是否模板 = 6, 信息更新时间 = 7
-		}
+			汽车ID = 0, 车型 = 1, 厂商 = 2, Data = 3, 版本 = 4, 是否模板 = 5,
+			信息更新时间 = 6, 信息更新者工号 = 7, 信息更新者姓名 = 8
+	}
 
 	#endregion
 }

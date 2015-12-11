@@ -134,7 +134,7 @@ namespace VehicleManagement
 					}
 					excelcmd.ExitExcelApp();
 					MessageBox.Show("导入成功");
-					ManagementMain.refreshgeoinfo();
+					//ManagementMain.refreshgeoinfo();
 				}
 			}
 			catch (Exception ex)
