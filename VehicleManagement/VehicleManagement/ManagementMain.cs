@@ -45,7 +45,7 @@ namespace VehicleManagement
 			panel_Info.Enabled = true;
 			panel_Info.Visible = true;
 			panel_Info.Location = new Point(12, 3);
-			panel_Info.Size = new Size(741, 259);
+			panel_Info.Dock = DockStyle.Fill;
 
 			panel_GeoInfo.Enabled = false;
 			panel_GeoInfo.Visible = false;
@@ -364,7 +364,7 @@ namespace VehicleManagement
 				panel_Info.Enabled = true;
 				panel_Info.Visible = true;
 				panel_Info.Location = new Point(12, 3);
-				panel_Info.Size = new Size(741, 259);
+				panel_Info.Dock = DockStyle.Fill;
 
 				panel_GeoInfo.Enabled = false;
 				panel_GeoInfo.Visible = false;
@@ -374,7 +374,7 @@ namespace VehicleManagement
 				panel_GeoInfo.Enabled = true;
 				panel_GeoInfo.Visible = true;
 				panel_GeoInfo.Location = new Point(12, 3);
-				panel_GeoInfo.Size = new Size(741, 259);
+				panel_GeoInfo.Dock = DockStyle.Fill;
 
 				panel_Info.Enabled = false;
 				panel_Info.Visible = false;
@@ -384,7 +384,7 @@ namespace VehicleManagement
 				panel_Info.Enabled = true;
 				panel_Info.Visible = true;
 				panel_Info.Location = new Point(12, 3);
-				panel_Info.Size = new Size(741, 259);
+				panel_Info.Dock = DockStyle.Fill;
 
 				panel_GeoInfo.Enabled = false;
 				panel_GeoInfo.Visible = false;

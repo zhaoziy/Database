@@ -247,7 +247,7 @@
 			this.dataGridView_AllInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.dataGridView_AllInfo.Name = "dataGridView_AllInfo";
 			this.dataGridView_AllInfo.RowTemplate.Height = 27;
-			this.dataGridView_AllInfo.Size = new System.Drawing.Size(1016, 297);
+			this.dataGridView_AllInfo.Size = new System.Drawing.Size(1016, 300);
 			this.dataGridView_AllInfo.TabIndex = 1;
 			this.dataGridView_AllInfo.SelectionChanged += new System.EventHandler(this.dataGridView_AllInfo_SelectionChanged);
 			// 
@@ -480,7 +480,7 @@
 			this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(1029, 370);
+			this.tabControl1.Size = new System.Drawing.Size(1029, 369);
 			this.tabControl1.TabIndex = 28;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
 			// 
@@ -495,7 +495,7 @@
 			this.tabPage_AllInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.tabPage_AllInfo.Name = "tabPage_AllInfo";
 			this.tabPage_AllInfo.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.tabPage_AllInfo.Size = new System.Drawing.Size(1021, 341);
+			this.tabPage_AllInfo.Size = new System.Drawing.Size(1021, 344);
 			this.tabPage_AllInfo.TabIndex = 0;
 			this.tabPage_AllInfo.Text = "所有数据";
 			// 
@@ -623,7 +623,7 @@
 			this.tabPage_GeoInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.tabPage_GeoInfo.Name = "tabPage_GeoInfo";
 			this.tabPage_GeoInfo.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.tabPage_GeoInfo.Size = new System.Drawing.Size(1021, 338);
+			this.tabPage_GeoInfo.Size = new System.Drawing.Size(1021, 340);
 			this.tabPage_GeoInfo.TabIndex = 2;
 			this.tabPage_GeoInfo.Text = "几何信息";
 			// 
@@ -763,7 +763,7 @@
 			this.dataGridView_AllGeoInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.dataGridView_AllGeoInfo.Name = "dataGridView_AllGeoInfo";
 			this.dataGridView_AllGeoInfo.RowTemplate.Height = 23;
-			this.dataGridView_AllGeoInfo.Size = new System.Drawing.Size(1016, 294);
+			this.dataGridView_AllGeoInfo.Size = new System.Drawing.Size(1016, 296);
 			this.dataGridView_AllGeoInfo.TabIndex = 0;
 			// 
 			// tabPage_Search
@@ -776,7 +776,7 @@
 			this.tabPage_Search.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.tabPage_Search.Name = "tabPage_Search";
 			this.tabPage_Search.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.tabPage_Search.Size = new System.Drawing.Size(1021, 338);
+			this.tabPage_Search.Size = new System.Drawing.Size(1021, 341);
 			this.tabPage_Search.TabIndex = 1;
 			this.tabPage_Search.Text = "检索数据";
 			// 
@@ -804,7 +804,7 @@
 			this.dataGridView_Search.Name = "dataGridView_Search";
 			this.dataGridView_Search.ReadOnly = true;
 			this.dataGridView_Search.RowTemplate.Height = 27;
-			this.dataGridView_Search.Size = new System.Drawing.Size(1016, 294);
+			this.dataGridView_Search.Size = new System.Drawing.Size(1016, 297);
 			this.dataGridView_Search.TabIndex = 1;
 			this.dataGridView_Search.SelectionChanged += new System.EventHandler(this.dataGridView_Search_SelectionChanged);
 			// 
@@ -944,8 +944,8 @@
 			this.splitContainer1.Panel2.Controls.Add(this.panel_GeoInfo);
 			this.splitContainer1.Panel2.Controls.Add(this.panel_Info);
 			this.splitContainer1.Size = new System.Drawing.Size(1036, 648);
-			this.splitContainer1.SplitterDistance = 376;
-			this.splitContainer1.SplitterWidth = 1;
+			this.splitContainer1.SplitterDistance = 375;
+			this.splitContainer1.SplitterWidth = 5;
 			this.splitContainer1.TabIndex = 29;
 			// 
 			// panel_GeoInfo
