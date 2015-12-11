@@ -114,59 +114,31 @@ namespace VehicleManagement
 
 			if (mode == 0)
 			{
-				if (InfoDataSet.Tables["Info"] != null)
-				{
-					InfoDataSet.Tables["Info"].Clear();
-				}
 				datacmd.SqlDataTable("Info", str, out InfoDataSet, out InfoDataAdapter);
-				try
-				{
-					bindingSource_Info.DataSource = InfoDataSet.Tables["Info"];
-					dataGridView_Info.DataSource = bindingSource_Info;
-					bindingNavigator_Info.BindingSource = bindingSource_Info;
-
-					ClearInfoBinding();
-
-					string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
-
-					int iLoop = 0;
-					for (iLoop = 0; iLoop < array1.Length; ++iLoop)
-					{
-						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Info, (string)array1.GetValue(iLoop));
-					}
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message);
-				}
 			}
 			else
 			{
-				if (InfoDataSet.Tables["SearchInfo"] != null)
-				{
-					InfoDataSet.Tables["SearchInfo"].Clear();
-				}
 				datacmd.SqlDataTable("SearchInfo", str, out InfoDataSet, out InfoDataAdapter);
-				try
+			}
+			try
+			{
+				bindingSource_Info.DataSource = InfoDataSet.Tables[0];
+				dataGridView_Info.DataSource = bindingSource_Info;
+				bindingNavigator_Info.BindingSource = bindingSource_Info;
+
+				ClearInfoBinding();
+
+				string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
+
+				int iLoop = 0;
+				for (iLoop = 0; iLoop < array1.Length; ++iLoop)
 				{
-					bindingSource_Info.DataSource = InfoDataSet.Tables["SearchInfo"];
-					dataGridView_Info.DataSource = bindingSource_Info;
-					bindingNavigator_Info.BindingSource = bindingSource_Info;
-
-					ClearInfoBinding();
-
-					string[] array1 = Enum.GetNames(typeof(ColName_Vehicle));
-
-					int iLoop = 0;
-					for (iLoop = 0; iLoop < array1.Length; ++iLoop)
-					{
-						txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Info, (string)array1.GetValue(iLoop));
-					}
+					txtInfo[iLoop].DataBindings.Add("Text", bindingSource_Info, (string)array1.GetValue(iLoop));
 				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message);
-				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -306,7 +278,9 @@ namespace VehicleManagement
 			DatabaseCmd databasecmd = new DatabaseCmd();
 			SqlDataReader myreader;
 
-			string str = "select count(*) from [GeoInfo_BWF] where 汽车ID = '"
+			if(dataGridView_Info.RowCount != 0 && dataGridView_Info.Rows[0].Cells[0].Value != null)
+			{
+				string str = "select count(*) from [GeoInfo_BWF] where 汽车ID = '"
 				+ dataGridView_Info.Rows[dataGridView_Info.CurrentRow.Index].Cells[1].Value + "'"
 				+ " union all "
 				+ "select count(*) from [GeoInfo_LQB] where 汽车ID = '"
@@ -333,6 +307,8 @@ namespace VehicleManagement
 			}
 			databasecmd.SqlReaderClose();
 			myreader = null;
+			}
+			
 		}
 
 		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
