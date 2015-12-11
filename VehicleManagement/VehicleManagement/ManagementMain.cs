@@ -11,6 +11,8 @@ namespace VehicleManagement
 	public partial class ManagementMain : Form
 	{
 		int authority = 0;
+		static public string UserName = string.Empty;
+		static public string UserNum = string.Empty;
 
 		DataSet InfoDataSet = new DataSet();
 		SqlDataAdapter InfoDataAdapter = new SqlDataAdapter();
@@ -32,10 +34,12 @@ namespace VehicleManagement
 		public delegate void RefreshGeoInfo_delegate(string GeoType);
 		public static RefreshGeoInfo_delegate refreshgeoinfo;
 
-		public ManagementMain(int auth)
+		public ManagementMain(int auth, string Num, string Name)
 		{
 			InitializeComponent();
 			authority = auth;
+			UserNum = Num;
+			UserName = Name;
 			showData = ShowInfo;
 			refreshinfo = RefreshInfo;
 			refreshgeoinfo = RefreshGeoInfo;
@@ -225,7 +229,7 @@ namespace VehicleManagement
 
 		private void 导入数据库ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			UploadToDatabase upload = new UploadToDatabase();
+			UploadToDatabase upload = new UploadToDatabase(UserNum, UserName);
 			upload.ShowDialog();
 			upload.Dispose();
 		}

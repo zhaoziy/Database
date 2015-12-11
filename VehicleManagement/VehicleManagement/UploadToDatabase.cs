@@ -15,7 +15,7 @@ namespace VehicleManagement
 {
 	public partial class UploadToDatabase : Form
 	{
-		public UploadToDatabase()
+		public UploadToDatabase(string Num, string Name)
 		{
 			InitializeComponent();
 		}
@@ -288,6 +288,8 @@ namespace VehicleManagement
 					Info UploadInfo = new Info();
 					try { UploadInfo.汽车ID = (string)excelcmd.GetCell(config.汽车ID, Col); } catch (Exception ex) { }
 					try { UploadInfo.车型 = (string)excelcmd.GetCell(config.车型, Col); } catch (Exception ex) { }
+					try { UploadInfo.型号 = UserFunction.GetModelNum(UploadInfo.车型); } catch (Exception ex) { }
+					try { UploadInfo.年款 = UserFunction.GetVintage(UploadInfo.车型); } catch (Exception ex) { }
 					try { UploadInfo.厂商 = (string)excelcmd.GetCell(config.厂商, Col); } catch (Exception ex) { }
 					try { UploadInfo.级别 = (string)excelcmd.GetCell(config.级别, Col); } catch (Exception ex) { }
 					try { UploadInfo.车身结构 = (string)excelcmd.GetCell(config.车身结构, Col); } catch (Exception ex) { }
@@ -319,6 +321,8 @@ namespace VehicleManagement
 					try { UploadInfo.车顶行李架 = ((string)excelcmd.GetCell(config.车顶行李架, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
 					try { UploadInfo.外观颜色 = (string)excelcmd.GetCell(config.外观颜色, Col); } catch (Exception ex) { }
 					try { UploadInfo.信息更新时间 = UserFunction.GetServerDateTime(); } catch (Exception ex) { }
+					try { UploadInfo.信息更新者工号 = ManagementMain.UserNum; } catch (Exception ex) { }
+					try { UploadInfo.信息更新者姓名 = ManagementMain.UserName; } catch (Exception ex) { }
 
 					SqlUpoadeInfo(column, UploadInfo);
 				}
@@ -330,13 +334,15 @@ namespace VehicleManagement
 		public bool SqlUpoadeInfo(string[] Column, UploadToDatabase.Info InfoStruct)
 		{
 			string InsertStr = "insert into VehicleInfo (";
-			for (int iLoop = 0; iLoop < 32; ++iLoop)
+			for (int iLoop = 0; iLoop < Column.Length - 1; ++iLoop)
 			{
 				InsertStr += Column[iLoop] + ",";
 			}
-			InsertStr += "信息更新时间) values ('";
+			InsertStr += "信息更新者姓名) values ('";
 			InsertStr += InfoStruct.汽车ID + "','";
 			InsertStr += InfoStruct.车型 + "','";
+			InsertStr += InfoStruct.型号 + "',";
+			InsertStr += InfoStruct.年款 + ",'";
 			InsertStr += InfoStruct.厂商 + "','";
 			InsertStr += InfoStruct.级别 + "','";
 			InsertStr += InfoStruct.车身结构 + "',";
@@ -367,8 +373,9 @@ namespace VehicleManagement
 			InsertStr += InfoStruct.感应后备厢 + "','";
 			InsertStr += InfoStruct.车顶行李架 + "','";
 			InsertStr += InfoStruct.外观颜色 + "','";
-			InsertStr += InfoStruct.信息更新时间;
-			InsertStr += "')";
+			InsertStr += InfoStruct.信息更新时间 + "','";
+			InsertStr += InfoStruct.信息更新者工号 + "','";
+			InsertStr += InfoStruct.信息更新者姓名 + "')";
 
 			DatabaseCmd databasecmd = new DatabaseCmd();
 			if (databasecmd.SqlExecuteNonQuery(InsertStr) == true)
@@ -387,16 +394,20 @@ namespace VehicleManagement
 			public string Car;
 			public string Factory;
 			public Byte[] ByteData;
-			public string Ext;
 			public int Version;
 			public bool IsModel;
 			public DateTime UpdateDate;
+			public string 信息更新者工号;
+			public string 信息更新者姓名;
+			public string Ext;
 		}
 
 		public struct Info
 		{
 			public string 汽车ID;
 			public string 车型;
+			public string 型号;
+			public int 年款;
 			public string 厂商;
 			public string 级别;
 			public string 车身结构;
@@ -428,6 +439,8 @@ namespace VehicleManagement
 			public bool 车顶行李架;
 			public string 外观颜色;
 			public DateTime 信息更新时间;
+			public string 信息更新者工号;
+			public string 信息更新者姓名;
 		}
 	}
 }

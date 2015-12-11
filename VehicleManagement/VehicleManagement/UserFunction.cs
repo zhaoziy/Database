@@ -82,5 +82,26 @@ namespace VehicleManagement
 				datacmd.SqlReaderClose();
 			}
 		}
-    }
+
+		public static string GetModelNum(string str)
+		{
+			string[] strArray = str.Split(' ');
+			return strArray[0];
+		}
+
+		public static int GetVintage(string str)
+		{
+			try
+			{
+				string[] strArray = str.Split(' ');
+				string strtemp = strArray[1].Substring(0, 4);
+				return Int32.Parse(strtemp);
+			}
+			catch(Exception ex)
+			{
+				return -1;
+				MessageBox.Show(ex.Message);
+			}			
+		}
+	}
 }
