@@ -42,6 +42,9 @@ namespace SetupPack
 					File.Delete(AppPath);
 				}
 				HttpDownloadFile("http://115.159.90.52//Resource//汽车模型信息管理.exe", AppPath);
+				Process ps = new Process();
+				ps.StartInfo.FileName = AppPath;
+				ps.Start();
 				Application.Exit();
 			}
 		}

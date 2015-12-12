@@ -81,7 +81,8 @@ namespace VehicleManagement
 			fs.Write(res, 0, res.Length);
 			fs.Close();
 
-			Process.Start(AppPath + "\\SetupPack.exe");
+			string str1 = Process.GetCurrentProcess().MainModule.FileName;
+			Process.Start(AppPath + "\\SetupPack.exe", str1);
 			Environment.Exit(0);
 		}  //更新
 	}
