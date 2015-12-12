@@ -12,6 +12,8 @@ namespace VehicleManagement
 {
 	public partial class Login : Form
 	{
+		static public int Version = 0;
+		static public bool disableCurrentVersion = false;
 		public Login()
 		{
 			InitializeComponent();

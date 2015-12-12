@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VehicleManagement</RootNamespace>
-    <AssemblyName>VehicleManagement</AssemblyName>
+    <AssemblyName>汽车模型信息管理</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckNewVersion.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DatabaseCmd.cs" />
     <Compile Include="ExcelCmd.cs" />

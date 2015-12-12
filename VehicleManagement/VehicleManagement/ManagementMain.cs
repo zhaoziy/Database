@@ -290,6 +290,11 @@ namespace VehicleManagement
 			}
 		}
 
+		private void ShowAllInfo_Bt_Click(object sender, EventArgs e)
+		{
+			RefreshInfo();
+		}
+
 		#endregion
 
 		private void dataGridView_Info_SelectionChanged(object sender, EventArgs e)
@@ -350,7 +355,7 @@ namespace VehicleManagement
 	#region"枚举变量"
 
 	enum ColName_Vehicle
-		{
+	{
 			汽车ID = 0, 车型 = 1, 型号 = 2, 年款 = 3, 厂商 = 4, 级别 = 5, 车身结构 = 6, 长 = 7, 宽 = 8, 高 = 9,
 			最高车速 = 10, 百公里加速 = 11, 综合油耗 = 12, 最小离地间隙 = 13, 轴距 = 14, 前轮距 = 15, 后轮距 = 16,
 			整备质量 = 17, 车门数 = 18,  座位数 = 19, 行李厢容积 = 20, 排量 = 21, 前轮胎规格 = 22, 后轮胎规格 = 23,
@@ -360,9 +365,9 @@ namespace VehicleManagement
 	}
 
 	enum ColName_VehicleGeo
-		{
+	{
 			汽车ID = 0, 车型 = 1, 厂商 = 2, Data = 3, 视图 = 4, 版本 = 5, 是否模板 = 6,
-			信息更新时间 = 7, 信息更新者工号 = 8, 信息更新者姓名 = 9
+			信息更新时间 = 7, 信息更新者工号 = 8, 信息更新者姓名 = 9, Ext = 10
 	}
 
 	#endregion
