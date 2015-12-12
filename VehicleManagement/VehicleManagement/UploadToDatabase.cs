@@ -157,7 +157,7 @@ namespace VehicleManagement
 			}
 		}
 
-		public bool SqlUploadGeoInfo(string[] Column, UploadToDatabase.GeoInfo GeoInfoStruct, int ReserveNum)
+		public bool SqlUploadGeoInfo(string[] Column, GeoInfo GeoInfoStruct, int ReserveNum)
 		{
 			DatabaseCmd SelectCmd = new DatabaseCmd();
 			string sqlstr = "select count(汽车ID) from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID + "'";
@@ -170,8 +170,8 @@ namespace VehicleManagement
 					if (myreader.GetInt32(0) >= ReserveNum)
 					{
 						string delStr = "delete from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID +
-							"' and 版本 not in (select top " + (ReserveNum - 1) + " (版本) from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" +
-							GeoInfoStruct.汽车ID + "' order by 版本 desc) ";
+							"' and 版本 not in (select top " + (ReserveNum - 1) + " (版本) from [GeoInfo_" + 
+							GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID + "' order by 版本 desc) ";
 						DatabaseCmd deleteCmd = new DatabaseCmd();
 						deleteCmd.SqlExecuteNonQuery(delStr);
 					}
@@ -360,7 +360,7 @@ namespace VehicleManagement
 			return true;
 		}
 
-		public bool SqlUpoadeInfo(string[] Column, UploadToDatabase.Info InfoStruct)
+		public bool SqlUpoadeInfo(string[] Column, Info InfoStruct)
 		{
 			string InsertStr = "insert into VehicleInfo (";
 			for (int iLoop = 0; iLoop < Column.Length - 1; ++iLoop)

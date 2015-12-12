@@ -94,7 +94,6 @@ namespace VehicleManagement
 				if (RowName[iLoop - 1] == "车身结构")
 				{
 					车身结构 = iLoop;
-					break;
 				}
 			}
 			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
