@@ -12,12 +12,13 @@ namespace SetupPack
 		/// 应用程序的主入口点。
 		/// </summary>
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
+			string path = string.Empty;
+			path = (args.Length == 0) ? (null) : (args[0]);			
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			SetupPack setup = new SetupPack();
-			setup.update();
+			Application.Run(new SetupPack(path));
 		}
 	}
 }
