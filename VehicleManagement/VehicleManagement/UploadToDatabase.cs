@@ -110,26 +110,40 @@ namespace VehicleManagement
 						UpdataGeoInfo.Factory = (string)excelcmd.GetCell(iLoop, 3);
 
 						path = (string)excelcmd.GetCell(iLoop, 4);
-						filter = Path.GetExtension(path);
+						filter = Path.GetExtension(path).Substring(1, Path.GetExtension(path).Length - 1);
+						UpdataGeoInfo.Ext = filter;
+						string str = string.Empty;
+						if (UpdataGeoInfo.Ext.ToUpper() == "TMPLT" ||
+								UpdataGeoInfo.Ext.ToUpper() == "LQB" ||
+								UpdataGeoInfo.Ext.ToUpper() == "BFW" ||
+								UpdataGeoInfo.Ext.ToUpper() == "PRT" ||
+								UpdataGeoInfo.Ext.ToUpper() == "STL" ||
+								UpdataGeoInfo.Ext.ToUpper() == "JPG")
+						{
+							str = "select top 1 版本 from [GeoInfo_" + UpdataGeoInfo.Ext + "] where 汽车ID = '" + UpdataGeoInfo.汽车ID + "' order by 版本 desc";
+							DatabaseCmd datacmd = new DatabaseCmd();
+							SqlDataReader myreader;
+							datacmd.SqlExecuteReader(str, out myreader);
+
+							UpdataGeoInfo.Version = (myreader.Read()) ? (UpdataGeoInfo.Version = myreader.GetInt32(0) + 1) : (1);
+							datacmd.SqlReaderClose();
+						}
+						else
+						{
+							MessageBox.Show("请上传正确的数据文件");
+							return;
+						}
+
 						UserFunction.FileToBinary(path, out UpdataGeoInfo.ByteData);
-
-						UpdataGeoInfo.Ext = (string)excelcmd.GetCell(iLoop, 5);
-
-						string str = "select top 1 版本 from [VehicleGeoInfo] where 汽车ID = '" + UpdataGeoInfo.汽车ID + "' and Ext = '" + UpdataGeoInfo.Ext + "' order by 版本 desc";
-						DatabaseCmd datacmd = new DatabaseCmd();
-						SqlDataReader myreader;
-						datacmd.SqlExecuteReader(str, out myreader);
-
-						UpdataGeoInfo.Version = (myreader.Read()) ? (UpdataGeoInfo.Version = myreader.GetInt32(0) + 1) : (1);
-						datacmd.SqlReaderClose();
-
+						UpdataGeoInfo.视图 = (string)excelcmd.GetCell(iLoop, 5);
 						UpdataGeoInfo.IsModel = ((string)excelcmd.GetCell(iLoop, 6) == "是") ? (true) : (false);
-
 						UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
+						UpdataGeoInfo.信息更新者工号 = ManagementMain.UserNum;
+						UpdataGeoInfo.信息更新者姓名 = ManagementMain.UserName;
 
 						if(UpdataGeoInfo.ByteData != null)
 						{
-							SqlUploadGeoInfo(column, UpdataGeoInfo, 4);
+							SqlUploadGeoInfo(column, UpdataGeoInfo, 5);
 						}
 					}
 					excelcmd.ExitExcelApp();
@@ -146,18 +160,18 @@ namespace VehicleManagement
 		public bool SqlUploadGeoInfo(string[] Column, UploadToDatabase.GeoInfo GeoInfoStruct, int ReserveNum)
 		{
 			DatabaseCmd SelectCmd = new DatabaseCmd();
-			string sqlstr = "select count(汽车ID) from [VehicleGeoInfo] where 汽车ID = '" + GeoInfoStruct.汽车ID + "' and Ext = '" + GeoInfoStruct.Ext + "'";
+			string sqlstr = "select count(汽车ID) from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID + "'";
 			try
 			{
 				SqlDataReader myreader;
 				SelectCmd.SqlExecuteReader(sqlstr, out myreader);
 				if (myreader.Read())
 				{
-					if (myreader.GetInt32(0) > ReserveNum)
+					if (myreader.GetInt32(0) >= ReserveNum)
 					{
-						string delStr = "delete from [VehicleGeoInfo] where 汽车ID = '" + GeoInfoStruct.汽车ID +
-							"' and Ext = '" + GeoInfoStruct.Ext + "' and 版本 not in (select top " + ReserveNum + " (版本) from [VehicleGeoInfo] where 汽车ID = '" +
-							GeoInfoStruct.汽车ID + "' and Ext = '" + GeoInfoStruct.Ext + "' order by 版本 desc) ";
+						string delStr = "delete from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID +
+							"' and 版本 not in (select top " + (ReserveNum - 1) + " (版本) from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" +
+							GeoInfoStruct.汽车ID + "' order by 版本 desc) ";
 						DatabaseCmd deleteCmd = new DatabaseCmd();
 						deleteCmd.SqlExecuteNonQuery(delStr);
 					}
@@ -180,13 +194,13 @@ namespace VehicleManagement
 				datacmd.GetCommand().Connection = datacmd.GetConnection();
 				datacmd.GetCommand().Transaction = myTran;
 				datacmd.GetCommand().CommandType = CommandType.Text;
-				datacmd.GetCommand().CommandText = "insert into VehicleGeoInfo (";
-				for (int iLoop = 0; iLoop < Column.Length - 1; ++iLoop)
+				datacmd.GetCommand().CommandText = "insert into [GeoInfo_" + GeoInfoStruct.Ext + "] (";
+				for (int iLoop = 0; iLoop < Column.Length - 2; ++iLoop)
 				{
 					datacmd.GetCommand().CommandText = datacmd.GetCommand().CommandText + Column[iLoop] + ",";
 				}
-				datacmd.GetCommand().CommandText += "信息更新时间) values (@str1, @str2, @str3, @byte1, @str4, @int1" +
-					", @bool1, @date1)";
+				datacmd.GetCommand().CommandText += "信息更新者姓名) values (@str1, @str2, @str3, @byte1, @str4, @int1" +
+					", @bool1, @date1, @str5, @str6)";
 
 				SqlParameter str1 = new SqlParameter("@str1", SqlDbType.NVarChar);
 				SqlParameter str2 = new SqlParameter("@str2", SqlDbType.NVarChar);
@@ -196,6 +210,8 @@ namespace VehicleManagement
 				SqlParameter int1 = new SqlParameter("@int1", SqlDbType.Int);
 				SqlParameter bool1 = new SqlParameter("@bool1", SqlDbType.Bit);
 				SqlParameter date1 = new SqlParameter("@date1", SqlDbType.DateTime);
+				SqlParameter str5 = new SqlParameter("@str5", SqlDbType.NVarChar);
+				SqlParameter str6 = new SqlParameter("@str6", SqlDbType.NVarChar);
 
 				str1.Value = GeoInfoStruct.汽车ID;
 				str2.Value = GeoInfoStruct.Car;
@@ -204,10 +220,13 @@ namespace VehicleManagement
 				if (GeoInfoStruct.ByteData != null) { byte1.Value = GeoInfoStruct.ByteData; }
 				else { byte1.Value = System.DBNull.Value; }
 
-				str4.Value = GeoInfoStruct.Ext;
+				str4.Value = GeoInfoStruct.视图;
+
 				int1.Value = GeoInfoStruct.Version;
 				bool1.Value = GeoInfoStruct.IsModel;
 				date1.Value = GeoInfoStruct.UpdateDate;
+				str5.Value = GeoInfoStruct.信息更新者工号;
+				str6.Value = GeoInfoStruct.信息更新者姓名;
 
 				datacmd.GetCommand().Parameters.Add(str1);
 				datacmd.GetCommand().Parameters.Add(str2);
@@ -217,10 +236,20 @@ namespace VehicleManagement
 				datacmd.GetCommand().Parameters.Add(int1);
 				datacmd.GetCommand().Parameters.Add(bool1);
 				datacmd.GetCommand().Parameters.Add(date1);
+				datacmd.GetCommand().Parameters.Add(str5);
+				datacmd.GetCommand().Parameters.Add(str6);
 
 				datacmd.GetCommand().ExecuteNonQuery();
-
 				myTran.Commit();
+
+				if (GeoInfoStruct.IsModel == true)
+				{
+					string updatestr = "update [GeoInfo_" + GeoInfoStruct.Ext + "] set 是否模板 = 'false' where 汽车ID = '" +
+						GeoInfoStruct.汽车ID + "' and 版本 <>" + GeoInfoStruct.Version;
+					DatabaseCmd updatedatabase = new DatabaseCmd();
+					updatedatabase.SqlExecuteNonQuery(updatestr);
+				}
+
 				return true;
 			}
 			catch (Exception ex)
@@ -394,6 +423,7 @@ namespace VehicleManagement
 			public string Car;
 			public string Factory;
 			public Byte[] ByteData;
+			public string 视图;
 			public int Version;
 			public bool IsModel;
 			public DateTime UpdateDate;
