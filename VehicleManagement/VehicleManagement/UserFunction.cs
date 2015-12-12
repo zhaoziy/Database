@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Xml;
+using Microsoft.International.Converters.PinYinConverter;
 
 namespace VehicleManagement
 {
@@ -131,6 +132,25 @@ namespace VehicleManagement
 				BAT.Append(arrInput[iLoop].ToString("X2"));
 			}
 			return BAT.ToString().ToLower();
+		}
+
+		public static string GetFirstPinyin(string str)
+		{
+			string r = string.Empty;
+			foreach (char obj in str)
+			{
+				try
+				{
+					ChineseChar chineseChar = new ChineseChar(obj);
+					string t = chineseChar.Pinyins[0].ToString();
+					r += t.Substring(0, 1);
+				}
+				catch
+				{
+					r += obj.ToString();
+				}
+			}
+			return r;
 		}
 	}
 }

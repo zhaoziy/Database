@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
 namespace VehicleManagement
 {
 	public partial class Login : Form
@@ -19,6 +20,9 @@ namespace VehicleManagement
 			InitializeComponent();
 			CheckNewVersion checkversion = new CheckNewVersion(Version);
 			checkversion.CheckVerList();
+
+			string str = UserFunction.GetFirstPinyin("逯遥");
+			MessageBox.Show(str);
 		}
 
 		private void Exit_Bt_Click(object sender, EventArgs e)
