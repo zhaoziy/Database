@@ -24,15 +24,17 @@ namespace VehicleManagement
 
 		private void Login_Bt_Click(object sender, EventArgs e)
 		{
-			if (GetAuthority(Num_Textbox.Text, UserFunction.Md5(Pwd_Textbox.Text)) == 2)
+			string Name = null;
+			int Authority = GetAuthority(Num_Textbox.Text, UserFunction.Md5(Pwd_Textbox.Text), out Name);
+			if (Authority == 2)
 			{
-				ManagementMain MainManagement = new ManagementMain(2);
+				ManagementMain MainManagement = new ManagementMain(2, Num_Textbox.Text, Name);
 				MainManagement.Show();
 				this.Hide();
 			}
-			else if (GetAuthority(Num_Textbox.Text, UserFunction.Md5(Pwd_Textbox.Text)) == 3)
+			else if (Authority == 3)
 			{
-				ManagementMain MainManagement = new ManagementMain(3);
+				ManagementMain MainManagement = new ManagementMain(3, Num_Textbox.Text, Name);
 				MainManagement.Show();
 				this.Hide();
 			}
@@ -42,21 +44,25 @@ namespace VehicleManagement
 			}
         }
 
-		private int GetAuthority(string num, string pwd)
+		private int GetAuthority(string Num, string pwd, out string Name)
 		{
-			string str = "select 权限 from [member] where 工号 ='" + num + "'and 密码 ='" + pwd + "'";
+			string str = "select 权限,姓名 from [member] where 工号 ='" + Num + "'and 密码 ='" + pwd + "'";
 			SqlDataReader myreader;
 			DatabaseCmd datacmd = new DatabaseCmd();
 			datacmd.SqlExecuteReader(str,out myreader);
-			if(myreader.Read())
+			if (myreader.Read())
 			{
-				return myreader.GetInt32(0);
-            }
+				Name = myreader.GetString(1);
+				int authority = myreader.GetInt32(0);
+				datacmd.SqlReaderClose();
+				return authority;
+			}
 			else
 			{
+				Name = string.Empty;
+				datacmd.SqlReaderClose();
 				return 0;
 			}
-			datacmd.SqlReaderClose();
 		}
 
 		private void Num_Textbox_KeyPress(object sender, KeyPressEventArgs e)
