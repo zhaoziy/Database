@@ -17,6 +17,8 @@ namespace VehicleManagement
 		public Login()
 		{
 			InitializeComponent();
+			CheckNewVersion checkversion = new CheckNewVersion(Version);
+			checkversion.CheckVerList();
 		}
 
 		private void Exit_Bt_Click(object sender, EventArgs e)
