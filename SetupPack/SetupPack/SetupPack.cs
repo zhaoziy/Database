@@ -41,7 +41,8 @@ namespace SetupPack
 				{
 					File.Delete(AppPath);
 				}
-				HttpDownloadFile("http://115.159.90.52//Resource//汽车模型信息管理.exe", AppPath);
+
+				UserFunction.DownloadFtp(AppPath.Substring(0, AppPath.LastIndexOf("\\")), "汽车模型信息管理.exe", "115.159.90.52", "zhao", "123abc");
 
 				string NewFileMD5 = UserFunction.GetMD5HashFromFile(AppPath);
 				string updatestr = "update [VerList] set MD5 = '" + NewFileMD5
@@ -54,28 +55,6 @@ namespace SetupPack
 				ps.Start();
 				Application.Exit();
 			}
-		}
-
-		public static string HttpDownloadFile(string url, string path)
-		{
-			// 设置参数
-			HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-			//发送请求并获取相应回应数据
-			HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-			//直到request.GetResponse()程序才开始向目标网页发送Post请求
-			Stream responseStream = response.GetResponseStream();
-			//创建本地文件写入流
-			Stream stream = new FileStream(path, FileMode.Create);
-			byte[] bArr = new byte[1024];
-			int size = responseStream.Read(bArr, 0, (int)bArr.Length);
-			while (size > 0)
-			{
-				stream.Write(bArr, 0, size);
-				size = responseStream.Read(bArr, 0, (int)bArr.Length);
-			}
-			stream.Close();
-			responseStream.Close();
-			return path;
 		}
 
 		private void SetupPack_Shown(object sender, EventArgs e)
