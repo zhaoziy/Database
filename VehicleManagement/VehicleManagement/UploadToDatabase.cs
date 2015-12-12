@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Collections;
 using System.IO;
 using VehicleManagement.Properties;
+using System.Text.RegularExpressions;
 
 namespace VehicleManagement
 {
@@ -316,8 +312,20 @@ namespace VehicleManagement
 
 					Info UploadInfo = new Info();
 					try { UploadInfo.车型 = (string)excelcmd.GetCell(config.车型, Col); } catch (Exception ex) { }
-					try { UploadInfo.型号 = UserFunction.GetModelNum(UploadInfo.车型); } catch (Exception ex) { }
-					try { UploadInfo.年款 = UserFunction.GetVintage(UploadInfo.车型); } catch (Exception ex) { }
+					try
+					{
+						//Regex reg = new Regex("([a-z]|[A-Z])*[ ]?[0-9]*");
+						//Match match = reg.Match(UploadInfo.车型);
+						UploadInfo.型号 = UserFunction.GetModelNum(UploadInfo.车型);
+					} catch (Exception ex) { }
+		
+					try
+					{
+						Regex reg = new Regex("[1-2]\\d\\d\\d");
+						Match match = reg.Match(UploadInfo.车型);
+						UploadInfo.年款 = Int32.Parse(match.Value);
+					} catch (Exception ex) { }
+
 					try { UploadInfo.厂商 = (string)excelcmd.GetCell(config.厂商, Col); } catch (Exception ex) { }
 					try { UploadInfo.级别 = (string)excelcmd.GetCell(config.级别, Col); } catch (Exception ex) { }
 					try { UploadInfo.车身结构 = (string)excelcmd.GetCell(config.车身结构, Col); } catch (Exception ex) { }
@@ -356,7 +364,7 @@ namespace VehicleManagement
 					{
 						UploadInfo.汽车ID = UserFunction.GetFirstPinyin(UploadInfo.型号) + "-" + UploadInfo.年款.ToString() + "-" +
 							UserFunction.GetFirstPinyin(UploadInfo.厂商) + "-" + UploadInfo.车门数 + "-" + UploadInfo.座位数 + "-" +
-							UserFunction.GetFirstPinyin(UploadInfo.车身结构) + "-" +
+							UserFunction.GetFirstPinyin(UploadInfo.车身结构) + "-" + UploadInfo.排量 + "-" +
 							UserFunction.GetFirstPinyin(UserFunction.GetLastLabel(UploadInfo.车型));
 					}
 					catch (Exception ex)

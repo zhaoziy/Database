@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Xml;
 using Microsoft.International.Converters.PinYinConverter;
 
 namespace VehicleManagement
@@ -88,21 +85,6 @@ namespace VehicleManagement
 		{
 			string[] strArray = str.Split(' ');
 			return strArray[0];
-		}
-
-		public static int GetVintage(string str)
-		{
-			try
-			{
-				string[] strArray = str.Split(' ');
-				string strtemp = strArray[1].Substring(0, 4);
-				return Int32.Parse(strtemp);
-			}
-			catch(Exception ex)
-			{
-				return -1;
-				MessageBox.Show(ex.Message);
-			}			
 		}
 
 		public static string GetLastLabel(string str)
