@@ -105,6 +105,20 @@ namespace VehicleManagement
 			}			
 		}
 
+		public static string GetLastLabel(string str)
+		{
+			try
+			{
+				string[] strArray = str.Split(' ');
+				return strArray[strArray.Length - 1];
+			}
+			catch (Exception ex)
+			{
+				return "";
+				MessageBox.Show(ex.Message);
+			}
+		}
+
 		public static string GetMD5HashFromFile(string fileName)
 		{
 			try

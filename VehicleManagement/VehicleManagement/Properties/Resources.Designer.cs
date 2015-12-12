@@ -83,6 +83,16 @@ namespace VehicleManagement.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
+        internal static byte[] Microsoft_Office_Interop_Excel {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft_Office_Interop_Excel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
         internal static byte[] SetupPack {
             get {
                 object obj = ResourceManager.GetObject("SetupPack", resourceCulture);

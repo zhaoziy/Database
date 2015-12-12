@@ -315,7 +315,6 @@ namespace VehicleManagement
 					progressBar.Value++;
 
 					Info UploadInfo = new Info();
-					try { UploadInfo.汽车ID = (string)excelcmd.GetCell(config.汽车ID, Col); } catch (Exception ex) { }
 					try { UploadInfo.车型 = (string)excelcmd.GetCell(config.车型, Col); } catch (Exception ex) { }
 					try { UploadInfo.型号 = UserFunction.GetModelNum(UploadInfo.车型); } catch (Exception ex) { }
 					try { UploadInfo.年款 = UserFunction.GetVintage(UploadInfo.车型); } catch (Exception ex) { }
@@ -352,6 +351,17 @@ namespace VehicleManagement
 					try { UploadInfo.信息更新时间 = UserFunction.GetServerDateTime(); } catch (Exception ex) { }
 					try { UploadInfo.信息更新者工号 = ManagementMain.UserNum; } catch (Exception ex) { }
 					try { UploadInfo.信息更新者姓名 = ManagementMain.UserName; } catch (Exception ex) { }
+
+					try
+					{
+						UploadInfo.汽车ID = UserFunction.GetFirstPinyin(UploadInfo.型号) + "-" + UploadInfo.年款.ToString() + "-" +
+							UserFunction.GetFirstPinyin(UploadInfo.厂商) + "-" + UploadInfo.车门数 + "-" + UploadInfo.座位数 + "-" +
+							UserFunction.GetFirstPinyin(UploadInfo.车身结构) + "-" +
+							UserFunction.GetFirstPinyin(UserFunction.GetLastLabel(UploadInfo.车型));
+					}
+					catch (Exception ex)
+					{
+					}
 
 					SqlUpoadeInfo(column, UploadInfo);
 				}

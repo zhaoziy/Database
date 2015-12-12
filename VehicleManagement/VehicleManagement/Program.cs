@@ -12,16 +12,12 @@ namespace VehicleManagement
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
-        //[STAThread]
-
-		static Program()
-		{
-			LoadResourceDll.RegistDLL();
-		}
+        [STAThread]
 
 		static void Main()
         {
-            Application.EnableVisualStyles();
+			LoadResourceDll.RegistDLL();
+			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Login());
         }

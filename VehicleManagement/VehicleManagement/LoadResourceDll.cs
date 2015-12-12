@@ -30,8 +30,6 @@ namespace VehicleManagement
 			}
 		}
 
-		/// <summary> 注册资源中的dll
-		/// </summary>
 		public static void RegistDLL()
 		{
 			//获取调用者的程序集
