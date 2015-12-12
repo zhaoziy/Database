@@ -42,6 +42,13 @@ namespace SetupPack
 					File.Delete(AppPath);
 				}
 				HttpDownloadFile("http://115.159.90.52//Resource//汽车模型信息管理.exe", AppPath);
+
+				string NewFileMD5 = UserFunction.GetMD5HashFromFile(AppPath);
+				string updatestr = "update [VerList] set MD5 = '" + NewFileMD5
+					+ "' where 版本号 =(select TOP 1 版本号 from [VerList] where 程序名 = '汽车模型信息管理' order by 版本号 desc)";
+				DatabaseCmd cmd = new DatabaseCmd();
+				cmd.SqlExecuteNonQuery(updatestr);
+				
 				Process ps = new Process();
 				ps.StartInfo.FileName = AppPath;
 				ps.Start();

@@ -15,7 +15,7 @@ namespace SetupPack
 		static void Main(string[] args)
 		{
 			string path = string.Empty;
-			path = (args.Length == 0) ? (null) : (args[0]);			
+			path = (args.Length == 0) ? (null) : (args[0]);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new SetupPack(path));
