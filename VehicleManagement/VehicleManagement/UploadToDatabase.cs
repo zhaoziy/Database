@@ -67,9 +67,6 @@ namespace VehicleManagement
 
 		private void Upload_Geo_Click(object sender, EventArgs e)
 		{
-			progressBar.Minimum = 0;
-			progressBar.Value = 0;
-
 			openFileDialog1.Multiselect = false;
 			openFileDialog1.Title = "几何信息导入数据库";
 			openFileDialog1.FileName = "几何信息模板.xlsx";
@@ -85,66 +82,60 @@ namespace VehicleManagement
 
 					int ExcelRow = excelcmd.GetLastRow(1);
 
+					progressBar.Minimum = 0;
+					progressBar.Value = 0;
 					int ProgressCount = 0;
-
-					for (int iLoop = 2; iLoop <= ExcelRow; ++iLoop)
-					{
-						ProgressCount++;
-					}
+					for (int iLoop = 2; iLoop <= ExcelRow; ++iLoop) {	ProgressCount++;	}
 					progressBar.Maximum = ProgressCount;
 
 					for (int iLoop = 2; iLoop <= ExcelRow; ++iLoop)
 					{
 						progressBar.Value++;
-
-						string path = string.Empty;
-						string filter = string.Empty;
 						GeoInfo UpdataGeoInfo = new GeoInfo();
 
-						UpdataGeoInfo.汽车ID = (string)excelcmd.GetCell(iLoop, 1);
-						UpdataGeoInfo.Car = (string)excelcmd.GetCell(iLoop, 2);
-						UpdataGeoInfo.Factory = (string)excelcmd.GetCell(iLoop, 3);
+						string path = (string)excelcmd.GetCell(iLoop, 4);
+						string filter = Path.GetExtension(path).Substring(1, Path.GetExtension(path).Length - 1);
 
-						path = (string)excelcmd.GetCell(iLoop, 4);
-						filter = Path.GetExtension(path).Substring(1, Path.GetExtension(path).Length - 1);
 						UpdataGeoInfo.Ext = filter;
-						string str = string.Empty;
 						if (UpdataGeoInfo.Ext.ToUpper() == "TMPLT" ||
 								UpdataGeoInfo.Ext.ToUpper() == "LQB" ||
-								UpdataGeoInfo.Ext.ToUpper() == "BFW" ||
+								UpdataGeoInfo.Ext.ToUpper() == "BWF" ||
 								UpdataGeoInfo.Ext.ToUpper() == "PRT" ||
 								UpdataGeoInfo.Ext.ToUpper() == "STL" ||
 								UpdataGeoInfo.Ext.ToUpper() == "JPG")
 						{
-							str = "select top 1 版本 from [GeoInfo_" + UpdataGeoInfo.Ext + "] where 汽车ID = '" + UpdataGeoInfo.汽车ID + "' order by 版本 desc";
+							UpdataGeoInfo.汽车ID = (string)excelcmd.GetCell(iLoop, 1);
+							UpdataGeoInfo.Car = (string)excelcmd.GetCell(iLoop, 2);
+							UpdataGeoInfo.Factory = (string)excelcmd.GetCell(iLoop, 3);
+
+							string str = "select top 1 版本 from [GeoInfo_" + UpdataGeoInfo.Ext + "] where 汽车ID = '" + UpdataGeoInfo.汽车ID + "' order by 版本 desc";
 							DatabaseCmd datacmd = new DatabaseCmd();
 							SqlDataReader myreader;
 							datacmd.SqlExecuteReader(str, out myreader);
 
 							UpdataGeoInfo.Version = (myreader.Read()) ? (UpdataGeoInfo.Version = myreader.GetInt32(0) + 1) : (1);
 							datacmd.SqlReaderClose();
+
+							UserFunction.FileToBinary(path, out UpdataGeoInfo.ByteData);
+							UpdataGeoInfo.视图 = (string)excelcmd.GetCell(iLoop, 5);
+							UpdataGeoInfo.IsModel = ((string)excelcmd.GetCell(iLoop, 6) == "是") ? (true) : (false);
+							UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
+							UpdataGeoInfo.信息更新者工号 = ManagementMain.UserNum;
+							UpdataGeoInfo.信息更新者姓名 = ManagementMain.UserName;
+
+							if (UpdataGeoInfo.ByteData != null)
+							{
+								SqlUploadGeoInfo(column, UpdataGeoInfo, 5);
+							}
 						}
 						else
 						{
 							MessageBox.Show("请上传正确的数据文件");
-							return;
-						}
-
-						UserFunction.FileToBinary(path, out UpdataGeoInfo.ByteData);
-						UpdataGeoInfo.视图 = (string)excelcmd.GetCell(iLoop, 5);
-						UpdataGeoInfo.IsModel = ((string)excelcmd.GetCell(iLoop, 6) == "是") ? (true) : (false);
-						UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
-						UpdataGeoInfo.信息更新者工号 = ManagementMain.UserNum;
-						UpdataGeoInfo.信息更新者姓名 = ManagementMain.UserName;
-
-						if(UpdataGeoInfo.ByteData != null)
-						{
-							SqlUploadGeoInfo(column, UpdataGeoInfo, 5);
 						}
 					}
 					excelcmd.ExitExcelApp();
 					MessageBox.Show("导入成功");
-					//ManagementMain.refreshgeoinfo();
+					ManagementMain.refreshgeoinfo("", 1);
 				}
 			}
 			catch (Exception ex)

@@ -28,7 +28,7 @@ namespace VehicleManagement
 		public delegate void RefreshInfo_delegate();
 		public static RefreshInfo_delegate refreshinfo;
 
-		public delegate void RefreshGeoInfo_delegate(string GeoType);
+		public delegate void RefreshGeoInfo_delegate(string GeoType, int Mode);
 		public static RefreshGeoInfo_delegate refreshgeoinfo;
 
 		public ManagementMain(int auth, string Num, string Name)
@@ -75,7 +75,7 @@ namespace VehicleManagement
 				SaveGeoInfo_Bt.Visible = false;
 			}
 			RefreshInfo();
-			RefreshGeoInfo("BWF");
+			RefreshGeoInfo("BWF", 0);
         }
 
 		private void RefreshInfo()
@@ -84,9 +84,17 @@ namespace VehicleManagement
 			ShowInfo(str, 0);
 		}
 
-		private void RefreshGeoInfo(string GeoType)
+		private void RefreshGeoInfo(string GeoType, int Mode)
 		{
-			string str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + GeoType + "]";
+			string str = string.Empty;
+			if (Mode == 0)
+			{
+				str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + GeoType + "]";
+			}
+			else
+			{
+				str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
+			}
 			ShowGeoInfo(str, 0);
 		}
 
@@ -292,6 +300,11 @@ namespace VehicleManagement
 			RefreshInfo();
 		}
 
+		private void ShowAllGeoInfo_Bt_Click(object sender, EventArgs e)
+		{
+			RefreshGeoInfo(tabControl2.TabPages[tabControl2.SelectedIndex].Text, 0);
+		}
+
 		#endregion
 
 		private void dataGridView_Info_SelectionChanged(object sender, EventArgs e)
@@ -341,11 +354,11 @@ namespace VehicleManagement
 
 		private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			UpdateDatabase("GeoInfo", 2);
+			UpdateDatabase("GeoInfo", 1);
 			tabControl2.TabPages[tabControl2.SelectedIndex].Controls.Add(splitContainer2);
 			string str = string.Empty;
 			str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
-			ShowGeoInfo(str, 1);
+			ShowGeoInfo(str, 0);
 		}
 	}
 

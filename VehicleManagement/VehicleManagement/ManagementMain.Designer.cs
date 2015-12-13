@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagementMain));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.导入数据库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -185,6 +185,7 @@
 			this.tabPage_STL = new System.Windows.Forms.TabPage();
 			this.tabPage_JPG = new System.Windows.Forms.TabPage();
 			this.bindingSource_GeoInfo = new System.Windows.Forms.BindingSource(this.components);
+			this.ShowAllGeoInfo_Bt = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource_Info)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView_Info)).BeginInit();
@@ -249,25 +250,25 @@
 			this.dataGridView_Info.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView_Info.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridView_Info.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
 			this.dataGridView_Info.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dataGridView_Info.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dataGridView_Info.DefaultCellStyle = dataGridViewCellStyle10;
 			this.dataGridView_Info.Location = new System.Drawing.Point(0, 24);
-			this.dataGridView_Info.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.dataGridView_Info.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridView_Info.Name = "dataGridView_Info";
 			this.dataGridView_Info.RowTemplate.Height = 27;
 			this.dataGridView_Info.Size = new System.Drawing.Size(932, 173);
@@ -397,7 +398,7 @@
 			// textBox1
 			// 
 			this.textBox1.Location = new System.Drawing.Point(61, 8);
-			this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox1.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Size = new System.Drawing.Size(76, 21);
 			this.textBox1.TabIndex = 14;
@@ -405,7 +406,7 @@
 			// textBox2
 			// 
 			this.textBox2.Location = new System.Drawing.Point(61, 32);
-			this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox2.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox2.Name = "textBox2";
 			this.textBox2.Size = new System.Drawing.Size(76, 21);
 			this.textBox2.TabIndex = 15;
@@ -413,7 +414,7 @@
 			// textBox3
 			// 
 			this.textBox3.Location = new System.Drawing.Point(61, 56);
-			this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox3.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox3.Name = "textBox3";
 			this.textBox3.Size = new System.Drawing.Size(76, 21);
 			this.textBox3.TabIndex = 16;
@@ -421,7 +422,7 @@
 			// textBox4
 			// 
 			this.textBox4.Location = new System.Drawing.Point(61, 80);
-			this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox4.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox4.Name = "textBox4";
 			this.textBox4.Size = new System.Drawing.Size(76, 21);
 			this.textBox4.TabIndex = 17;
@@ -429,7 +430,7 @@
 			// textBox5
 			// 
 			this.textBox5.Location = new System.Drawing.Point(61, 104);
-			this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox5.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox5.Name = "textBox5";
 			this.textBox5.Size = new System.Drawing.Size(76, 21);
 			this.textBox5.TabIndex = 18;
@@ -437,7 +438,7 @@
 			// textBox6
 			// 
 			this.textBox6.Location = new System.Drawing.Point(61, 128);
-			this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox6.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox6.Name = "textBox6";
 			this.textBox6.Size = new System.Drawing.Size(76, 21);
 			this.textBox6.TabIndex = 19;
@@ -445,7 +446,7 @@
 			// textBox7
 			// 
 			this.textBox7.Location = new System.Drawing.Point(61, 152);
-			this.textBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox7.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox7.Name = "textBox7";
 			this.textBox7.Size = new System.Drawing.Size(76, 21);
 			this.textBox7.TabIndex = 20;
@@ -453,7 +454,7 @@
 			// textBox8
 			// 
 			this.textBox8.Location = new System.Drawing.Point(61, 176);
-			this.textBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox8.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox8.Name = "textBox8";
 			this.textBox8.Size = new System.Drawing.Size(76, 21);
 			this.textBox8.TabIndex = 21;
@@ -461,7 +462,7 @@
 			// textBox9
 			// 
 			this.textBox9.Location = new System.Drawing.Point(61, 200);
-			this.textBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox9.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox9.Name = "textBox9";
 			this.textBox9.Size = new System.Drawing.Size(76, 21);
 			this.textBox9.TabIndex = 22;
@@ -469,7 +470,7 @@
 			// textBox10
 			// 
 			this.textBox10.Location = new System.Drawing.Point(254, 6);
-			this.textBox10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox10.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox10.Name = "textBox10";
 			this.textBox10.Size = new System.Drawing.Size(76, 21);
 			this.textBox10.TabIndex = 23;
@@ -477,7 +478,7 @@
 			// textBox11
 			// 
 			this.textBox11.Location = new System.Drawing.Point(254, 32);
-			this.textBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox11.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox11.Name = "textBox11";
 			this.textBox11.Size = new System.Drawing.Size(76, 21);
 			this.textBox11.TabIndex = 24;
@@ -485,7 +486,7 @@
 			// textBox12
 			// 
 			this.textBox12.Location = new System.Drawing.Point(254, 56);
-			this.textBox12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox12.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox12.Name = "textBox12";
 			this.textBox12.Size = new System.Drawing.Size(76, 21);
 			this.textBox12.TabIndex = 25;
@@ -494,7 +495,7 @@
 			// 
 			this.SaveAllInfo_Bt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.SaveAllInfo_Bt.Location = new System.Drawing.Point(867, 0);
-			this.SaveAllInfo_Bt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.SaveAllInfo_Bt.Margin = new System.Windows.Forms.Padding(2);
 			this.SaveAllInfo_Bt.Name = "SaveAllInfo_Bt";
 			this.SaveAllInfo_Bt.Size = new System.Drawing.Size(62, 24);
 			this.SaveAllInfo_Bt.TabIndex = 27;
@@ -510,7 +511,7 @@
 			this.tabControl1.Controls.Add(this.tabPage_AllInfo);
 			this.tabControl1.Controls.Add(this.tabPage_GeoInfo);
 			this.tabControl1.Location = new System.Drawing.Point(0, 24);
-			this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
 			this.tabControl1.Size = new System.Drawing.Size(944, 466);
@@ -523,9 +524,9 @@
 			this.tabPage_AllInfo.Controls.Add(this.splitContainer1);
 			this.tabPage_AllInfo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.tabPage_AllInfo.Location = new System.Drawing.Point(4, 22);
-			this.tabPage_AllInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage_AllInfo.Margin = new System.Windows.Forms.Padding(2);
 			this.tabPage_AllInfo.Name = "tabPage_AllInfo";
-			this.tabPage_AllInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage_AllInfo.Padding = new System.Windows.Forms.Padding(2);
 			this.tabPage_AllInfo.Size = new System.Drawing.Size(936, 440);
 			this.tabPage_AllInfo.TabIndex = 0;
 			this.tabPage_AllInfo.Text = "基本信息";
@@ -536,7 +537,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.splitContainer1.Location = new System.Drawing.Point(2, 2);
-			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
 			this.splitContainer1.Name = "splitContainer1";
 			this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -559,7 +560,7 @@
 			// 
 			this.ShowAllInfo_Bt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.ShowAllInfo_Bt.Location = new System.Drawing.Point(760, 0);
-			this.ShowAllInfo_Bt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ShowAllInfo_Bt.Margin = new System.Windows.Forms.Padding(2);
 			this.ShowAllInfo_Bt.Name = "ShowAllInfo_Bt";
 			this.ShowAllInfo_Bt.Size = new System.Drawing.Size(97, 24);
 			this.ShowAllInfo_Bt.TabIndex = 28;
@@ -781,7 +782,7 @@
 			// textBox43
 			// 
 			this.textBox43.Location = new System.Drawing.Point(847, 151);
-			this.textBox43.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox43.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox43.Name = "textBox43";
 			this.textBox43.ReadOnly = true;
 			this.textBox43.Size = new System.Drawing.Size(76, 21);
@@ -790,7 +791,7 @@
 			// textBox42
 			// 
 			this.textBox42.Location = new System.Drawing.Point(847, 127);
-			this.textBox42.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox42.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox42.Name = "textBox42";
 			this.textBox42.ReadOnly = true;
 			this.textBox42.Size = new System.Drawing.Size(76, 21);
@@ -799,7 +800,7 @@
 			// textBox41
 			// 
 			this.textBox41.Location = new System.Drawing.Point(847, 103);
-			this.textBox41.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox41.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox41.Name = "textBox41";
 			this.textBox41.ReadOnly = true;
 			this.textBox41.Size = new System.Drawing.Size(76, 21);
@@ -808,7 +809,7 @@
 			// textBox40
 			// 
 			this.textBox40.Location = new System.Drawing.Point(847, 79);
-			this.textBox40.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox40.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox40.Name = "textBox40";
 			this.textBox40.ReadOnly = true;
 			this.textBox40.Size = new System.Drawing.Size(76, 21);
@@ -857,7 +858,7 @@
 			// textBox39
 			// 
 			this.textBox39.Location = new System.Drawing.Point(847, 56);
-			this.textBox39.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox39.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox39.Name = "textBox39";
 			this.textBox39.ReadOnly = true;
 			this.textBox39.Size = new System.Drawing.Size(76, 21);
@@ -866,7 +867,7 @@
 			// textBox38
 			// 
 			this.textBox38.Location = new System.Drawing.Point(847, 32);
-			this.textBox38.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox38.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox38.Name = "textBox38";
 			this.textBox38.ReadOnly = true;
 			this.textBox38.Size = new System.Drawing.Size(76, 21);
@@ -875,7 +876,7 @@
 			// textBox37
 			// 
 			this.textBox37.Location = new System.Drawing.Point(847, 8);
-			this.textBox37.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox37.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox37.Name = "textBox37";
 			this.textBox37.ReadOnly = true;
 			this.textBox37.Size = new System.Drawing.Size(76, 21);
@@ -884,7 +885,7 @@
 			// textBox36
 			// 
 			this.textBox36.Location = new System.Drawing.Point(650, 199);
-			this.textBox36.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox36.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox36.Name = "textBox36";
 			this.textBox36.ReadOnly = true;
 			this.textBox36.Size = new System.Drawing.Size(76, 21);
@@ -893,7 +894,7 @@
 			// textBox35
 			// 
 			this.textBox35.Location = new System.Drawing.Point(650, 175);
-			this.textBox35.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox35.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox35.Name = "textBox35";
 			this.textBox35.ReadOnly = true;
 			this.textBox35.Size = new System.Drawing.Size(76, 21);
@@ -902,7 +903,7 @@
 			// textBox34
 			// 
 			this.textBox34.Location = new System.Drawing.Point(650, 151);
-			this.textBox34.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox34.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox34.Name = "textBox34";
 			this.textBox34.Size = new System.Drawing.Size(76, 21);
 			this.textBox34.TabIndex = 74;
@@ -910,7 +911,7 @@
 			// textBox33
 			// 
 			this.textBox33.Location = new System.Drawing.Point(650, 127);
-			this.textBox33.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox33.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox33.Name = "textBox33";
 			this.textBox33.Size = new System.Drawing.Size(76, 21);
 			this.textBox33.TabIndex = 73;
@@ -918,7 +919,7 @@
 			// textBox32
 			// 
 			this.textBox32.Location = new System.Drawing.Point(650, 103);
-			this.textBox32.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox32.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox32.Name = "textBox32";
 			this.textBox32.Size = new System.Drawing.Size(76, 21);
 			this.textBox32.TabIndex = 72;
@@ -926,7 +927,7 @@
 			// textBox31
 			// 
 			this.textBox31.Location = new System.Drawing.Point(650, 79);
-			this.textBox31.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox31.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox31.Name = "textBox31";
 			this.textBox31.Size = new System.Drawing.Size(76, 21);
 			this.textBox31.TabIndex = 71;
@@ -934,7 +935,7 @@
 			// textBox30
 			// 
 			this.textBox30.Location = new System.Drawing.Point(650, 57);
-			this.textBox30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox30.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox30.Name = "textBox30";
 			this.textBox30.Size = new System.Drawing.Size(76, 21);
 			this.textBox30.TabIndex = 70;
@@ -942,7 +943,7 @@
 			// textBox29
 			// 
 			this.textBox29.Location = new System.Drawing.Point(650, 33);
-			this.textBox29.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox29.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox29.Name = "textBox29";
 			this.textBox29.Size = new System.Drawing.Size(76, 21);
 			this.textBox29.TabIndex = 69;
@@ -950,7 +951,7 @@
 			// textBox28
 			// 
 			this.textBox28.Location = new System.Drawing.Point(650, 9);
-			this.textBox28.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox28.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox28.Name = "textBox28";
 			this.textBox28.Size = new System.Drawing.Size(76, 21);
 			this.textBox28.TabIndex = 68;
@@ -958,7 +959,7 @@
 			// textBox27
 			// 
 			this.textBox27.Location = new System.Drawing.Point(451, 200);
-			this.textBox27.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox27.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox27.Name = "textBox27";
 			this.textBox27.Size = new System.Drawing.Size(76, 21);
 			this.textBox27.TabIndex = 67;
@@ -966,7 +967,7 @@
 			// textBox26
 			// 
 			this.textBox26.Location = new System.Drawing.Point(451, 176);
-			this.textBox26.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox26.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox26.Name = "textBox26";
 			this.textBox26.Size = new System.Drawing.Size(76, 21);
 			this.textBox26.TabIndex = 66;
@@ -974,7 +975,7 @@
 			// textBox25
 			// 
 			this.textBox25.Location = new System.Drawing.Point(451, 152);
-			this.textBox25.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox25.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox25.Name = "textBox25";
 			this.textBox25.Size = new System.Drawing.Size(76, 21);
 			this.textBox25.TabIndex = 65;
@@ -982,7 +983,7 @@
 			// textBox24
 			// 
 			this.textBox24.Location = new System.Drawing.Point(451, 128);
-			this.textBox24.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox24.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox24.Name = "textBox24";
 			this.textBox24.Size = new System.Drawing.Size(76, 21);
 			this.textBox24.TabIndex = 64;
@@ -990,7 +991,7 @@
 			// textBox23
 			// 
 			this.textBox23.Location = new System.Drawing.Point(451, 104);
-			this.textBox23.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox23.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox23.Name = "textBox23";
 			this.textBox23.Size = new System.Drawing.Size(76, 21);
 			this.textBox23.TabIndex = 63;
@@ -998,7 +999,7 @@
 			// textBox22
 			// 
 			this.textBox22.Location = new System.Drawing.Point(451, 80);
-			this.textBox22.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox22.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox22.Name = "textBox22";
 			this.textBox22.Size = new System.Drawing.Size(76, 21);
 			this.textBox22.TabIndex = 62;
@@ -1006,7 +1007,7 @@
 			// textBox21
 			// 
 			this.textBox21.Location = new System.Drawing.Point(451, 56);
-			this.textBox21.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox21.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox21.Name = "textBox21";
 			this.textBox21.Size = new System.Drawing.Size(76, 21);
 			this.textBox21.TabIndex = 61;
@@ -1014,7 +1015,7 @@
 			// textBox20
 			// 
 			this.textBox20.Location = new System.Drawing.Point(451, 31);
-			this.textBox20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox20.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox20.Name = "textBox20";
 			this.textBox20.Size = new System.Drawing.Size(76, 21);
 			this.textBox20.TabIndex = 60;
@@ -1022,7 +1023,7 @@
 			// textBox19
 			// 
 			this.textBox19.Location = new System.Drawing.Point(451, 7);
-			this.textBox19.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox19.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox19.Name = "textBox19";
 			this.textBox19.Size = new System.Drawing.Size(76, 21);
 			this.textBox19.TabIndex = 59;
@@ -1030,7 +1031,7 @@
 			// textBox18
 			// 
 			this.textBox18.Location = new System.Drawing.Point(254, 200);
-			this.textBox18.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox18.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox18.Name = "textBox18";
 			this.textBox18.Size = new System.Drawing.Size(76, 21);
 			this.textBox18.TabIndex = 58;
@@ -1038,7 +1039,7 @@
 			// textBox17
 			// 
 			this.textBox17.Location = new System.Drawing.Point(254, 176);
-			this.textBox17.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox17.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox17.Name = "textBox17";
 			this.textBox17.Size = new System.Drawing.Size(76, 21);
 			this.textBox17.TabIndex = 57;
@@ -1046,7 +1047,7 @@
 			// textBox16
 			// 
 			this.textBox16.Location = new System.Drawing.Point(254, 152);
-			this.textBox16.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox16.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox16.Name = "textBox16";
 			this.textBox16.Size = new System.Drawing.Size(76, 21);
 			this.textBox16.TabIndex = 56;
@@ -1064,7 +1065,7 @@
 			// textBox15
 			// 
 			this.textBox15.Location = new System.Drawing.Point(254, 128);
-			this.textBox15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox15.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox15.Name = "textBox15";
 			this.textBox15.Size = new System.Drawing.Size(76, 21);
 			this.textBox15.TabIndex = 55;
@@ -1082,7 +1083,7 @@
 			// textBox14
 			// 
 			this.textBox14.Location = new System.Drawing.Point(254, 104);
-			this.textBox14.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox14.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox14.Name = "textBox14";
 			this.textBox14.Size = new System.Drawing.Size(76, 21);
 			this.textBox14.TabIndex = 54;
@@ -1100,7 +1101,7 @@
 			// textBox13
 			// 
 			this.textBox13.Location = new System.Drawing.Point(254, 80);
-			this.textBox13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox13.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox13.Name = "textBox13";
 			this.textBox13.Size = new System.Drawing.Size(76, 21);
 			this.textBox13.TabIndex = 53;
@@ -1350,9 +1351,9 @@
 			this.tabPage_GeoInfo.BackColor = System.Drawing.Color.Transparent;
 			this.tabPage_GeoInfo.Controls.Add(this.tabControl2);
 			this.tabPage_GeoInfo.Location = new System.Drawing.Point(4, 22);
-			this.tabPage_GeoInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage_GeoInfo.Margin = new System.Windows.Forms.Padding(2);
 			this.tabPage_GeoInfo.Name = "tabPage_GeoInfo";
-			this.tabPage_GeoInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.tabPage_GeoInfo.Padding = new System.Windows.Forms.Padding(2);
 			this.tabPage_GeoInfo.Size = new System.Drawing.Size(936, 440);
 			this.tabPage_GeoInfo.TabIndex = 2;
 			this.tabPage_GeoInfo.Text = "几何信息";
@@ -1401,6 +1402,7 @@
 			// 
 			// splitContainer2.Panel1
 			// 
+			this.splitContainer2.Panel1.Controls.Add(this.ShowAllGeoInfo_Bt);
 			this.splitContainer2.Panel1.Controls.Add(this.SaveGeoInfo_Bt);
 			this.splitContainer2.Panel1.Controls.Add(this.dataGridView_GeoInfo);
 			this.splitContainer2.Panel1.Controls.Add(this.bindingNavigator_GeoInfo);
@@ -1431,7 +1433,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridView_GeoInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView_GeoInfo.Location = new System.Drawing.Point(0, 24);
-			this.dataGridView_GeoInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.dataGridView_GeoInfo.Margin = new System.Windows.Forms.Padding(2);
 			this.dataGridView_GeoInfo.Name = "dataGridView_GeoInfo";
 			this.dataGridView_GeoInfo.RowTemplate.Height = 23;
 			this.dataGridView_GeoInfo.Size = new System.Drawing.Size(926, 234);
@@ -1583,7 +1585,7 @@
 			// textBox52
 			// 
 			this.textBox52.Location = new System.Drawing.Point(499, 14);
-			this.textBox52.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox52.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox52.Name = "textBox52";
 			this.textBox52.Size = new System.Drawing.Size(76, 21);
 			this.textBox52.TabIndex = 17;
@@ -1601,7 +1603,7 @@
 			// textBox51
 			// 
 			this.textBox51.Location = new System.Drawing.Point(282, 110);
-			this.textBox51.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox51.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox51.Name = "textBox51";
 			this.textBox51.Size = new System.Drawing.Size(76, 21);
 			this.textBox51.TabIndex = 15;
@@ -1619,7 +1621,7 @@
 			// textBox50
 			// 
 			this.textBox50.Location = new System.Drawing.Point(282, 78);
-			this.textBox50.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox50.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox50.Name = "textBox50";
 			this.textBox50.Size = new System.Drawing.Size(76, 21);
 			this.textBox50.TabIndex = 13;
@@ -1627,7 +1629,7 @@
 			// textBox49
 			// 
 			this.textBox49.Location = new System.Drawing.Point(282, 46);
-			this.textBox49.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox49.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox49.Name = "textBox49";
 			this.textBox49.Size = new System.Drawing.Size(76, 21);
 			this.textBox49.TabIndex = 12;
@@ -1635,7 +1637,7 @@
 			// textBox48
 			// 
 			this.textBox48.Location = new System.Drawing.Point(282, 14);
-			this.textBox48.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox48.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox48.Name = "textBox48";
 			this.textBox48.Size = new System.Drawing.Size(76, 21);
 			this.textBox48.TabIndex = 11;
@@ -1643,7 +1645,7 @@
 			// textBox47
 			// 
 			this.textBox47.Location = new System.Drawing.Point(74, 110);
-			this.textBox47.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox47.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox47.Name = "textBox47";
 			this.textBox47.Size = new System.Drawing.Size(76, 21);
 			this.textBox47.TabIndex = 10;
@@ -1651,7 +1653,7 @@
 			// textBox46
 			// 
 			this.textBox46.Location = new System.Drawing.Point(74, 78);
-			this.textBox46.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox46.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox46.Name = "textBox46";
 			this.textBox46.Size = new System.Drawing.Size(76, 21);
 			this.textBox46.TabIndex = 9;
@@ -1659,7 +1661,7 @@
 			// textBox45
 			// 
 			this.textBox45.Location = new System.Drawing.Point(74, 46);
-			this.textBox45.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox45.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox45.Name = "textBox45";
 			this.textBox45.Size = new System.Drawing.Size(76, 21);
 			this.textBox45.TabIndex = 8;
@@ -1667,7 +1669,7 @@
 			// textBox44
 			// 
 			this.textBox44.Location = new System.Drawing.Point(74, 14);
-			this.textBox44.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox44.Margin = new System.Windows.Forms.Padding(2);
 			this.textBox44.Name = "textBox44";
 			this.textBox44.Size = new System.Drawing.Size(76, 21);
 			this.textBox44.TabIndex = 7;
@@ -1746,7 +1748,7 @@
 			// 
 			this.tabPage_LQB.Location = new System.Drawing.Point(4, 25);
 			this.tabPage_LQB.Name = "tabPage_LQB";
-			this.tabPage_LQB.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tabPage_LQB.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage_LQB.Size = new System.Drawing.Size(926, 410);
 			this.tabPage_LQB.TabIndex = 1;
 			this.tabPage_LQB.Text = "LQB";
@@ -1756,7 +1758,7 @@
 			// 
 			this.tabPage_TMPLT.Location = new System.Drawing.Point(4, 25);
 			this.tabPage_TMPLT.Name = "tabPage_TMPLT";
-			this.tabPage_TMPLT.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tabPage_TMPLT.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage_TMPLT.Size = new System.Drawing.Size(926, 410);
 			this.tabPage_TMPLT.TabIndex = 2;
 			this.tabPage_TMPLT.Text = "TMPLT";
@@ -1766,7 +1768,7 @@
 			// 
 			this.tabPage_PRT.Location = new System.Drawing.Point(4, 25);
 			this.tabPage_PRT.Name = "tabPage_PRT";
-			this.tabPage_PRT.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tabPage_PRT.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage_PRT.Size = new System.Drawing.Size(926, 410);
 			this.tabPage_PRT.TabIndex = 3;
 			this.tabPage_PRT.Text = "PRT";
@@ -1776,7 +1778,7 @@
 			// 
 			this.tabPage_STL.Location = new System.Drawing.Point(4, 25);
 			this.tabPage_STL.Name = "tabPage_STL";
-			this.tabPage_STL.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tabPage_STL.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage_STL.Size = new System.Drawing.Size(926, 410);
 			this.tabPage_STL.TabIndex = 4;
 			this.tabPage_STL.Text = "STL";
@@ -1786,11 +1788,22 @@
 			// 
 			this.tabPage_JPG.Location = new System.Drawing.Point(4, 25);
 			this.tabPage_JPG.Name = "tabPage_JPG";
-			this.tabPage_JPG.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tabPage_JPG.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage_JPG.Size = new System.Drawing.Size(926, 410);
 			this.tabPage_JPG.TabIndex = 5;
 			this.tabPage_JPG.Text = "JPG";
 			this.tabPage_JPG.UseVisualStyleBackColor = true;
+			// 
+			// ShowAllGeoInfo_Bt
+			// 
+			this.ShowAllGeoInfo_Bt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.ShowAllGeoInfo_Bt.Location = new System.Drawing.Point(745, 0);
+			this.ShowAllGeoInfo_Bt.Name = "ShowAllGeoInfo_Bt";
+			this.ShowAllGeoInfo_Bt.Size = new System.Drawing.Size(97, 24);
+			this.ShowAllGeoInfo_Bt.TabIndex = 3;
+			this.ShowAllGeoInfo_Bt.Text = "显示所有信息";
+			this.ShowAllGeoInfo_Bt.UseVisualStyleBackColor = true;
+			this.ShowAllGeoInfo_Bt.Click += new System.EventHandler(this.ShowAllGeoInfo_Bt_Click);
 			// 
 			// ManagementMain
 			// 
@@ -1802,7 +1815,7 @@
 			this.DoubleBuffered = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.MinimumSize = new System.Drawing.Size(533, 377);
 			this.Name = "ManagementMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1936,7 +1949,6 @@
 		private System.Windows.Forms.DataGridView dataGridView_GeoInfo;
 		private System.Windows.Forms.BindingSource bindingSource_GeoInfo;
 		private System.Windows.Forms.Panel panel_Info;
-		private System.Windows.Forms.TabControl tabControl2;
 		private System.Windows.Forms.TabPage tabPage_BWF;
 		private System.Windows.Forms.TabPage tabPage_LQB;
 		private System.Windows.Forms.Button SaveGeoInfo_Bt;
@@ -1998,6 +2010,8 @@
 		private System.Windows.Forms.TextBox textBox52;
 		private System.Windows.Forms.Label label52;
 		private System.Windows.Forms.Button ShowAllInfo_Bt;
+		public System.Windows.Forms.TabControl tabControl2;
+		private System.Windows.Forms.Button ShowAllGeoInfo_Bt;
 	}
 }
 
