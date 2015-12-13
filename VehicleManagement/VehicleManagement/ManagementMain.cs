@@ -17,9 +17,7 @@ namespace VehicleManagement
 		DataSet GeoInfoDataSet = new DataSet();
 		SqlDataAdapter GeoInfoDataAdapter = new SqlDataAdapter();
 
-		SearchOne SearchOneForm = new SearchOne();
-
-		TextBox[] txtInfo = new TextBox[43];
+		TextBox[] txtInfo = new TextBox[45];
 		TextBox[] txtGeoInfo = new TextBox[9];
 
 		public delegate void ShowDatabase(string str, int mode);
@@ -108,11 +106,11 @@ namespace VehicleManagement
 			txtInfo[25] = textBox26; txtInfo[26] = textBox27; txtInfo[27] = textBox28; txtInfo[28] = textBox29; txtInfo[29] = textBox30;
 			txtInfo[30] = textBox31; txtInfo[31] = textBox32; txtInfo[32] = textBox33; txtInfo[33] = textBox34; txtInfo[34] = textBox35;
 			txtInfo[35] = textBox36; txtInfo[36] = textBox37; txtInfo[37] = textBox38; txtInfo[38] = textBox39; txtInfo[39] = textBox40;
-			txtInfo[40] = textBox41; txtInfo[41] = textBox42; txtInfo[42] = textBox43;
+			txtInfo[40] = textBox41; txtInfo[41] = textBox42; txtInfo[42] = textBox43; txtInfo[43] = textBox44; txtInfo[44] = textBox45;
 
-			txtGeoInfo[0] = textBox44; txtGeoInfo[1] = textBox45; txtGeoInfo[2] = textBox46; txtGeoInfo[3] = textBox47;
-			txtGeoInfo[4] = textBox48; txtGeoInfo[5] = textBox49; txtGeoInfo[6] = textBox50; txtGeoInfo[7] = textBox51;
-			txtGeoInfo[8] = textBox52;
+			txtGeoInfo[0] = textBox101; txtGeoInfo[1] = textBox102; txtGeoInfo[2] = textBox103; txtGeoInfo[3] = textBox104;
+			txtGeoInfo[4] = textBox105; txtGeoInfo[5] = textBox106; txtGeoInfo[6] = textBox107; txtGeoInfo[7] = textBox108;
+			txtGeoInfo[8] = textBox109;
 		}
 
 		private void ShowInfo(string str, int mode)
@@ -256,6 +254,7 @@ namespace VehicleManagement
 
 		private void 检索数据ToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
+			SearchOne SearchOneForm = new SearchOne();
 			SearchOneForm.Show();
 		}
 
@@ -336,7 +335,7 @@ namespace VehicleManagement
 			int iLoop = 0;
 			while (myreader.Read())
 			{
-				txtInfo[iLoop + 37].Text = (myreader.GetInt32(0) != 0) ? ("True") : ("False");
+				txtInfo[iLoop + 39].Text = (myreader.GetInt32(0) != 0) ? ("True") : ("False");
 				iLoop++;
 			}
 			databasecmd.SqlReaderClose();
@@ -368,10 +367,10 @@ namespace VehicleManagement
 	{
 			汽车ID = 0, 车型 = 1, 型号 = 2, 年款 = 3, 厂商 = 4, 级别 = 5, 车身结构 = 6, 长 = 7, 宽 = 8, 高 = 9,
 			最高车速 = 10, 百公里加速 = 11, 综合油耗 = 12, 最小离地间隙 = 13, 轴距 = 14, 前轮距 = 15, 后轮距 = 16,
-			整备质量 = 17, 车门数 = 18,  座位数 = 19, 行李厢容积 = 20, 排量 = 21, 前轮胎规格 = 22, 后轮胎规格 = 23,
-			电动天窗 = 24, 全景天窗 = 25, 运动外观套件 = 26, 铝合金轮圈 = 27, 电动吸合门 = 28, 侧滑门 = 29,
-			电动后备厢 = 30, 感应后备厢 = 31, 车顶行李架 = 32, 外观颜色 = 33, 信息更新时间 = 34, 信息更新者工号= 35,
-			信息更新者姓名 = 36
+			整备质量 = 17, 车门数 = 18,  座位数 = 19, 行李厢容积 = 20, 排量 = 21, 最大马力 = 22, 最大功率 = 23,
+			前轮胎规格 = 24, 后轮胎规格 = 25,	电动天窗 = 26, 全景天窗 = 27, 运动外观套件 = 28, 铝合金轮圈 = 29,
+			电动吸合门 = 30, 侧滑门 = 31, 电动后备厢 = 32, 感应后备厢 = 33, 车顶行李架 = 34, 外观颜色 = 35,
+			信息更新时间 = 36, 信息更新者工号= 37,	信息更新者姓名 = 38
 	}
 
 	enum ColName_VehicleGeo

@@ -303,15 +303,9 @@ namespace VehicleManagement
 
 					Info UploadInfo = new Info();
 					try { UploadInfo.车型 = (string)excelcmd.GetCell(config.车型, Col); } catch (Exception ex) { }
-					try
-					{
-						//Regex reg = new Regex("([a-z]|[A-Z])*[ ]?[0-9]*");
-						//Match match = reg.Match(UploadInfo.车型);
-						UploadInfo.型号 = UserFunction.GetModelNum(UploadInfo.车型);
-					} catch (Exception ex) { }
+					try { UploadInfo.型号 = UserFunction.GetModelNum(UploadInfo.车型);	} catch (Exception ex) { }
 		
-					try
-					{
+					try{
 						Regex reg = new Regex("[1-2]\\d\\d\\d");
 						Match match = reg.Match(UploadInfo.车型);
 						UploadInfo.年款 = Int32.Parse(match.Value);
@@ -335,6 +329,8 @@ namespace VehicleManagement
 					try { UploadInfo.座位数 = Int32.Parse((string)excelcmd.GetCell(config.座位数, Col)); } catch (Exception ex) { }
 					try { UploadInfo.行李厢容积 = Int32.Parse((string)excelcmd.GetCell(config.行李厢容积, Col)); } catch (Exception ex) { }
 					try { UploadInfo.排量 = Int32.Parse((string)excelcmd.GetCell(config.排量, Col)); } catch (Exception ex) { }
+					try { UploadInfo.最大马力 = Int32.Parse((string)excelcmd.GetCell(config.最大马力, Col)); } catch (Exception ex) { }
+					try { UploadInfo.最大功率 = Int32.Parse((string)excelcmd.GetCell(config.最大功率, Col)); } catch (Exception ex) { }
 					try { UploadInfo.前轮胎规格 = (string)excelcmd.GetCell(config.前轮胎规格, Col); } catch (Exception ex) { }
 					try { UploadInfo.后轮胎规格 = (string)excelcmd.GetCell(config.后轮胎规格, Col); } catch (Exception ex) { }
 					try { UploadInfo.电动天窗 = ((string)excelcmd.GetCell(config.电动天窗, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
@@ -354,8 +350,8 @@ namespace VehicleManagement
 					try
 					{
 						UploadInfo.汽车ID = UserFunction.GetFirstPinyin(UploadInfo.型号) + "-" + UploadInfo.年款.ToString() + "-" +
-							UserFunction.GetFirstPinyin(UploadInfo.厂商) + "-" + UploadInfo.车门数 + "-" + UploadInfo.座位数 + "-" +
-							UserFunction.GetFirstPinyin(UploadInfo.车身结构) + "-" + UploadInfo.排量 + "-" +
+							UserFunction.GetFirstPinyin(UploadInfo.厂商) + "-" + UploadInfo.排量 + "-" + UploadInfo.最大马力 + "-" +
+							UploadInfo.最大功率 + "-" + UserFunction.GetFirstPinyin(UploadInfo.车身结构) + "-" +
 							UserFunction.GetFirstPinyin(UserFunction.GetLastLabel(UploadInfo.车型));
 					}
 					catch (Exception ex)
@@ -398,7 +394,9 @@ namespace VehicleManagement
 			InsertStr += InfoStruct.车门数 + ",";
 			InsertStr += InfoStruct.座位数 + ",";
 			InsertStr += InfoStruct.行李厢容积 + ",";
-			InsertStr += InfoStruct.排量 + ",'";
+			InsertStr += InfoStruct.排量 + ",";
+			InsertStr += InfoStruct.最大马力 + ",";
+			InsertStr += InfoStruct.最大功率 + ",'";
 			InsertStr += InfoStruct.前轮胎规格 + "','";
 			InsertStr += InfoStruct.后轮胎规格 + "','";
 			InsertStr += InfoStruct.电动天窗 + "','";
@@ -465,6 +463,8 @@ namespace VehicleManagement
 			public int 座位数;
 			public int 行李厢容积;
 			public int 排量;
+			public int 最大马力;
+			public int 最大功率;
 			public string 前轮胎规格;
 			public string 后轮胎规格;
 			public bool 电动天窗;

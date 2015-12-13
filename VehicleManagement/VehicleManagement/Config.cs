@@ -24,6 +24,8 @@
 		public int 座位数 = 32;
 		public int 行李厢容积 = 34;
 		public int 排量 = 37;
+		public int 最大马力 = 46;
+		public int 最大功率 = 47;
 		public int 前轮胎规格 = 74;
 		public int 后轮胎规格 = 75;
 		public int 电动天窗 = 107;
@@ -52,22 +54,6 @@
             }
 			excelcmd.ExitExcelApp();
 
-			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
-			{
-				if(RowName[iLoop - 1] == "ID")
-				{
-					汽车ID = 汽车ID;
-					break;
-                }
-			}
-			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
-			{
-				if(RowName[iLoop - 1] == "")
-				{
-					车型 = 车型;
-					break;
-				}
-			}
 			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
 			{
 				if (RowName[iLoop - 1] == "厂商")
@@ -208,6 +194,22 @@
 				if (RowName[iLoop - 1] == "排量(mL)")
 				{
 					排量 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "最大马力(Ps)")
+				{
+					最大马力 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "最大功率(kW)")
+				{
+					最大功率 = iLoop;
 					break;
 				}
 			}

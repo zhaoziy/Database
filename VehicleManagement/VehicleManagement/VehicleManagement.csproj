@@ -89,6 +89,12 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchBoxComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SearchBoxComponent.Designer.cs">
+      <DependentUpon>SearchBoxComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchOne.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SearchBoxComponent.resx">
+      <DependentUpon>SearchBoxComponent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchOne.resx">
       <DependentUpon>SearchOne.cs</DependentUpon>
     </EmbeddedResource>
