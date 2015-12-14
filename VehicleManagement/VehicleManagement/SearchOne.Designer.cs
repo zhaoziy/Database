@@ -38,10 +38,10 @@
 			// 
 			// Close_Bt
 			// 
-			this.Close_Bt.Location = new System.Drawing.Point(84, 4);
-			this.Close_Bt.Margin = new System.Windows.Forms.Padding(2);
+			this.Close_Bt.Location = new System.Drawing.Point(112, 5);
+			this.Close_Bt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Close_Bt.Name = "Close_Bt";
-			this.Close_Bt.Size = new System.Drawing.Size(56, 26);
+			this.Close_Bt.Size = new System.Drawing.Size(75, 32);
 			this.Close_Bt.TabIndex = 2;
 			this.Close_Bt.Text = "关闭";
 			this.Close_Bt.UseVisualStyleBackColor = true;
@@ -49,10 +49,10 @@
 			// 
 			// Search_Bt
 			// 
-			this.Search_Bt.Location = new System.Drawing.Point(7, 4);
-			this.Search_Bt.Margin = new System.Windows.Forms.Padding(2);
+			this.Search_Bt.Location = new System.Drawing.Point(9, 5);
+			this.Search_Bt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Search_Bt.Name = "Search_Bt";
-			this.Search_Bt.Size = new System.Drawing.Size(56, 26);
+			this.Search_Bt.Size = new System.Drawing.Size(75, 32);
 			this.Search_Bt.TabIndex = 1;
 			this.Search_Bt.Text = "搜索";
 			this.Search_Bt.UseVisualStyleBackColor = true;
@@ -60,16 +60,18 @@
 			// 
 			// panel_SearchBox
 			// 
-			this.panel_SearchBox.Location = new System.Drawing.Point(32, 12);
+			this.panel_SearchBox.Location = new System.Drawing.Point(43, 15);
+			this.panel_SearchBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.panel_SearchBox.Name = "panel_SearchBox";
-			this.panel_SearchBox.Size = new System.Drawing.Size(309, 27);
+			this.panel_SearchBox.Size = new System.Drawing.Size(412, 34);
 			this.panel_SearchBox.TabIndex = 4;
 			// 
 			// AddConditon_BT
 			// 
-			this.AddConditon_BT.Location = new System.Drawing.Point(356, 13);
+			this.AddConditon_BT.Location = new System.Drawing.Point(475, 16);
+			this.AddConditon_BT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.AddConditon_BT.Name = "AddConditon_BT";
-			this.AddConditon_BT.Size = new System.Drawing.Size(97, 23);
+			this.AddConditon_BT.Size = new System.Drawing.Size(129, 29);
 			this.AddConditon_BT.TabIndex = 6;
 			this.AddConditon_BT.Text = "点我增加条件";
 			this.AddConditon_BT.UseVisualStyleBackColor = true;
@@ -79,21 +81,24 @@
 			// 
 			this.panel1.Controls.Add(this.Close_Bt);
 			this.panel1.Controls.Add(this.Search_Bt);
-			this.panel1.Location = new System.Drawing.Point(166, 22);
+			this.panel1.Location = new System.Drawing.Point(221, 28);
+			this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(147, 40);
+			this.panel1.Size = new System.Drawing.Size(196, 50);
 			this.panel1.TabIndex = 7;
 			// 
 			// SearchOne
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+			this.AcceptButton = this.Search_Bt;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(485, 75);
+			this.CancelButton = this.Close_Bt;
+			this.ClientSize = new System.Drawing.Size(647, 94);
 			this.ControlBox = false;
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.AddConditon_BT);
 			this.Controls.Add(this.panel_SearchBox);
-			this.Margin = new System.Windows.Forms.Padding(2);
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "SearchOne";

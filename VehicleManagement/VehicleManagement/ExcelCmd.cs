@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Office.Interop.Excel;
-using System.Windows.Forms;
 using System.Reflection;
 
 namespace VehicleManagement
@@ -33,7 +32,7 @@ namespace VehicleManagement
 				}
 				else
 				{
-					MessageBox.Show("路径不能为空");
+					System.Windows.Forms.MessageBox.Show("路径不能为空");
 					return false;
 				}
 
@@ -43,7 +42,7 @@ namespace VehicleManagement
 			catch(Exception ex)
 			{
 				return false;
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 			}
 		} ///mode为true时创建新文件，false时打开path位置的文件
 
@@ -58,13 +57,13 @@ namespace VehicleManagement
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message);
+					System.Windows.Forms.MessageBox.Show(ex.Message);
 					return false;
 				}
 			}
 			else
 			{
-				MessageBox.Show("Index必须大于0");
+				System.Windows.Forms.MessageBox.Show("Index必须大于0");
 				return false;
 			}
 			
@@ -79,7 +78,7 @@ namespace VehicleManagement
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				return false;
 			}
 		}///before,after: 确定添加位置；num：数目；type：类型
@@ -94,7 +93,7 @@ namespace VehicleManagement
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				return false;
 			}
 		}
@@ -108,7 +107,7 @@ namespace VehicleManagement
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				return false;
 			}
 		}
@@ -121,7 +120,7 @@ namespace VehicleManagement
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				return null;
             }
 		}
@@ -132,11 +131,11 @@ namespace VehicleManagement
 			try
 			{
 				ExcelWorkBook.SaveAs(path, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value);
-				MessageBox.Show("保存成功");
+				System.Windows.Forms.MessageBox.Show("保存成功");
 			}
 			catch(Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 			}
         }
 
@@ -164,7 +163,7 @@ namespace VehicleManagement
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -183,7 +182,7 @@ namespace VehicleManagement
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 			}
 		}
 

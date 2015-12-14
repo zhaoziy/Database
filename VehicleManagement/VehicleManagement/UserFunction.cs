@@ -79,13 +79,13 @@ namespace VehicleManagement
 			{
 				datacmd.SqlReaderClose();
 			}
-		}
+		}//获取服务器时间
 
 		public static string GetModelNum(string str)
 		{
 			string[] strArray = str.Split(' ');
 			return strArray[0];
-		}
+		}//获取型号系列（截取车型字符串第一组数据）
 
 		public static string GetLastLabel(string str)
 		{
@@ -99,7 +99,7 @@ namespace VehicleManagement
 				return "";
 				MessageBox.Show(ex.Message);
 			}
-		}
+		}//获取字符串最后一组标签
 
 		public static string GetMD5HashFromFile(string fileName)
 		{
@@ -118,7 +118,7 @@ namespace VehicleManagement
 			{
 				throw new Exception("GetMD5HashFromFile() fail, error:" +ex.Message);
 			}
-		}
+		}//获取文件MD5值
 
 		private static string ByteArrayToString(byte[] arrInput)
 		{
@@ -147,6 +147,6 @@ namespace VehicleManagement
 				}
 			}
 			return r;
-		}
+		}//获取汉字首字母
 	}
 }

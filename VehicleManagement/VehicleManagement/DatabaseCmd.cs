@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Windows.Forms;
 using System.Data;
 using System.Collections;
 
@@ -35,14 +34,14 @@ namespace VehicleManagement
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				try
 				{
 					myTran.Rollback();
 				}
 				catch (Exception ex2)
 				{
-					MessageBox.Show(ex2.Message);
+					System.Windows.Forms.MessageBox.Show(ex2.Message);
 				}
 				return false;
 			}
@@ -69,7 +68,7 @@ namespace VehicleManagement
 			catch (Exception ex)
 			{
 				myreader = null;
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				return false;
 			}
 		}  //提交查询并返回数据，用于select
@@ -106,14 +105,14 @@ namespace VehicleManagement
 			catch (Exception ex)
 			{
 				obj = null;
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				try
 				{
 					myTran.Rollback();
 				}
 				catch (Exception ex2)
 				{
-					MessageBox.Show(ex2.Message);
+					System.Windows.Forms.MessageBox.Show(ex2.Message);
 				}
 				return false;
 			}
@@ -142,7 +141,7 @@ namespace VehicleManagement
 			{
 				da = null;
 				ds = null;
-				MessageBox.Show(ex.Message);
+				System.Windows.Forms.MessageBox.Show(ex.Message);
 				return null;
 			}
 			finally

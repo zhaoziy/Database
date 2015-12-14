@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Windows.Forms;
-using VehicleManagement.Properties;
-using System.IO;
-using System.Diagnostics;
 
 namespace VehicleManagement
 {
@@ -48,7 +44,7 @@ namespace VehicleManagement
 				{
 					if(myreader.GetValue(0).ToString() != "")
 					{
-						MessageBox.Show((string)myreader.GetValue(0).ToString(), "更新信息", MessageBoxButtons.OK);
+						System.Windows.Forms.MessageBox.Show((string)myreader.GetValue(0).ToString(), "更新信息", System.Windows.Forms.MessageBoxButtons.OK);
 					}
 				}
 				checkUpdate.SqlReaderClose();
@@ -57,7 +53,7 @@ namespace VehicleManagement
 
 		public void check()
 		{
-			string ThisApp = Application.ExecutablePath;
+			string ThisApp = System.Windows.Forms.Application.ExecutablePath;
 			string ThisAppMD5 = UserFunction.GetMD5HashFromFile(ThisApp);
 			DatabaseCmd checkver = new DatabaseCmd();
 			object obj = null;
@@ -70,16 +66,16 @@ namespace VehicleManagement
 
 		public void update()
 		{
-			string AppPath = Application.StartupPath;
+			string AppPath = System.Windows.Forms.Application.StartupPath;
 
-			byte[] res = new byte[Resources.SetupPack.Length];
-			Resources.SetupPack.CopyTo(res, 0);
-			FileStream fs = new FileStream(AppPath + "\\SetupPack.exe", FileMode.Create, FileAccess.Write);
+			byte[] res = new byte[VehicleManagement.Properties.Resources.SetupPack.Length];
+			VehicleManagement.Properties.Resources.SetupPack.CopyTo(res, 0);
+			System.IO.FileStream fs = new System.IO.FileStream(AppPath + "\\SetupPack.exe", System.IO.FileMode.Create, System.IO.FileAccess.Write);
 			fs.Write(res, 0, res.Length);
 			fs.Close();
 
-			string str1 = Process.GetCurrentProcess().MainModule.FileName;
-			Process.Start(AppPath + "\\SetupPack.exe", str1);
+			string str1 = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+			System.Diagnostics.Process.Start(AppPath + "\\SetupPack.exe", str1);
 			Environment.Exit(0);
 		}  //更新
 	}
