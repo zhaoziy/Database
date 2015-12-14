@@ -49,9 +49,9 @@ namespace VehicleManagement
 				}
 				checkUpdate.SqlReaderClose();
 			}
-		} //新版本更新信息，并更新
+		} //检查并显示新版本的更新信息
 
-		public void check()
+		public void check() //快速升级（只校验MD5值，不相同就更新）
 		{
 			string ThisApp = System.Windows.Forms.Application.ExecutablePath;
 			string ThisAppMD5 = UserFunction.GetMD5HashFromFile(ThisApp);
@@ -77,6 +77,6 @@ namespace VehicleManagement
 			string str1 = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
 			System.Diagnostics.Process.Start(AppPath + "\\SetupPack.exe", str1);
 			Environment.Exit(0);
-		}  //更新
+		}  //更新具体实施
 	}
 }
