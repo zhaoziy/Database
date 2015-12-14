@@ -121,6 +121,7 @@ namespace VehicleManagement
 					}
 					catch (Exception ex) { }
 
+					try { UploadInfo.品牌 = (string)excelcmd.GetCell(config.品牌, Col); } catch (Exception ex) { }
 					try { UploadInfo.厂商 = (string)excelcmd.GetCell(config.厂商, Col); } catch (Exception ex) { }
 					try { UploadInfo.级别 = (string)excelcmd.GetCell(config.级别, Col); } catch (Exception ex) { }
 					try { UploadInfo.车身结构 = (string)excelcmd.GetCell(config.车身结构, Col); } catch (Exception ex) { }
@@ -153,27 +154,29 @@ namespace VehicleManagement
 					try { UploadInfo.感应后备厢 = ((string)excelcmd.GetCell(config.感应后备厢, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
 					try { UploadInfo.车顶行李架 = ((string)excelcmd.GetCell(config.车顶行李架, Col) != "-") ? (true) : (false); } catch (Exception ex) { }
 					try { UploadInfo.外观颜色 = (string)excelcmd.GetCell(config.外观颜色, Col); } catch (Exception ex) { }
+					try { UploadInfo.变速箱 = (string)excelcmd.GetCell(config.变速箱, Col); } catch (Exception ex) { }
 					try { UploadInfo.信息更新时间 = UserFunction.GetServerDateTime(); } catch (Exception ex) { }
 					try { UploadInfo.信息更新者工号 = ManagementMain.UserNum; } catch (Exception ex) { }
 					try { UploadInfo.信息更新者姓名 = ManagementMain.UserName; } catch (Exception ex) { }
 
 					try
 					{
-						UploadInfo.汽车ID = UserFunction.GetFirstPinyin(UploadInfo.型号) + "-" + UploadInfo.年款.ToString() + "-" +
-							UserFunction.GetFirstPinyin(UploadInfo.厂商) + "-" + UploadInfo.排量 + "-" + UploadInfo.最大马力 + "-" +
-							UploadInfo.最大功率 + "-" + UserFunction.GetFirstPinyin(UploadInfo.车身结构) + "-" +
+						UploadInfo.汽车ID = UserFunction.GetFirstPinyin(UploadInfo.型号) + "_" + UploadInfo.年款.ToString() + "_" +
+							UserFunction.GetFirstPinyin(UploadInfo.厂商) + "_" + UploadInfo.排量 + "_" + UploadInfo.最大马力 + "_" +
+							UploadInfo.最大功率 + "_" + UserFunction.GetFirstPinyin(UploadInfo.变速箱) + "_" +
+							UserFunction.GetFirstPinyin(UploadInfo.车身结构)  + "_" +
 							UserFunction.GetFirstPinyin(UserFunction.GetLastLabel(UploadInfo.车型));
 					}
 					catch (Exception ex) { }
 
-					SqlUpoadeInfo(column, UploadInfo);
+					SqlUploadeInfo(column, UploadInfo);
 				}
 			}
 			excelcmd.ExitExcelApp();
 			return true;
 		}
 
-		public bool SqlUpoadeInfo(string[] Column, Info InfoStruct)
+		public bool SqlUploadeInfo(string[] Column, Info InfoStruct)
 		{
 			string InsertStr = "insert into VehicleInfo (";
 			for (int iLoop = 0; iLoop < Column.Length - 1; ++iLoop)
@@ -183,7 +186,8 @@ namespace VehicleManagement
 			InsertStr += "信息更新者姓名) values ('";
 			InsertStr += InfoStruct.汽车ID + "','";
 			InsertStr += InfoStruct.车型 + "','";
-			InsertStr += InfoStruct.型号 + "',";
+			InsertStr += InfoStruct.型号 + "','";
+			InsertStr += InfoStruct.品牌 + "',";
 			InsertStr += InfoStruct.年款 + ",'";
 			InsertStr += InfoStruct.厂商 + "','";
 			InsertStr += InfoStruct.级别 + "','";
@@ -217,6 +221,7 @@ namespace VehicleManagement
 			InsertStr += InfoStruct.感应后备厢 + "','";
 			InsertStr += InfoStruct.车顶行李架 + "','";
 			InsertStr += InfoStruct.外观颜色 + "','";
+			InsertStr += InfoStruct.变速箱 + "','";
 			InsertStr += InfoStruct.信息更新时间 + "','";
 			InsertStr += InfoStruct.信息更新者工号 + "','";
 			InsertStr += InfoStruct.信息更新者姓名 + "')";
@@ -426,6 +431,7 @@ namespace VehicleManagement
 			public string 汽车ID;
 			public string 车型;
 			public string 型号;
+			public string 品牌;
 			public int 年款;
 			public string 厂商;
 			public string 级别;
@@ -459,6 +465,7 @@ namespace VehicleManagement
 			public bool 感应后备厢;
 			public bool 车顶行李架;
 			public string 外观颜色;
+			public string 变速箱;
 			public DateTime 信息更新时间;
 			public string 信息更新者工号;
 			public string 信息更新者姓名;

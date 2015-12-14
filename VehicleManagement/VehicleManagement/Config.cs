@@ -6,6 +6,7 @@
 
 		public int 汽车ID = 3;
 		public int 车型 = 2;
+		public int 品牌 = 7;
 		public int 厂商 = 7;
 		public int 级别 = 8;
 		public int 车身结构 = 12;
@@ -38,6 +39,7 @@
 		public int 感应后备厢 = 114;
 		public int 车顶行李架 = 115;
 		public int 外观颜色 = 217;
+		public int 变速箱 = 10;
 
 		#endregion
 
@@ -58,6 +60,7 @@
 			{
 				if (RowName[iLoop - 1] == "厂商")
 				{
+					品牌 = iLoop;
 					厂商 = iLoop;
 					break;
 				}
@@ -306,6 +309,14 @@
 				if (RowName[iLoop - 1] == "外观颜色")
 				{
 					外观颜色 = iLoop;
+					break;
+				}
+			}
+			for (int iLoop = 1; iLoop <= MaxRowNum; ++iLoop)
+			{
+				if (RowName[iLoop - 1] == "变速箱")
+				{
+					变速箱 = iLoop;
 					break;
 				}
 			}
