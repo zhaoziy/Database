@@ -25,10 +25,15 @@ namespace VehicleManagement
 			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
 			string[] Option_String = Enum.GetNames(typeof(ColName_Vehicle));
-			foreach(string r in Option_String)
+			foreach (string r in Option_String)
 			{
 				Option_ComboBox.Items.Add(r);
 			}
+
+			Logical_ComboBox.Location = new Point(Option_ComboBox.Location.X + Option_ComboBox.Size.Width + 6, Logical_ComboBox.Location.Y);
+			Condition_TextBox.Location = new Point(Logical_ComboBox.Location.X + Logical_ComboBox.Size.Width + 19, Condition_TextBox.Location.Y);
+
+			this.Size = new Size(Condition_TextBox.Location.X + Condition_TextBox.Size.Width + 4, Condition_TextBox.Size.Height + 7);
 		}
 
 		private void Option_ComboBox_SelectedValueChanged(object sender, EventArgs e)
@@ -45,7 +50,8 @@ namespace VehicleManagement
 				panel1.Visible = false;
 				Condition_TextBox.Enabled = true;
 				Condition_TextBox.Visible = true;
-				Condition_TextBox.Location = new Point(162, 3);
+				Condition_TextBox.Location = new Point(Logical_ComboBox.Location.X + Logical_ComboBox.Size.Width + 19, 3);
+				this.Size = new Size(Condition_TextBox.Location.X + Condition_TextBox.Size.Width + 4, Condition_TextBox.Size.Height + 7);
 			}
 			else if(Logical.ToLower() == "区间")
 			{
@@ -53,7 +59,8 @@ namespace VehicleManagement
 				Condition_TextBox.Visible = false;
 				panel1.Enabled = true;
 				panel1.Visible = true;
-				panel1.Location = new Point(162, 3);
+				panel1.Location = new Point(Logical_ComboBox.Location.X + Logical_ComboBox.Size.Width + 19, 3);
+				this.Size = new Size(panel1.Location.X + panel1.Size.Width + 4, panel1.Size.Height + 7);
 			}
 		}
 

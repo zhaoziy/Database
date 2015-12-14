@@ -79,7 +79,7 @@
 			this.panel1.Controls.Add(this.numericUpDown1);
 			this.panel1.Location = new System.Drawing.Point(139, 40);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(157, 24);
+			this.panel1.Size = new System.Drawing.Size(138, 24);
 			this.panel1.TabIndex = 3;
 			// 
 			// label1
@@ -129,7 +129,7 @@
 			this.Controls.Add(this.Option_ComboBox);
 			this.DoubleBuffered = true;
 			this.Name = "SearchBoxComponent";
-			this.Size = new System.Drawing.Size(336, 27);
+			this.Size = new System.Drawing.Size(370, 28);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();

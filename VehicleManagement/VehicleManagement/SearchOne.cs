@@ -27,12 +27,13 @@ namespace VehicleManagement
 			string str = "SELECT * FROM [vehicleinfo] WHERE ";
 			for(int iLoop = 0; iLoop < searchBoxComponet.Count - 1; ++iLoop)
 			{
-				if(searchBoxComponet[iLoop].GetLogical.ToLower() == "like")
+				if(searchBoxComponet[iLoop].GetLogical.ToLower() == "like" &&
+					searchBoxComponet[iLoop].GetConditon != "")
 				{
 					str += searchBoxComponet[iLoop].GetOption + " like '%" + 
 						searchBoxComponet[iLoop].GetConditon + "%' and ";
 				}
-				else
+				else if(searchBoxComponet[iLoop].GetConditon != "")
 				{
 					str += searchBoxComponet[iLoop].GetOption + ">" +
 						searchBoxComponet[iLoop].GetNumLower + " and " +
@@ -41,19 +42,22 @@ namespace VehicleManagement
 				}
 			}
 
-			if (searchBoxComponet[searchBoxComponet.Count - 1].GetLogical.ToLower() == "like")
+			if (searchBoxComponet[searchBoxComponet.Count - 1].GetLogical.ToLower() == "like" &&
+						searchBoxComponet[searchBoxComponet.Count - 1].GetConditon != "")
 			{
 				str += searchBoxComponet[searchBoxComponet.Count - 1].GetOption + " like '%" +
 					searchBoxComponet[searchBoxComponet.Count - 1].GetConditon + "%' ";
+				ManagementMain.showData(str, 1);
 			}
-			else
+			else if (searchBoxComponet[searchBoxComponet.Count - 1].GetConditon != "")
 			{
 				str += searchBoxComponet[searchBoxComponet.Count - 1].GetOption + ">" +
 					searchBoxComponet[searchBoxComponet.Count - 1].GetNumLower + " and " +
 					searchBoxComponet[searchBoxComponet.Count - 1].GetOption + "<" +
 					searchBoxComponet[searchBoxComponet.Count - 1].GetNumUpper + "";
+				ManagementMain.showData(str, 1);
 			}
-			ManagementMain.showData(str, 1);
+			
 		}
 
 		private void CreateSearchBoxComponet()
