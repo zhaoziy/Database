@@ -262,6 +262,7 @@ namespace VehicleManagement
 					progressBar.Value++;
 					GeoInfo UpdataGeoInfo = new GeoInfo();
 
+					UpdataGeoInfo.视图 = (string)excelcmd.GetCell(iLoop, 5);
 					string path = (string)excelcmd.GetCell(iLoop, 4);
 					string filter = Path.GetExtension(path).Substring(1, Path.GetExtension(path).Length - 1);
 
@@ -277,7 +278,9 @@ namespace VehicleManagement
 						UpdataGeoInfo.Car = (string)excelcmd.GetCell(iLoop, 2);
 						UpdataGeoInfo.Factory = (string)excelcmd.GetCell(iLoop, 3);
 
-						string str = "select top 1 版本 from [GeoInfo_" + UpdataGeoInfo.Ext + "] where 汽车ID = '" + UpdataGeoInfo.汽车ID + "' order by 版本 desc";
+						string str = "select top 1 版本 from [GeoInfo_" + UpdataGeoInfo.Ext + 
+							"] where 汽车ID = '" + UpdataGeoInfo.汽车ID + "' and 视图= '" + UpdataGeoInfo.视图 + 
+							" 'order by 版本 desc";
 						DatabaseCmd datacmd = new DatabaseCmd();
 						SqlDataReader myreader;
 						datacmd.SqlExecuteReader(str, out myreader);
@@ -286,7 +289,6 @@ namespace VehicleManagement
 						datacmd.SqlReaderClose();
 
 						UserFunction.FileToBinary(path, out UpdataGeoInfo.ByteData);
-						UpdataGeoInfo.视图 = (string)excelcmd.GetCell(iLoop, 5);
 						UpdataGeoInfo.IsModel = ((string)excelcmd.GetCell(iLoop, 6) == "是") ? (true) : (false);
 						UpdataGeoInfo.UpdateDate = UserFunction.GetServerDateTime();
 						UpdataGeoInfo.信息更新者工号 = ManagementMain.UserNum;
@@ -311,7 +313,8 @@ namespace VehicleManagement
 		public bool SqlUploadGeoInfo(string[] Column, GeoInfo GeoInfoStruct, int ReserveNum)
 		{
 			DatabaseCmd SelectCmd = new DatabaseCmd();
-			string sqlstr = "select count(汽车ID) from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID + "'";
+			string sqlstr = "select count(汽车ID) from [GeoInfo_" + GeoInfoStruct.Ext + 
+				"] where 汽车ID = '" + GeoInfoStruct.汽车ID + "' and 视图 = '" + GeoInfoStruct.视图 + "'";
 			try
 			{
 				SqlDataReader myreader;
@@ -321,7 +324,7 @@ namespace VehicleManagement
 					if (myreader.GetInt32(0) >= ReserveNum)
 					{
 						string delStr = "delete from [GeoInfo_" + GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID +
-							"' and 版本 not in (select top " + (ReserveNum - 1) + " (版本) from [GeoInfo_" +
+							"' and 视图 = '" + GeoInfoStruct.视图 + "' and 版本 not in (select top " + (ReserveNum - 1) + " (版本) from [GeoInfo_" +
 							GeoInfoStruct.Ext + "] where 汽车ID = '" + GeoInfoStruct.汽车ID + "' order by 版本 desc) ";
 						DatabaseCmd deleteCmd = new DatabaseCmd();
 						deleteCmd.SqlExecuteNonQuery(delStr);
