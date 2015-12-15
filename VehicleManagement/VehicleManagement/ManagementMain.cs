@@ -18,7 +18,7 @@ namespace VehicleManagement
 		SqlDataAdapter GeoInfoDataAdapter = new SqlDataAdapter();
 
 		TextBox[] txtInfo = new TextBox[47];
-		TextBox[] txtGeoInfo = new TextBox[9];
+		TextBox[] txtGeoInfo = new TextBox[10];
 
 		public delegate void ShowDatabase(string str, int mode);
 		public static ShowDatabase showData;
@@ -87,11 +87,11 @@ namespace VehicleManagement
 			string str = string.Empty;
 			if (Mode == 0)
 			{
-				str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + GeoType + "]";
+				str = "select ID,汽车ID,车型,品牌,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + GeoType + "]";
 			}
 			else
 			{
-				str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
+				str = "select ID,汽车ID,车型,品牌,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
 			}
 			ShowGeoInfo(str, 0);
 		}
@@ -111,7 +111,7 @@ namespace VehicleManagement
 
 			txtGeoInfo[0] = textBox101; txtGeoInfo[1] = textBox102; txtGeoInfo[2] = textBox103; txtGeoInfo[3] = textBox104;
 			txtGeoInfo[4] = textBox105; txtGeoInfo[5] = textBox106; txtGeoInfo[6] = textBox107; txtGeoInfo[7] = textBox108;
-			txtGeoInfo[8] = textBox109;
+			txtGeoInfo[8] = textBox109; txtGeoInfo[9] = textBox110;
 		}
 
 		private void ShowInfo(string str, int mode)
@@ -170,13 +170,14 @@ namespace VehicleManagement
 
 				txtGeoInfo[0].DataBindings.Add("Text", bindingSource_GeoInfo, "汽车ID");
 				txtGeoInfo[1].DataBindings.Add("Text", bindingSource_GeoInfo, "车型");
-				txtGeoInfo[2].DataBindings.Add("Text", bindingSource_GeoInfo, "厂商");
-				txtGeoInfo[3].DataBindings.Add("Text", bindingSource_GeoInfo, "视图");
-				txtGeoInfo[4].DataBindings.Add("Text", bindingSource_GeoInfo, "版本");
-				txtGeoInfo[5].DataBindings.Add("Text", bindingSource_GeoInfo, "是否模板");
-				txtGeoInfo[6].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新时间");
-				txtGeoInfo[7].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新者工号");
-				txtGeoInfo[8].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新者姓名");
+				txtGeoInfo[2].DataBindings.Add("Text", bindingSource_GeoInfo, "品牌");
+				txtGeoInfo[3].DataBindings.Add("Text", bindingSource_GeoInfo, "厂商");
+				txtGeoInfo[4].DataBindings.Add("Text", bindingSource_GeoInfo, "视图");
+				txtGeoInfo[5].DataBindings.Add("Text", bindingSource_GeoInfo, "版本");
+				txtGeoInfo[6].DataBindings.Add("Text", bindingSource_GeoInfo, "是否模板");
+				txtGeoInfo[7].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新时间");
+				txtGeoInfo[8].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新者工号");
+				txtGeoInfo[9].DataBindings.Add("Text", bindingSource_GeoInfo, "信息更新者姓名");
 			}
 			catch (Exception ex)
 			{
@@ -357,7 +358,7 @@ namespace VehicleManagement
 			UpdateDatabase("GeoInfo", 1);
 			tabControl2.TabPages[tabControl2.SelectedIndex].Controls.Add(splitContainer2);
 			string str = string.Empty;
-			str = "select ID,汽车ID,车型,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
+			str = "select ID,汽车ID,车型,品牌,厂商,视图,版本,是否模板,信息更新时间,信息更新者工号,信息更新者姓名 from [GeoInfo_" + tabControl2.TabPages[tabControl2.SelectedIndex].Text + "]";
 			ShowGeoInfo(str, 0);
 		}
 
@@ -406,8 +407,8 @@ namespace VehicleManagement
 
 	enum ColName_VehicleGeo
 	{
-			汽车ID = 0, 车型 = 1, 厂商 = 2, Data = 3, 视图 = 4, 版本 = 5, 是否模板 = 6,
-			信息更新时间 = 7, 信息更新者工号 = 8, 信息更新者姓名 = 9, Ext = 10
+			汽车ID = 0, 车型,品牌,厂商,Data, 视图,版本,是否模板,
+			信息更新时间,信息更新者工号,信息更新者姓名,Ext
 	}
 
 	#endregion
