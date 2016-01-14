@@ -7,7 +7,7 @@ namespace SetupPack
 	class DatabaseCmd
 	{
 		static private string DatabaseName = "Vehicle";
-		static private string connstr = "server=115.159.90.52;database=" + DatabaseName + "; uid=sa;pwd=Elab2015;connection timeout = 5;";
+		static private string connstr = "server=192.168.1.252;database=" + DatabaseName + "; uid=sa;pwd=Elab2015;connection timeout = 5;";
 		private SqlConnection conn = new SqlConnection(connstr);
 		private SqlCommand command = new SqlCommand();
 
