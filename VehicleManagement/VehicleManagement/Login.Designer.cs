@@ -63,7 +63,6 @@
 			this.Num_Textbox.Name = "Num_Textbox";
 			this.Num_Textbox.Size = new System.Drawing.Size(224, 25);
 			this.Num_Textbox.TabIndex = 2;
-			this.Num_Textbox.Text = "21422011";
 			this.Num_Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Num_Textbox_KeyPress);
 			// 
 			// Pwd_Textbox
@@ -74,7 +73,6 @@
 			this.Pwd_Textbox.PasswordChar = '*';
 			this.Pwd_Textbox.Size = new System.Drawing.Size(224, 25);
 			this.Pwd_Textbox.TabIndex = 3;
-			this.Pwd_Textbox.Text = "123abc";
 			// 
 			// Login_Bt
 			// 

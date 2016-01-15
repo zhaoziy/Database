@@ -44,7 +44,7 @@ namespace SetupPack
 					File.Delete(AppPath);
 				}
 
-				FtpDownload(AppPath.Substring(0, AppPath.LastIndexOf("\\")), "汽车模型信息管理.exe", "115.159.90.52", "zhao", "123abc");
+				FtpDownload(AppPath.Substring(0, AppPath.LastIndexOf("\\")), "汽车模型信息管理.exe", "192.168.1.252", "zhao", "123abc");
 
 				string NewFileMD5 = UserFunction.GetMD5HashFromFile(AppPath);
 				string updatestr = "update [VerList] set MD5 = '" + NewFileMD5
