@@ -11,6 +11,8 @@
 using namespace ADODB;
 
 #include <icrsint.h>
+#include <string>
+using namespace std;
 #define MAX_BUFF 260
 
 class DatabaseCmd
@@ -50,6 +52,7 @@ public:
 	bool	CollectMsg(const char *szColumnName, double &dbTemp);
 	bool	CollectMsg(const char *szColumnName, char &chTemp);
 	bool	CollectMsg(const char *szColumnName, char *szBuff, int nBuffSize);
+	bool CollectMsg(const char *szColumnName, string &szBuff);
 
 	bool	CollectMsg(ULONG nIndex, long	&lTemp);
 	bool	CollectMsg(ULONG nIndex, BYTE &btTemp);
